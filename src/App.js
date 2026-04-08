@@ -1,5 +1,5 @@
 // 건들지마시오
-import { react, useEffect } from "react";
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyle";
 import Layout from "./components/common/Layout";
@@ -27,11 +27,12 @@ function App() {
     <>
       <GlobalStyle />
       <BrowserRouter>
-        <Layout />
         <Routes>
-          <Route path="/ahyun/*" element={<AhyunRouter />} />
-          <Route path="/jiyeon/*" element={<JiyeonRouter />} />
-          <Route path="/namyoon/*" element={<NamyoonRouter />} />
+          <Route element={<Layout />}>
+            <Route path="/ahyun/*" element={<AhyunRouter />} />
+            <Route path="/jiyeon/*" element={<JiyeonRouter />} />
+            <Route path="/namyoon/*" element={<NamyoonRouter />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>

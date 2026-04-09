@@ -1,11 +1,14 @@
 // 모바일 레이아웃 설정
 import React from "react";
 import styled from "styled-components";
+import { Outlet } from "react-router-dom";
 
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
     <Container>
-      <AppBox>{children}</AppBox>
+      <AppBox>
+        <Outlet />
+      </AppBox>
     </Container>
   );
 };

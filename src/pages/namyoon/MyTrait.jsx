@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import TagBlock, { TagGrid } from './Component';
+import TagBlock, { TagGrid } from './Components';
 
-import Button from "../../components/Button";
+import Button from "../../components/common/Button";
+
+import MessageCard from "../../components/common/MessageCard";
 
 // 전체 페이지 감싸는 태그
 const ButtonContainer = styled.div`
@@ -11,6 +13,8 @@ const ButtonContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100dvh;
+  padding-top: 80px;
+  padding-bottom: 80px;
 `;
 
 const MyTrait = () => {
@@ -31,7 +35,7 @@ const MyTrait = () => {
 
   return (
     <ButtonContainer>
-      <img src="/assets/basiclion.png" alt="사자" />
+      <MessageCard imageUrl="/assets/smallbasicLion.png" text="나의 성격은?" />
 
       <TagGrid>
         {traits.map((text) => (

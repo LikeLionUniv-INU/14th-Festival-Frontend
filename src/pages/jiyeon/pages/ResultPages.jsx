@@ -6,7 +6,7 @@ export default function ResultPage({ title, lion, button }) {
   return (
     <Complete
       title={title}
-      fontSize="2rem"
+      fontSize="40px"
       lion={lion}
       button={button}
     />

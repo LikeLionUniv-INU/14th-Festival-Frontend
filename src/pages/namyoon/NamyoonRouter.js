@@ -3,10 +3,14 @@
 import { Routes, Route } from "react-router-dom";
 // import Login from "./Login"; 이런 식으로 본인이 만든 페이지 불러와서
 import MyTrait from './MyTrait';
+import Alcohol from "./Alcohol";
 
 export default function NamyoonRouter() {
   return (
     <Routes>
+
+      <Route path="/alcohol" element={<Alcohol />} />
+
 
       <Route path="/my-trait" element={<MyTrait />} />
 

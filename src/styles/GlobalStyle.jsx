@@ -22,6 +22,22 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 700;
     font-style: normal;
   }
+  
+// 버튼 폰트
+  @font-face {
+    font-family: 'NexonLv1Gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF Light.woff') format('woff');
+    font-weight: 300;
+    font-display: swap;
+}
+
+// 본문 폰트
+@font-face {
+    font-family: 'YeogiOttaeJalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
 
   /* 실제 화면 높이 변수 */
   :root {
@@ -55,7 +71,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'SUIT', 'Noto Sans KR', sans-serif !important;
+    font-family: 'YeogiOttaeJalnan', sans-serif !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color:rgb(255, 255, 255);
@@ -69,7 +85,7 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
   }
 
-  button, input, textarea, select {
+  input, textarea, select {
     font-family: inherit; 
   }
 
@@ -77,6 +93,9 @@ const GlobalStyle = createGlobalStyle`
   color: #28041d;
   background: none;
   border: none;
+
+  font-family: 'NexonLv1Gothic', sans-serif;
+  cursor: pointer;
 }
 `;
 

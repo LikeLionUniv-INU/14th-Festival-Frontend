@@ -89,8 +89,8 @@ const GlobalStyle = createGlobalStyle`
     font-family: inherit; 
   }
 
- button {
-  color: #28041d;
+ button, p, h3 {
+  color: #000000;
   background: none;
   border: none;
 

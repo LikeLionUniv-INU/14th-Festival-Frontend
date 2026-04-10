@@ -54,11 +54,13 @@ const Overlay = styled.div`
 `;
 
 const ModalBox = styled.div`
-  background-color: #d9d9d9;
-  width: 307px;
-  height: 398px;
-  border-radius: 49px;
-  padding: 24px;
+  background-color: #ffffff;
+  width: 85%;
+  max-width: 342px;
+  height: 412px;
+  min-height: 412px;
+  border-radius: 12px;
+  padding: 32px 64px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
   display: flex;
@@ -82,14 +84,15 @@ const ModalBox = styled.div`
 
 const Title = styled.h3`
   margin: 0 0 16px 0;
-  font-size: 32px;
+  font-size: 28px;
+  font-weight: 700;
   color: #000000;
   text-align: center;
 `;
 
 const Content = styled.div`
   margin-bottom: 24px;
-  font-size: 15px;
+  font-size: 20px;
   color: #555;
   text-align: center;
   line-height: 1.5;
@@ -101,10 +104,11 @@ const ButtonWrapper = styled.div`
 `;
 
 const CloseButton = styled.button`
-  width: 97.96px;
-  height: 41.35px;
-  background-color: #28041d;
+  width: 122px;
+  height: 53px;
+  background-color: #000000;
   color: white;
-  border-radius: 20px;
-  font-size: 14px;
+  border-radius: 12px;
+  font-size: 22px;
+  padding: 14px 40px;
 `;

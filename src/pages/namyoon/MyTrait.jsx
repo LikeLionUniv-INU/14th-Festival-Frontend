@@ -1,10 +1,22 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import TagBlock, { TagGrid } from './Components';
+import TagBlock, { TagGrid } from './Component';
+
+import Button from "../../components/Button";
+
+// 전체 페이지 감싸는 태그
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+`;
 
 const MyTrait = () => {
   const [selected, setSelected] = useState([]);
 
+  //함수로직 (클릭할때, 안할때)
   const toggleTag = (tag) => {
     if (selected.includes(tag)) {
       setSelected(selected.filter((item) => item !== tag));
@@ -13,10 +25,14 @@ const MyTrait = () => {
     }
   };
 
-  const traits = ["# 에겐", "# 활발한", "# 털털한", "# 조용한", "# 유쾌한"];
+  const traits = ["# 에겐", "# 활발한", "# 털털한", "# 조용한", "# 유쾌한", "# 장난스러운"
+    , "# 이성적인", "# 도전적인", "# 침착한", "# 솔직한", "# 섬세한"
+    , "# 테토", "# 즉흥적인", "# 사교적인", "# 소심한"];
 
   return (
-    <>
+    <ButtonContainer>
+      <img src="/assets/basiclion.png" alt="사자" />
+
       <TagGrid>
         {traits.map((text) => (
           <TagBlock
@@ -28,8 +44,14 @@ const MyTrait = () => {
         ))}
       </TagGrid>
 
-    </>
+      <Button>다음</Button>
+
+    </ButtonContainer>
+
+
   );
 };
 
 export default MyTrait;
+
+

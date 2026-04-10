@@ -31,9 +31,12 @@ const AppBox = styled.div`
   max-width: 430px;
   height: 100%; /* 부모 높이(화면 전체)를 꽉 채움 */
 
-  background-color: #fbfbfb;
+  background: linear-gradient(180deg, #fff9e7 0%, #ffffff 100%);
+
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   /* 스크롤바 숨기기 */
   &::-webkit-scrollbar {

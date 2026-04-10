@@ -6,8 +6,11 @@ import styled from "styled-components";
 const Block = styled.button`
   width: 90px;
   height: 40px;
-  color: black;
-  font-weight: bold;
+  font-size: 14px;
+  -webkit-text-stroke: 0.5px; /* 글자 외곽선을 0.5px 그려서 강제로 굵게 만듦 */
+  text-shadow: 0.2px 0.2px 0px;
+  color: #A4612E;
+  font-weight: 700;
   cursor: pointer;
   border: ${(props) =>
     props.$isSelected
@@ -22,7 +25,7 @@ const Block = styled.button`
 
   
   box-shadow: ${(props) => (props.$isSelected ? '0 4px 6px rgba(0,0,0,0.1)' : 'none')};
-  color: #333;
+  
 
   &:hover { opacity: 0.9; }
 

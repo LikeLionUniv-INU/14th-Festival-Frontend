@@ -29,13 +29,13 @@ const MyTrait = () => {
     }
   };
 
-  const traits = ["# 에겐", "# 활발한", "# 털털한", "# 조용한", "# 유쾌한", "# 장난스러운"
-    , "# 이성적인", "# 도전적인", "# 침착한", "# 솔직한", "# 섬세한"
-    , "# 테토", "# 즉흥적인", "# 사교적인", "# 소심한"];
+  const traits = ["# 스포츠", "# 영화", "# 반려동물", "# 여행", "# 전시회", "# 러닝"
+    , "# 맛집탐방", "# 자기계발", "# 애니메이션", "# 독서", "# 페스티벌"
+    , "# 음악감상", "# 덕질", "# 보드게임", "# 스타일링"];
 
   return (
     <ButtonContainer>
-      <MessageCard imageUrl="/assets/smallbasicLion.png" text="나의 성격은?" />
+      <MessageCard imageUrl="/assets/smallbasicLion.png" text="나의 관심사는?" />
 
       <TagGrid>
         {traits.map((text) => (

@@ -9,8 +9,7 @@ export const Title = styled.h2`
 `;
 
 export const Lion = styled.div`
-  margin-top: 10px;
-  margin-bottom: 30px;
+  margin: 8vh 0;
   text-align: center;
 `;
 
@@ -20,5 +19,4 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   height: 100dvh;
-  margin-top: 20px;
 `;

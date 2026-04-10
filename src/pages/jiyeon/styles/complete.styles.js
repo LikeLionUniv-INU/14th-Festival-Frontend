@@ -20,5 +20,6 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     height: 100dvh;
+    margin-top: 20px;
 `;
 

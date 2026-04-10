@@ -1,6 +1,6 @@
-import { Route } from "react-router-dom";
+// waiting, match-success, match-fail 페이지 묶음
+
 import Complete from "../Complete";
-import { resultPages } from "./pageData";
 
 export default function ResultPage({ title, lion, button }) {
   return (

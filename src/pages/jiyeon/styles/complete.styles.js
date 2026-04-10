@@ -10,15 +10,15 @@ export const Title = styled.h2`
 `;
 
 export const Lion = styled.div`
-margin-top: ${(props) => props.$gap || "10px"};
-margin-bottom: 30px;
+    margin-top: 10px;
+    margin-bottom: 30px;
 `;
 
 export const Container = styled.div`
-    margin-top: 140px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    height: 100dvh;
 `;
 

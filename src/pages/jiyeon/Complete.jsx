@@ -9,6 +9,7 @@ function Complete({
   lion = "smile",
   button,
   animation = "slideUp",
+  onButtonClick,
 }) {
   const isTypewriter = animation === "typewriter"; //타자기 효과
 
@@ -60,7 +61,7 @@ function Complete({
           <img src={`/assets/${lion}Lion.png`} />
         </S.Lion>
       </S.Box>
-      {button && <Button>{button}</Button>}
+      {button && <Button onClick={onButtonClick}>{button}</Button>}
     </S.Container>
   );
 }

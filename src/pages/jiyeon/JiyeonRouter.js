@@ -14,17 +14,13 @@ export default function JiyeonRouter() {
     <Routes>
       {/* SelectPage.jsx */}
       <Route
-        path="/complete"
+        path="/choice-done"
         element={<SelectPage title="작성 완료!" button="다음" />}
-      />
-      <Route
-        path="/ready"
-        element={<SelectPage title="선택 완료!" button="다음" />}
       />
 
       {/* QuestionPage.jsx */}
       <Route
-        path="/about-me"
+        path="/lets-choice"
         element={
           <QuestionPage
             title={"질문에 대한\n답변을 선택해줘!"}
@@ -32,21 +28,8 @@ export default function JiyeonRouter() {
           />
         }
       />
-      <Route
-        path="/about-you"
-        element={
-          <QuestionPage
-            title={"이제 내가 원하는\n상대를 골라보자!"}
-            button="다음"
-          />
-        }
-      />
 
       {/* ResultPage.jsx */}
-      <Route
-        path="/waiting"
-        element={<ResultPage title={"결과는 18시에\n나와요!"} />}
-      />
       <Route
         path="/match-success"
         element={
@@ -60,11 +43,7 @@ export default function JiyeonRouter() {
       <Route
         path="/match-fail"
         element={
-          <ResultPage
-            title="매칭 실패!"
-            lion="crying"
-            button="끝내기"
-          />
+          <ResultPage title="매칭 실패!" lion="crying" button="끝내기" />
         }
       />
       {/* <Route path="login" element={<Login />} /> 이런 식으로 본인이 만든 페이지 라우팅 설정하세용*/}

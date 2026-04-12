@@ -2,24 +2,26 @@
 import styled from "styled-components";
 
 const StyledBtn = styled.button`
-  width: 134px;
+  min-width: 150px;
+  width: auto;
   height: 60px;
+  padding: 16px 44px;
   border: none;
   border-radius: 12px;
-  background-color: #f08c97;
-  font-size: 2rem;
-  color: white;
+
+  background-color: rgb(240, 140, 151);
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-  padding: 16px 44px;
+
   font-size: 24px;
+  color: white;
 
   transition:
     transform 0.1s ease,
     box-shadow 0.1s ease;
 
   &:active {
+    background-color: rgb(203, 120, 129);
     box-shadow: inset 2px 5px 5px rgba(0, 0, 0, 0.3);
-    background-color: #cb7881;
   }
 `;
 

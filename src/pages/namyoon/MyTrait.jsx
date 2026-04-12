@@ -61,6 +61,8 @@ const MyTrait = () => {
             label={text}
             isSelected={selected.includes(text)}
             onClick={() => toggleTag(text)}
+            width="100px"
+            height="100px"
           />
         ))}
       </TagGrid>

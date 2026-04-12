@@ -28,7 +28,7 @@ return(
             </S.GenderButton>
         </S.BSection>
         <S.NButton>
-            <Button onClick={() => navigate('/ahyun/next-page')}>
+            <Button onClick={() => navigate('jiyeon/complete')}>
                 다음
             </Button>
         </S.NButton>

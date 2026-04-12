@@ -37,6 +37,7 @@ export default function JiyeonRouter() {
             title="매칭 성공!"
             lion="bigheart"
             button="결과 확인하기"
+            isSuccess={true}
           />
         }
       />

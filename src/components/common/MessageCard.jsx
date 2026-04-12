@@ -48,22 +48,22 @@ export default MessageCard;
 const Container = styled.div`
   display: flex;
   align-items: center;
-  margin: 10px 0;
-  width: 92%;
+  width: 100%;
 `;
 
 const ProfileImage = styled.img`
-  width: 110px;
-  height: 110px;
+  width: 100px;
+  height: 100px;
   object-fit: contain;
   z-index: 2;
 `;
 
 const TextBox = styled.div`
   background-color: #ffffff;
-  padding: 18px 63px 18px 46px;
   border-radius: 14px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid #aa6734;
+
   margin-left: -25px;
   z-index: 1;
   display: flex;

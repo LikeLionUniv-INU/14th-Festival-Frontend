@@ -2,11 +2,18 @@
 // 라우팅을 App.js에 하지 말고 여기서!
 import { Routes, Route } from "react-router-dom";
 // import Login from "./Login"; 이런 식으로 본인이 만든 페이지 불러와서
-import MyTrait from './MyTrait';
+import MyTrait from './pages/MyTrait.jsx';
+import Alcohol from "./pages/Alcohol.jsx";
+import MyAnimal from "./pages/MyAnimal.jsx";
 
 export default function NamyoonRouter() {
   return (
     <Routes>
+
+      <Route path="/my-animal" element={<MyAnimal />} />
+
+      <Route path="/alcohol" element={<Alcohol />} />
+
 
       <Route path="/my-trait" element={<MyTrait />} />
 

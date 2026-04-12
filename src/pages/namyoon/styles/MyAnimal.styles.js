@@ -10,7 +10,6 @@ export const Container = styled.div`
   
   justify-content: center; 
 
-  padding: 6dvh 20px; 
   box-sizing: border-box;
   background-color: #FFFDF5; 
 

@@ -4,10 +4,13 @@ import { Routes, Route } from "react-router-dom";
 // import Login from "./Login"; 이런 식으로 본인이 만든 페이지 불러와서
 import MyTrait from './pages/MyTrait.jsx';
 import Alcohol from "./pages/Alcohol.jsx";
+import MyAnimal from "./pages/MyAnimal.jsx";
 
 export default function NamyoonRouter() {
   return (
     <Routes>
+
+      <Route path="/my-animal" element={<MyAnimal />} />
 
       <Route path="/alcohol" element={<Alcohol />} />
 

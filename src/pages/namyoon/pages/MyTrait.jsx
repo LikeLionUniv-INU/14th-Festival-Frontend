@@ -20,7 +20,7 @@ const MyTrait = () => {
     }
   };
 
-  const traits = ["# 스포츠", "# 영화", "# 반려동물", "# 여행"
+  const Traits = ["# 스포츠", "# 영화", "# 반려동물", "# 여행"
     , "# 맛집탐방", "# 자기계발"
     , "# 덕질", "# 음악감상", "# 보드게임"];
 
@@ -34,7 +34,7 @@ const MyTrait = () => {
       <GuideText>3개를 선택해주세요!</GuideText>
 
       <TagGrid>
-        {traits.map((text) => (
+        {Traits.map((text) => (
           <TagBlock
             key={text}
             label={text}

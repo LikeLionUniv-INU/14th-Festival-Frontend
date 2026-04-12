@@ -1,4 +1,4 @@
-// waiting, match-success, match-fail 페이지 묶음
+// match-success, match-fail 페이지 묶음
 
 import Complete from "../Complete";
 

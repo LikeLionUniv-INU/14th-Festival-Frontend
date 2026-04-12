@@ -1,20 +1,32 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import TagBlock, { TagGrid } from './Components';
-
+import TagBlock, { GuideText, TagGrid } from './Components';
 import Button from "../../components/common/Button";
-
 import MessageCard from "../../components/common/MessageCard";
+import ProgressBar from "../../components/common/ProgressBar";
 
 // 전체 페이지 감싸는 태그
-const ButtonContainer = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 100dvh;
-  padding-top: 80px;
-  padding-bottom: 80px;
+  
+  width: 100%;
+  height: 100dvh; 
+  
+  justify-content: center; 
+
+  padding: 6dvh 20px; 
+  box-sizing: border-box;
+  background-color: #FFFDF5; 
+
+  gap: 2dvh;
+
+  margin-bottom: 20px;
+`;
+
+const ButtonContainer = styled.button`
+  margin-bottom: 2dvh;
 `;
 
 const MyTrait = () => {
@@ -29,13 +41,18 @@ const MyTrait = () => {
     }
   };
 
-  const traits = ["# 스포츠", "# 영화", "# 반려동물", "# 여행", "# 전시회", "# 러닝"
-    , "# 맛집탐방", "# 자기계발", "# 애니메이션", "# 독서", "# 페스티벌"
-    , "# 음악감상", "# 덕질", "# 보드게임", "# 스타일링"];
+  const traits = ["# 스포츠", "# 영화", "# 반려동물", "# 여행"
+    , "# 맛집탐방", "# 자기계발"
+    , "# 덕질", "# 음악감상", "# 보드게임"];
 
   return (
-    <ButtonContainer>
-      <MessageCard imageUrl="/assets/smallbasicLion.png" text="나의 관심사는?" />
+    <Container>
+
+      <ProgressBar currentStep={3} totalSteps={5} />
+
+      <MessageCard imageUrl="/assets/smallbasicLion.png" text="내가 관심 있는 건..?" />
+
+      <GuideText>3개를 선택해주세요!</GuideText>
 
       <TagGrid>
         {traits.map((text) => (
@@ -44,13 +61,18 @@ const MyTrait = () => {
             label={text}
             isSelected={selected.includes(text)}
             onClick={() => toggleTag(text)}
+            width="100px"
+            height="100px"
           />
         ))}
       </TagGrid>
 
-      <Button>다음</Button>
+      <ButtonContainer>
+        <Button>다음</Button>
+      </ButtonContainer>
 
-    </ButtonContainer>
+
+    </Container>
 
 
   );

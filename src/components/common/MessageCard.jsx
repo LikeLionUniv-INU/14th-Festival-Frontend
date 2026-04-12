@@ -48,29 +48,30 @@ export default MessageCard;
 const Container = styled.div`
   display: flex;
   align-items: center;
-  margin: 10px 0;
+  width: 100%;
 `;
 
 const ProfileImage = styled.img`
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   object-fit: contain;
   z-index: 2;
 `;
 
 const TextBox = styled.div`
   background-color: #ffffff;
-  padding: 14px 24px 14px 30px;
-  border-radius: 10px;
+  border-radius: 14px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  margin-left: -50px;
+  border: 1px solid #aa6734;
+
+  margin-left: -25px;
   z-index: 1;
   display: flex;
 
   justify-content: center;
   align-items: center;
 
-  width: 250px;
+  width: 300px;
   height: 60px;
   box-sizing: border-box;
 `;
@@ -78,8 +79,7 @@ const TextBox = styled.div`
 const MessageText = styled.p`
   margin: 0;
   font-size: 16px;
-  color: #333333;
-  font-weight: 500;
+  font-weight: 900;
 
   text-align: center;
   line-height: 1.4;

@@ -25,11 +25,26 @@ const GlobalStyle = createGlobalStyle`
   
 // 버튼 폰트
   @font-face {
+    font-family:'NexonLv1Gothic';
+    src: url('../fonts/NEXONLV1GothicBold.ttf') format('truetype');
+    font-weight: 700;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family:'NexonLv1Gothic';
+    src: url('../fonts/NEXONLV1GothicRegular.ttf') format('truetype');
+    font-weight: 500;
+    font-display: swap;
+  }
+  
+  @font-face {
     font-family: 'NexonLv1Gothic';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF Light.woff') format('woff');
     font-weight: 300;
     font-display: swap;
 }
+
 
 // 본문 폰트
 @font-face {

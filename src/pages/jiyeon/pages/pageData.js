@@ -23,7 +23,6 @@ export const resultPages = [
     title: "매칭 성공!",
     lion: "bigheart",
     button: "결과 확인하기",
-    isSuccess: "true",
   },
   {
     path: "/match-fail",

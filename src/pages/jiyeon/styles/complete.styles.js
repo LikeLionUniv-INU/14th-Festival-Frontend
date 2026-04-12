@@ -32,9 +32,7 @@ export const Title = styled.h2`
 
 export const TitleArea = styled.div`
   width: 100%;
-  height: calc(
-    (${(props) => props.$fontSize || "40px"}) * 2 * 1.2
-  ); // 글자 두 줄일 때 사진 안 밀리게
+  height: calc((${(props) => props.$fontSize || "40px"}) * 2 * 1.2);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -42,7 +40,7 @@ export const TitleArea = styled.div`
 
 export const Lion = styled.div`
   text-align: center;
-  margin-top: 5.03dvh; // 글자와 사진 사이 간격
+  margin-top: 44px; // 글자와 사진 사이 간격
 
   img {
     width: 83.33%;
@@ -57,11 +55,13 @@ export const Box = styled.div`
 `;
 
 export const Container = styled.div`
-  // 전체 텍스트, 사진, 버튼 그룹
-  height: 69.1dvh;
+  // 전체
+  height: min(604px, calc(100dvh - 167px - 20px));
+  /* 무조건 높이 고정하려면 height: 604px ;
+  위 코드는 604px로 고정하되 화면이 더 작으면 화면에서 위 패딩 167px 뺀 값만큼 높이 쓰세요 */
   width: 100%;
   box-sizing: border-box;
-  margin-top: 19.1dvh;
+  margin-top: 167px; //상단 마진
 
   display: flex;
   flex-direction: column;

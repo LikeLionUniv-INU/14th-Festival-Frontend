@@ -10,10 +10,10 @@ export const NButton = styled.div`
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; // 위아래 여백이 똑같아지도록 수직 정렬.
     width: 100%;
     
-    justify-content: flex-start;
+    justify-content: flex-start; // 가로 방향의 시작점으로 아이템들을 붙임 
     gap: 50px;
     padding: 60px 0;
     background-color:transparent;
@@ -22,7 +22,7 @@ export const Container = styled.div`
 
 export const Guide = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: center; // 가로 방향의 가운데로 아이템을 모음
     width: 100%;
 `; 
 
@@ -31,6 +31,7 @@ export const BSection = styled.div`
     display: flex;
     gap: 20px;
     justify-content: center;
+    height: 360px;
 `;
 
 export const GenderButton = styled.button`
@@ -39,7 +40,7 @@ export const GenderButton = styled.button`
     border-radius: 26px;
     font-size: 28px;
     font-weight: bold;
-    border: 1px solid rgba(240, 197, 202, 1);
+    border: 2px solid rgba(240, 197, 202, 1);
     transition: all 0.2s;
     //선택 여부에 따라 색 바꿈
     background-color: ${(props) => (props.isSelected ? 'rgba(230, 158, 166, 1)' : '#FFFFFF')};

@@ -8,10 +8,14 @@ import { Routes, Route } from "react-router-dom";
 import SelectPage from "./pages/SelectPages";
 import QuestionPage from "./pages/QuestionPages";
 import ResultPage from "./pages/ResultPages";
+import IntroPage from "./pages/IntroPage";
 
 export default function JiyeonRouter() {
   return (
     <Routes>
+      {/* IntroPage.jsx */}
+      <Route path="intro" element={<IntroPage />} />
+
       {/* SelectPage.jsx */}
       <Route
         path="/choice-done"
@@ -47,6 +51,7 @@ export default function JiyeonRouter() {
           <ResultPage title="매칭 실패!" lion="crying" button="끝내기" />
         }
       />
+
       {/* <Route path="login" element={<Login />} /> 이런 식으로 본인이 만든 페이지 라우팅 설정하세용*/}
       {/* 자기가 만든 페이지 확인하고 싶으면 이거 연동 다 하고 주소 뒤에 jiyeon/login 처럼 입력하면 됨 */}
     </Routes>

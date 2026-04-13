@@ -5,10 +5,12 @@ import { Routes, Route } from "react-router-dom";
 import MyTrait from './pages/MyTrait.jsx';
 import Alcohol from "./pages/Alcohol.jsx";
 import MyAnimal from "./pages/MyAnimal.jsx";
+import YourAnimal from "./pages/YourAnimal.jsx"
 
 export default function NamyoonRouter() {
   return (
     <Routes>
+
 
       <Route path="/my-animal" element={<MyAnimal />} />
 
@@ -16,6 +18,8 @@ export default function NamyoonRouter() {
 
 
       <Route path="/my-trait" element={<MyTrait />} />
+
+      <Route path="/your-animal" element={<YourAnimal />} />
 
       {/* <Route path="login" element={<Login />} /> 이런 식으로 본인이 만든 페이지 라우팅 설정하세용*/}
       {/* 자기가 만든 페이지 확인하고 싶으면 이거 연동 다 하고 주소 뒤에 namyoon/login 처럼 입력하면 됨 */}

@@ -4,10 +4,10 @@ import TagBlock, { GuideText, TagGrid } from '../Components';
 import Button from "../../../components/common/Button";
 import MessageCard from "../../../components/common/MessageCard";
 import ProgressBar from "../../../components/common/ProgressBar";
-import { Container, ButtonContainer } from '../styles/Alcohol.styles';
+import { Container, ButtonContainer } from '../styles/MyAnimal.styles';
 import { useNavigate } from 'react-router-dom';
 
-const Alcohol = () => {
+const YourAnimal = () => {
   const [selected, setSelected] = useState([]);
   const navigate = useNavigate();
 
@@ -15,52 +15,47 @@ const Alcohol = () => {
   const toggleTag = (tag) => {
     if (selected.includes(tag)) {
       setSelected(selected.filter((item) => item !== tag));
-    } else if (selected.length < 2) {
+    } else if (selected.length < 1) {
       setSelected([...selected, tag]);
     }
   };
 
-  const AlcoholGrid = styled(TagGrid)`
+  const MyAnimalGrid = styled(TagGrid)`
   /* 3열을 2열로 변경 */
   grid-template-columns: repeat(2, 1fr) !important;
   
   width: 100% !important;
   max-width: 340px !important; 
   column-gap: 20px !important; /* 가로 사이 간격 */
-  row-gap: 30px !important;
-  
-  & button {
-    width: 100% !important;   
-    height: 100px !important;  
-    font-size: 16px !important; 
-  }
+  //row-gap: 20px !important;
+  align-content: space-between;
 `;
 
-  const alcohols = ["# 소주", "# 맥주", "# 소맥", "# 하이볼", "# 위스키", "# 음료수"];
+  const MyAnimals = ["# 강아지", "# 고양이", "# 곰", "# 원숭이", "# 토끼", "# 말", "# 공룡", "# 병아리"];
 
   return (
     <Container>
-      <ProgressBar currentStep={4} totalSteps={5} />
+      <ProgressBar currentStep={5} totalSteps={5} />
 
-      <MessageCard imageUrl="/assets/smallbasicLion.png" text="오늘 내가 먹고 싶은 술은..." />
+      <MessageCard imageUrl="/assets/smallbasicLion.png" text="내가 원하는 상대의 동물은?" />
 
-      <GuideText>2개를 선택해주세요!</GuideText>
+      <GuideText>1개를 선택해주세요!</GuideText>
 
-      <AlcoholGrid>
-        {alcohols.map((text) => (
+      <MyAnimalGrid>
+        {MyAnimals.map((text) => (
           <TagBlock
             key={text}
             label={text}
             isSelected={selected.includes(text)}
             onClick={() => toggleTag(text)}
             width="160px"
-            height="100px"
+            height="60px"
           />
         ))}
-      </AlcoholGrid>
+      </MyAnimalGrid>
 
       <ButtonContainer>
-        <Button onClick={() => navigate("/namyoon/your-animal")}>다음</Button>
+        <Button >다음</Button>
       </ButtonContainer>
 
     </Container>
@@ -68,6 +63,6 @@ const Alcohol = () => {
   );
 };
 
-export default Alcohol;
+export default YourAnimal;
 
 

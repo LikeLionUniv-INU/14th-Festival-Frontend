@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../../components/common/Button';
 import * as S from '../style/login.style';
 import PrivacyModal from "../../../components/common/PrivacyModal";
-import NotTimeModal from '../../../components/common/NotTimeModal';
 
 const Login = () => {
     const [instaId, setInstaId] = useState('');
@@ -36,10 +35,6 @@ const Login = () => {
                 <Button onClick={() => setIsModalOpen(true)}>입력완료</Button>
             </S.Content>
             <PrivacyModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-            />
-            <NotTimeModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
             />

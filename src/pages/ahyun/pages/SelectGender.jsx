@@ -1,10 +1,10 @@
 import React,{ useState } from 'react';
 import {useNavigate} from 'react-router-dom'    
-import *as S from './style/gender.style'; 
+import *as S from '../style/gender.style'; 
 
 // 공통 버튼 불러오기 
-import Button from '../../components/common/Button';
-import MessageCard from '../../components/common/MessageCard';
+import Button from '../../../components/common/Button';
+import MessageCard from '../../../components/common/MessageCard';
 
 const Gender = () => {
     const [selectedGender, setSelectedGender] = useState(null);

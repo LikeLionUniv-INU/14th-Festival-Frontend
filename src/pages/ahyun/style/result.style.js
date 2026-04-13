@@ -1,4 +1,3 @@
-
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -41,13 +40,13 @@ export const Img = styled.img`
     margin-bottom: 20px;
     `;
 
-export const LoginTitle = styled.div`
+export const ResultTitle = styled.div`
     font-size: 20px;
     font-weight: 700;
     white-space: pre-line;
-    line-height: 1.5;
+    line-height: 1.2;
     color: rgba(0, 0, 0, 1);
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     font-family: 'NEXON Lv1 Gothic ', sans-serif;
     text-align: center;
     `;
@@ -56,34 +55,44 @@ export const InputBox = styled.input`
     width: 204.55px;
     height: 34px;
     background: rgba(255, 255, 255, 1);
-    border: 1px solid rgba(0, 0, 0, 1);
+    border: 1px solid rgba(144, 144, 144, 1);
     border-radius: 8px;
-    padding:10px;
+    padding: 10px;
     box-sizing: border-box;
     outline: none;
+    margin-bottom: 15px;
 
     //사용자가 입력할 글자 스타일
     font-family: 'NEXON Lv1 Gothic', sans-serif;
     font-size: 14px;
     color: rgba(0, 0, 0, 1);
     
-    &::placeholder {
+    & ::placeholder {
         font-family: 'NEXON Lv1 Gothic', sans-serif;
         font-size: 14px;
         color: rgba(166, 166, 166, 1);
-        }
+    }
 `;
 
-export const GuideText = styled.div`
-    font-family: 'NEXON Lv1 Gothic', sans-serif;
-    font-size: 10px;
-    line-height: 1.0;
-    font-weight: 300;
-    color: rgba(0, 0, 0, 1);
-    margin: 6px 0 22px 0;
-    text-align: left;
-    width: 207px;
-`;
+export const ButtonWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 25px; 
 
+
+    button {
+        width: 152px !important; 
+        height: 50px !important;    
+        border-radius: 12px !important; 
+        font-size: 16px !important; 
+        white-space: nowrap !important;
+        font-size: 16px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 10px !important;
+    }  
+`;
 
 

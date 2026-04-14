@@ -48,6 +48,7 @@ export default MessageCard;
 const Container = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
 `;
 
@@ -79,7 +80,7 @@ const TextBox = styled.div`
 const MessageText = styled.p`
   margin: 0;
   font-size: 16px;
-  font-weight: 900;
+  font-weight: 400;
 
   text-align: center;
   line-height: 1.4;

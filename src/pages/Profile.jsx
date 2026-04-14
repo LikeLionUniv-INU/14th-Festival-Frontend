@@ -1,7 +1,17 @@
 import React, { useState } from "react";
-import * as S from "../style/profile.style";
 import { useNavigate } from "react-router-dom";
-import GuideModal from "../../../components/common/GuideModal";
+import * as S from "../pages/profile.styles";
+import GuideModal from "../components/modal/GuideModal";
+
+import bear from "../assets/images/profile/bear.png";
+import monkey from "../assets/images/profile/monkey.png";
+import cat from "../assets/images/profile/cat.png";
+import chick from "../assets/images/profile/chick.png";
+import dinosaur from "../assets/images/profile/dinosaur.png";
+import dog from "../assets/images/profile/dog.png";
+import horse from "../assets/images/profile/horse.png";
+import rabbit from "../assets/images/profile/rabbit.png";
+
 const Profile = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -42,14 +52,14 @@ const Profile = () => {
   }
 
   const ANIMAL_MAP = {
-    monkey: "/assets/profile/monkey.png",
-    rabbit: "/assets/profile/rabbit.png",
-    horse: "/assets/profile/horse.png",
-    dinosaur: "/assets/profile/dinosaur.png",
-    chick: "/assets/profile/chick.png",
-    bear: "/assets/profile/bear.png",
-    cat: "/assets/profile/cat.png",
-    dog: "/assets/profile/dog.png",
+    monkey: monkey,
+    rabbit: rabbit,
+    horse: horse,
+    dinosaur: dinosaur,
+    chick: chick,
+    bear: bear,
+    cat: cat,
+    dog: dog,
   };
 
   const ANIMAL_NAME_KR = {

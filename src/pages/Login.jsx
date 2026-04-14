@@ -2,8 +2,9 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as S from "../style/login.style";
-import PrivacyModal from "../../../components/common/PrivacyModal";
+import * as S from "../pages/Login.styles";
+import PrivacyModal from "../components/modal/PrivacyModal";
+import lion from "../assets/images/lion/small-basic-lion.png";
 
 const Login = () => {
   const [instaId, setInstaId] = useState("");
@@ -22,7 +23,7 @@ const Login = () => {
   return (
     <S.Container>
       <S.Content>
-        <S.Img src="/assets/smallbasicLion.png" />
+        <S.Img src={lion} />
         <S.LoginTitle>
           인스타 ID와 본인확인용 <br />
           숫자를 입력해주세요

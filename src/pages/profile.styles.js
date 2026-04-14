@@ -13,7 +13,7 @@ export const Container = styled.div`
   padding-bottom: 60px;
 `;
 
-export const Title = styled.div`
+export const Title = styled.h2`
   font-size: 40px;
   font-weight: 400;
   color: rgba(0, 0, 0, 1);
@@ -42,7 +42,7 @@ export const AnimalImg = styled.img`
   height: auto;
   margin-bottom: 60px;
 `;
-export const AnimalName = styled.div`
+export const AnimalName = styled.h2`
   width: 350px;
   height: 47px;
   font-weight: 400;

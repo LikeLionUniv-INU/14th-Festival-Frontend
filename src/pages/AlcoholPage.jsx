@@ -1,0 +1,82 @@
+// 8. 질문 3 - 주종 (남윤)
+
+import React, { useState } from "react";
+import styled from "styled-components";
+import TagBlock, { GuideText, TagGrid } from "../components/common/TagBlock";
+import Button from "../components/common/Button";
+import MessageCard from "../components/common/MessageCard";
+import ProgressBar from "../components/common/ProgressBar";
+import { Container, ButtonContainer } from "./AlcoholPage.styles";
+import { useNavigate } from "react-router-dom";
+import smallBasicLion from "../assets/images/lion/small-basic-lion.png";
+
+const AlcoholPage = () => {
+  const [selected, setSelected] = useState([]);
+  const navigate = useNavigate();
+
+  // 함수로직 (클릭할때, 안할때)
+  const toggleTag = (tag) => {
+    if (selected.includes(tag)) {
+      setSelected(selected.filter((item) => item !== tag));
+    } else if (selected.length < 2) {
+      setSelected([...selected, tag]);
+    }
+  };
+
+  const AlcoholGrid = styled(TagGrid)`
+    /* 3열을 2열로 변경 */
+    grid-template-columns: repeat(2, 1fr) !important;
+
+    width: 100% !important;
+    max-width: 340px !important;
+    column-gap: 20px !important; /* 가로 사이 간격 */
+    row-gap: 30px !important;
+
+    & button {
+      width: 100% !important;
+      height: 100px !important;
+      font-size: 16px !important;
+    }
+  `;
+
+  const alcohols = [
+    "# 소주",
+    "# 맥주",
+    "# 소맥",
+    "# 하이볼",
+    "# 위스키",
+    "# 음료수",
+  ];
+
+  return (
+    <Container>
+      <ProgressBar currentStep={4} totalSteps={5} />
+
+      <MessageCard
+        imageUrl={smallBasicLion}
+        text="오늘 내가 먹고 싶은 술은..."
+      />
+
+      <GuideText>2개를 선택해주세요!</GuideText>
+
+      <AlcoholGrid>
+        {alcohols.map((text) => (
+          <TagBlock
+            key={text}
+            label={text}
+            isSelected={selected.includes(text)}
+            onClick={() => toggleTag(text)}
+            width="160px"
+            height="100px"
+          />
+        ))}
+      </AlcoholGrid>
+
+      <ButtonContainer>
+        <Button onClick={() => navigate("/your-animal")}>다음</Button>
+      </ButtonContainer>
+    </Container>
+  );
+};
+
+export default AlcoholPage;

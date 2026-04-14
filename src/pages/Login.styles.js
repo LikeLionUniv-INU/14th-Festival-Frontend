@@ -49,6 +49,7 @@ export const LoginTitle = styled.div`
   line-height: 1.5;
   color: rgba(0, 0, 0, 1);
   margin-bottom: 30px;
+  font-family: "NEXON Lv1 Gothic ", sans-serif;
   text-align: center;
 `;
 
@@ -83,4 +84,31 @@ export const GuideText = styled.div`
   margin: 6px 0 22px 0;
   text-align: left;
   width: 207px;
+`;
+
+export const Button = styled.button`
+  min-width: 150px;
+  width: auto;
+  height: 60px;
+  padding: 16px 44px;
+  border: none;
+  border-radius: 12px;
+  /// 활성화 전
+  background-color: #d9d9d9;
+  cursor: not-allowed;
+  pointer-events: none;
+  /// 활성화 후
+  &:not(:disabled) {
+    background-color: rgb(240, 140, 151);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    pointer-events: auto;
+    color: white;
+  }
+  /// 눌렀을때
+  &:active:not(:disabled) {
+    background-color: rgb(203, 120, 129);
+    box-shadow: inset 2px 5px 5px rgba(0, 0, 0, 0.3);
+    transform: scale(0.98);
+  }
 `;

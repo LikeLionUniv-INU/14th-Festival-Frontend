@@ -15,6 +15,7 @@ const SelectGender = () => {
 
   return (
     <S.Container>
+      <ProgressBar currentStep={1} totalSteps={4} />
       <S.Guide>
         <MessageCard imageUrl={smallBasicLion} text="성별을 선택해 주세요" />
       </S.Guide>

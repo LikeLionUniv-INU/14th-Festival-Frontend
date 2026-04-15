@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import * as S from "./SelectGender.styles";
 import smallBasicLion from "../assets/images/lion/small-basic-lion.png";
 import ProgressBar from "../components/common/ProgressBar";
-
 // 공통 버튼 불러오기
 import Button from "../components/common/Button";
 import MessageCard from "../components/common/MessageCard";
@@ -16,7 +15,7 @@ const SelectGender = () => {
 
   return (
     <S.Container>
-      <ProgressBar currentStep={1} totalSteps={4} />
+      <ProgressBar currentStep={1} totalSteps={5} />
       <S.Guide>
         <MessageCard imageUrl={smallBasicLion} text="성별을 선택해 주세요" />
       </S.Guide>
@@ -34,8 +33,13 @@ const SelectGender = () => {
           여성
         </S.GenderButton>
       </S.BSection>
-      <S.NButton>
-        <Button onClick={() => navigate("/my-animal")}>다음</Button>
+      <S.NButton $isDisabled={!selectedGender}>
+        <Button
+          onClick={() => navigate("/my-animal")}
+          disabled={!selectedGender}
+        >
+          다음
+        </Button>
       </S.NButton>
     </S.Container>
   );

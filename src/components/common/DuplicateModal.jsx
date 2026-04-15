@@ -1,5 +1,3 @@
-// 2-2. 17시 이후 최초접속 시 (비활성화) (남윤)
-
 // 공통 모달 컴포넌트 - 아래처럼 갖다쓰세요잉
 // const [isModalOpen, setIsModalOpen] = useState(false);
 // <Modal
@@ -15,14 +13,13 @@
 
 import React from "react";
 import styled from "styled-components";
-import lion from "../../assets/images/lion/small-crying-lion.png";
 
 // isOpen: 모달이 열려있는지 여부
 // onClose: 모달을 닫는 함수
 // title: 모달 상단 제목
 // children: 모달 창 안에 들어갈 내용물
 
-const NotTimeModal = ({ isOpen, onClose }) => {
+const DuplicateModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
@@ -30,15 +27,19 @@ const NotTimeModal = ({ isOpen, onClose }) => {
       <ModalBox onClick={(e) => e.stopPropagation()}>
         {
           <Title>
-            {"지금은\n 매칭시간이\n 아니예요!"}
+            {"이미 참여했어요"}
           </Title>
         }
 
-        <img src={lion} width="100" />
+        <img src="/assets/smallcryingLion.png" width="100" />
 
         <Content>
-          {"내일 다시 만나요"}
+          {"18시 이후에\n 결과를 확인할 수 있어요!"}
         </Content>
+
+        <Info>
+          {"내일 또 참여할 수 있어요"}
+        </Info>
 
         <ButtonWrapper>
           <CloseButton onClick={onClose}>확인</CloseButton>
@@ -48,7 +49,7 @@ const NotTimeModal = ({ isOpen, onClose }) => {
   );
 };
 
-export default NotTimeModal;
+export default DuplicateModal;
 
 // --- 스타일 ---
 const Overlay = styled.div`
@@ -94,22 +95,28 @@ const ModalBox = styled.div`
 `;
 
 const Title = styled.h3`
-  margin: 0 0 14px 0;
+  margin: 0 0 16px 0;
   font-size: 28px;
   font-weight: 700;
   color: #000000;
   text-align: center;
-  white-space: pre-line;
-  line-height: 30px;
 `;
 
 const Content = styled.p`
-  margin-top: 12px;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
   font-size: 20px;
   color: #555;
   text-align: center;
   line-height: 1.5;
+  white-space: pre-line;
+`;
+
+const Info = styled.p`
+  font-size: 12px;
+  font-weight: 300;
+  color: rgb(91, 91, 91);
+  margin-top: 14px;
+  text-align: center;
 `;
 
 const ButtonWrapper = styled.div`

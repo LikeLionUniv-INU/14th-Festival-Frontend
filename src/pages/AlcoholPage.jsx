@@ -14,6 +14,8 @@ const AlcoholPage = () => {
   const [selected, setSelected] = useState([]);
   const navigate = useNavigate();
 
+  const isButtonActive = selected.length === 2;
+
   // 함수로직 (클릭할때, 안할때)
   const toggleTag = (tag) => {
     if (selected.includes(tag)) {
@@ -72,8 +74,14 @@ const AlcoholPage = () => {
         ))}
       </AlcoholGrid>
 
-      <ButtonContainer>
-        <Button onClick={() => navigate("/your-animal")}>다음</Button>
+      <ButtonContainer $active={isButtonActive}>
+        <Button
+          onClick={() => {
+            if (isButtonActive) {
+              navigate("/your-animal");
+            }
+          }}
+        >다음</Button>
       </ButtonContainer>
     </Container>
   );

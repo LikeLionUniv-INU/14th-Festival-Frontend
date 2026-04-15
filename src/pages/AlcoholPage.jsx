@@ -42,12 +42,12 @@ const AlcoholPage = () => {
   `;
 
   const alcohols = [
-    "# 소주",
-    "# 맥주",
-    "# 소맥",
-    "# 하이볼",
-    "# 위스키",
-    "# 음료수",
+    "# 로맨스",
+    "# 공포/스릴러",
+    "# 코미디",
+    "# 액션/느와르",
+    "# 애니메이션",
+    "# 판타지",
   ];
 
   return (
@@ -56,7 +56,7 @@ const AlcoholPage = () => {
 
       <MessageCard
         imageUrl={smallBasicLion}
-        text="오늘 내가 먹고 싶은 술은..."
+        text="내가 좋아하는 영화 장르는?"
       />
 
       <GuideText>2개를 선택해주세요!</GuideText>

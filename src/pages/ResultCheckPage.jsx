@@ -11,6 +11,12 @@ const ResultCheckPage = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const handleUserNumChange = (e) => {
+    const value = e.target.value;
+    const onlyNumber = value.replace(/[^0-9]/g, "").slice(0, 4);
+    setUserNum(onlyNumber);
+  };
+
   const isFormValid = instaId.trim() !== "" && userNum.length === 4;
 
   return (
@@ -32,7 +38,7 @@ const ResultCheckPage = () => {
           type="text"
           placeholder="ex) 1234"
           value={userNum}
-          onChange={(e) => setUserNum(e.target.value)}
+          onChange={handleUserNumChange}
         />
         <S.GuideText> 캡처 화면을 들고 멋사 부스로 와주세요! </S.GuideText>
         <S.Button onClick={() => setIsModalOpen(true)} disabled={!isFormValid}>

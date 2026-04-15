@@ -15,6 +15,7 @@
 
 import React from "react";
 import styled from "styled-components";
+import lion from "../../assets/images/lion/small-crying-lion.png";
 
 // isOpen: 모달이 열려있는지 여부
 // onClose: 모달을 닫는 함수
@@ -33,7 +34,7 @@ const NotTimeModal = ({ isOpen, onClose }) => {
           </Title>
         }
 
-        <img src="/assets/smallcryingLion.png" width="100" />
+        <img src={lion} width="100" />
 
         <Content>
           {"내일 다시 만나요"}
@@ -93,15 +94,18 @@ const ModalBox = styled.div`
 `;
 
 const Title = styled.h3`
-  margin: 0 0 16px 0;
+  margin: 0 0 14px 0;
   font-size: 28px;
   font-weight: 700;
   color: #000000;
   text-align: center;
+  white-space: pre-line;
+  line-height: 30px;
 `;
 
-const Content = styled.div`
-  margin-bottom: 24px;
+const Content = styled.p`
+  margin-top: 12px;
+  margin-bottom: 40px;
   font-size: 20px;
   color: #555;
   text-align: center;

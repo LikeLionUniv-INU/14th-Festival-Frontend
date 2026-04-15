@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   ///배경 수정 그라데이션 이상함
   background: linear-gradient(180deg, rgba(240, 140, 151, 0.25), #fff9e7 100%);
   box-sizing: border-box;

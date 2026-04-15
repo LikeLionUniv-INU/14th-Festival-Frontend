@@ -6,9 +6,7 @@ export const NButton = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: auto;
-  margin-bottom: 30px;
-
+  margin-bottom: 2dvh;
   /* 성별 선택 안 됐을 때 버튼 색 죽이기 */
   ${(props) =>
     props.$isDisabled &&
@@ -25,15 +23,13 @@ export const NButton = styled.div`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center; // 위아래 여백이 똑같아지도록 수직 정렬.
+  align-items: center;
+  justify-content: center;
+
   width: 100%;
-  height: 100dvh;
-  justify-content: flex-start; // 가로 방향의 시작점으로 아이템들을 붙임
-  gap: 50px;
-  padding: 60px 0;
-  background-color: transparent;
+  min-height: 100dvh;
+
   box-sizing: border-box;
-  position: relative;
 `;
 
 export const Guide = styled.div`
@@ -44,9 +40,12 @@ export const Guide = styled.div`
 
 export const BSection = styled.div`
   display: flex;
-  gap: 20px;
   justify-content: center;
-  height: 360px;
+  align-items: center;
+  column-gap: 5vw;
+  height: 336px;
+  width: 90%;
+  margin: 20px 0 30px 0;
 `;
 
 export const GenderButton = styled.button`

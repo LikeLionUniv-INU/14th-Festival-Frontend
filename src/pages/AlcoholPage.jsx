@@ -27,18 +27,7 @@ const AlcoholPage = () => {
 
   const AlcoholGrid = styled(TagGrid)`
     /* 3열을 2열로 변경 */
-    grid-template-columns: repeat(2, 1fr) !important;
-
-    width: 100% !important;
-    max-width: 340px !important;
-    column-gap: 20px !important; /* 가로 사이 간격 */
-    row-gap: 30px !important;
-
-    & button {
-      width: 100% !important;
-      height: 100px !important;
-      font-size: 16px !important;
-    }
+    grid-template-columns: repeat(2, 1fr);
   `;
 
   const alcohols = [
@@ -81,7 +70,9 @@ const AlcoholPage = () => {
               navigate("/your-animal");
             }
           }}
-        >다음</Button>
+        >
+          다음
+        </Button>
       </ButtonContainer>
     </Container>
   );

@@ -4,43 +4,38 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100dvh;
   ///배경 수정 그라데이션 이상함
   background: linear-gradient(180deg, rgba(240, 140, 151, 0.25), #fff9e7 100%);
   box-sizing: border-box;
-  padding-top: 60px;
-  padding-bottom: 60px;
 `;
 
 export const Title = styled.h2`
   font-size: 40px;
   font-weight: 400;
   color: rgba(0, 0, 0, 1);
-  margin-bottom: 60px;
 `;
 
 export const MainGuide = styled.div`
-  font-family: "NEXON Lv1 Gothic", sans-serif;
   font-size: 22px;
-  font-weight: 400;
+  font-weight: 500;
   color: rgba(0, 0, 0, 1);
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 `;
 
 export const SubGuide = styled.div`
-  font-family: "NEXON Lv1 Gothic", sans-serif;
   font-size: 14px;
   font-weight: 300;
   color: rgba(0, 0, 0, 1);
-  margin-bottom: 42px;
+  margin-bottom: 30px;
   letter-spacing: -0.5px;
 `;
 /// 강아지만 높이 230px
 export const AnimalImg = styled.img`
-  width: 250px;
-  height: auto;
-  margin-bottom: 60px;
+  width: 60%;
+  margin: 10px 0 10px 0;
 `;
 export const AnimalName = styled.h2`
   width: 350px;
@@ -49,7 +44,7 @@ export const AnimalName = styled.h2`
   font-size: 40px;
   text-overflow: ellipsis;
   text-align: center;
-  margin-bottom: 46px;
+  margin-bottom: 26px;
 `;
 
 export const Button = styled.button`

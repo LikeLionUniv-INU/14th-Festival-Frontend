@@ -2,10 +2,9 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/common/Button";
-import * as S from "./Login.styles";
+import * as S from "../pages/Login.styles";
 import PrivacyModal from "../components/modal/PrivacyModal";
-import smallBasicLion from "../assets/images/lion/small-basic-lion.png";
+import lion from "../assets/images/lion/small-basic-lion.png";
 
 const Login = () => {
   const [instaId, setInstaId] = useState("");
@@ -13,10 +12,18 @@ const Login = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const handleUserNumChange = (e) => {
+    const value = e.target.value;
+    const onlyNumber = value.replace(/[^0-9]/g, "").slice(0, 4);
+    setUserNum(onlyNumber);
+  };
+
+  const isFormValid = instaId.trim() !== "" && userNum.length === 4;
+
   return (
     <S.Container>
       <S.Content>
-        <S.Img src={smallBasicLion} />
+        <S.Img src={lion} />
         <S.LoginTitle>
           인스타 ID와 본인확인용 <br />
           숫자를 입력해주세요
@@ -32,10 +39,12 @@ const Login = () => {
           type="text"
           placeholder="ex) 1234"
           value={userNum}
-          onChange={(e) => setUserNum(e.target.value)}
+          onChange={handleUserNumChange}
         />
         <S.GuideText> 숫자 4자리 </S.GuideText>
-        <Button onClick={() => setIsModalOpen(true)}>입력완료</Button>
+        <S.Button onClick={() => setIsModalOpen(true)} disabled={!isFormValid}>
+          입력완료
+        </S.Button>
       </S.Content>
       <PrivacyModal
         isOpen={isModalOpen}

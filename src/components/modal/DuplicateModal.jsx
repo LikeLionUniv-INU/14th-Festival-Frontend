@@ -1,5 +1,3 @@
-// 2-3. 매칭 대기 (18시 이전) (남윤)
-
 // 공통 모달 컴포넌트 - 아래처럼 갖다쓰세요잉
 // const [isModalOpen, setIsModalOpen] = useState(false);
 // <Modal

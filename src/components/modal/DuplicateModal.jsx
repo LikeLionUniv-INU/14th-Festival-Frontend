@@ -1,5 +1,3 @@
-// 2-3. 매칭 대기 (18시 이전) (남윤)
-
 // 공통 모달 컴포넌트 - 아래처럼 갖다쓰세요잉
 // const [isModalOpen, setIsModalOpen] = useState(false);
 // <Modal
@@ -15,7 +13,6 @@
 
 import React from "react";
 import styled from "styled-components";
-import lion from "../../assets/images/lion/small-crying-lion.png";
 
 // isOpen: 모달이 열려있는지 여부
 // onClose: 모달을 닫는 함수
@@ -34,7 +31,7 @@ const DuplicateModal = ({ isOpen, onClose }) => {
           </Title>
         }
 
-        <img src={lion} width="110" />
+        <img src="/assets/smallcryingLion.png" width="100" />
 
         <Content>
           {"18시 이후에\n 결과를 확인할 수 있어요!"}
@@ -72,8 +69,8 @@ const ModalBox = styled.div`
   background-color: #ffffff;
   width: 85%;
   max-width: 342px;
-  height: 397px;
-  min-height: 397px;
+  height: 412px;
+  min-height: 412px;
   border-radius: 12px;
   padding: 32px 64px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -98,7 +95,7 @@ const ModalBox = styled.div`
 `;
 
 const Title = styled.h3`
-  margin: 0 0 14px 0;
+  margin: 0 0 16px 0;
   font-size: 28px;
   font-weight: 700;
   color: #000000;
@@ -106,23 +103,19 @@ const Title = styled.h3`
 `;
 
 const Content = styled.p`
-  margin-bottom: 2px;
+  margin-bottom: 24px;
   font-size: 20px;
-  color: black;
+  color: #555;
   text-align: center;
   line-height: 1.5;
   white-space: pre-line;
-  width:260px;
-  margin-top:12px;
-  line-height: 23px;
 `;
 
 const Info = styled.p`
   font-size: 12px;
-  font-weight: 500;
-  color: rgb(113, 113, 113);
-  margin-top: 12px;
-  margin-bottom: 40px;
+  font-weight: 300;
+  color: rgb(91, 91, 91);
+  margin-top: 14px;
   text-align: center;
 `;
 

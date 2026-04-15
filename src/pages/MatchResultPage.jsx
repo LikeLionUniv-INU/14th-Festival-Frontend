@@ -7,8 +7,15 @@ import React, { useState } from "react";
 
 import Complete from "./Complete";
 import Modal from "../components/modal/ResultModal";
+import { useNavigate } from "react-router-dom";
 
-export default function MatchResultPage({ title, lion, button, isSuccess }) {
+export default function MatchResultPage({
+  title,
+  lion,
+  info,
+  button,
+  isSuccess,
+}) {
   /* 모달창 열기 */
   const [isModalOpen, setIsModalopen] = useState(false);
   const handleButtonClick = () => {
@@ -16,6 +23,8 @@ export default function MatchResultPage({ title, lion, button, isSuccess }) {
       setIsModalopen(true);
     }
   };
+
+  const navigate = useNavigate();
 
   /* 모달창 안 인스타그램 아이디
   나머지 과정은 모달 컴포넌트 안에 구현 */
@@ -25,10 +34,11 @@ export default function MatchResultPage({ title, lion, button, isSuccess }) {
     <>
       <Complete
         title={title}
-        fontSize="40px"
         lion={lion}
+        fontSize="40px"
+        info={info}
         button={button}
-        onButtonClick={handleButtonClick}
+        onButtonClick={isSuccess ? handleButtonClick : () => navigate("/")}
       />
       <Modal
         isOpen={isModalOpen}

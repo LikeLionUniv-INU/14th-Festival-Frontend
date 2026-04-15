@@ -22,5 +22,9 @@ export const Container = styled.div`
 `;
 
 export const ButtonContainer = styled.button`
+  button {
+    background-color: ${(props) => (props.$active ? "" : "#D9D9D9 !important")};
+  }
+
   margin-bottom: 2dvh;
 `;

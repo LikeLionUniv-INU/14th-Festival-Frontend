@@ -14,11 +14,13 @@ const YourAnimalPage = () => {
   const [selected, setSelected] = useState([]);
   const navigate = useNavigate();
 
+  const isButtonActive = selected.length === 2;
+
   // 함수로직 (클릭할때, 안할때)
   const toggleTag = (tag) => {
     if (selected.includes(tag)) {
       setSelected(selected.filter((item) => item !== tag));
-    } else if (selected.length < 1) {
+    } else if (selected.length < 2) {
       setSelected([...selected, tag]);
     }
   };
@@ -54,7 +56,7 @@ const YourAnimalPage = () => {
         text="내가 원하는 상대의 동물은?"
       />
 
-      <GuideText>1개를 선택해주세요!</GuideText>
+      <GuideText>2개를 선택해주세요!</GuideText>
 
       <MyAnimalGrid>
         {MyAnimals.map((text) => (
@@ -69,14 +71,14 @@ const YourAnimalPage = () => {
         ))}
       </MyAnimalGrid>
 
-      <ButtonContainer>
+      <ButtonContainer $active={isButtonActive}>
         <Button
           onClick={() => {
-            navigate("/choice-done");
+            if (isButtonActive) {
+              navigate("/choice-done");
+            }
           }}
-        >
-          다음
-        </Button>
+        >다음</Button>
       </ButtonContainer>
     </Container>
   );

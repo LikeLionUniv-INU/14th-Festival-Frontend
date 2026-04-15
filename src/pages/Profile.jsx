@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as S from "../pages/Profile.styles";
+import * as S from "./profile.styles";
 import GuideModal from "../components/modal/GuideModal";
 
 import bear from "../assets/images/profile/bear.png";

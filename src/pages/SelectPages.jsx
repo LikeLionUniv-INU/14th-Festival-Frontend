@@ -2,7 +2,16 @@
 // /choice-done 페이지 묶음
 
 import Complete from "./Complete";
+import { useNavigate } from "react-router-dom";
 
 export default function SelectPage({ title, button }) {
-  return <Complete title={title} button={button} />;
+  const navigate = useNavigate();
+
+  return (
+    <Complete
+      title={title}
+      button={button}
+      onButtonClick={() => navigate("/profile")}
+    />
+  );
 }

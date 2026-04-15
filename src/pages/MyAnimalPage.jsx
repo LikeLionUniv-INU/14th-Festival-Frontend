@@ -10,9 +10,13 @@ import { Container, ButtonContainer } from "./MyAnimalPage.styles";
 import { useNavigate } from "react-router-dom";
 import smallBasicLion from "../assets/images/lion/small-basic-lion.png";
 
+
+
 const MyAnimalPage = () => {
   const [selected, setSelected] = useState([]);
   const navigate = useNavigate();
+
+  const isButtonActive = selected.length === 1;
 
   // 함수로직 (클릭할때, 안할때)
   const toggleTag = (tag) => {
@@ -66,8 +70,14 @@ const MyAnimalPage = () => {
         ))}
       </MyAnimalGrid>
 
-      <ButtonContainer>
-        <Button onClick={() => navigate("/my-trait")}>다음</Button>
+      <ButtonContainer $active={isButtonActive}>
+        <Button
+          onClick={() => {
+            if (isButtonActive) {
+              navigate("/my-trait");
+            }
+          }}
+        >다음</Button>
       </ButtonContainer>
     </Container>
   );

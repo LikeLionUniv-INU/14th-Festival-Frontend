@@ -6,7 +6,20 @@ export const NButton = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-bottom: 20px;
+  margin-top: auto;
+  margin-bottom: 30px;
+
+  /* 성별 선택 안 됐을 때 버튼 색 죽이기 */
+  ${(props) =>
+    props.$isDisabled &&
+    `
+    button {
+      background-color: #d9d9d9 !important;
+      color: #000000 !important;
+      pointer-events: none !important;
+      
+    }
+  `}
 `;
 
 export const Container = styled.div`
@@ -14,12 +27,13 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center; // 위아래 여백이 똑같아지도록 수직 정렬.
   width: 100%;
-
+  height: 100dvh;
   justify-content: flex-start; // 가로 방향의 시작점으로 아이템들을 붙임
   gap: 50px;
   padding: 60px 0;
   background-color: transparent;
   box-sizing: border-box;
+  position: relative;
 `;
 
 export const Guide = styled.div`

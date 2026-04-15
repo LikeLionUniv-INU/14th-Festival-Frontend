@@ -54,6 +54,15 @@ export const Lion = styled.div`
   }
 `;
 
+export const Info = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 500;
+  color: darkgray;
+`;
+
 export const Box = styled.div`
   //텍스트, 사진 그룹
   display: flex;

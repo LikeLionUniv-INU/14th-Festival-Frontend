@@ -7,7 +7,9 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Button from "../components/common/Button.jsx";
 import * as S from "./Complete.styles.js";
-import smileLion from "../assets/images/lion/smile-lion.png"
+import smileLion from "../assets/images/lion/smile-lion.png";
+import heartLion from "../assets/images/lion/big-heart-lion.png";
+import cryingLion from "../assets/images/lion/crying-lion.png";
 
 function Complete({
   title,
@@ -15,6 +17,7 @@ function Complete({
   lion = "smile",
   button,
   animation = "slideUp",
+  info,
   onButtonClick,
 }) {
   const isTypewriter = animation === "typewriter"; //타자기 효과
@@ -22,6 +25,12 @@ function Complete({
   const [displayedTitle, setDisplayedTitle] = useState(
     isTypewriter ? "" : title,
   );
+
+  const lionImages = {
+    smile: smileLion,
+    heart: heartLion,
+    crying: cryingLion,
+  };
 
   useEffect(() => {
     if (!isTypewriter) {
@@ -64,9 +73,10 @@ function Complete({
         )}
 
         <S.Lion>
-          <img src={smileLion} />
+          <img src={lionImages[lion]} />
         </S.Lion>
       </S.Box>
+      <S.Info>{info}</S.Info>
       {button && <Button onClick={onButtonClick}>{button}</Button>}
     </S.Container>
   );

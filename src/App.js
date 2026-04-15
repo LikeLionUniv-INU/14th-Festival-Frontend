@@ -15,6 +15,7 @@ import ResultCheckPage from "./pages/ResultCheckPage";
 import SelectGender from "./pages/SelectGender";
 import SelectPage from "./pages/SelectPages";
 import YourAnimalPage from "./pages/YourAnimalPage";
+import Profile from "./pages/Profile";
 
 function App() {
   // 모바일 브라우저 높이 계산
@@ -58,6 +59,7 @@ function App() {
               path="/choice-done"
               element={<SelectPage title="작성 완료!" button="다음" />}
             />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/result" element={<ResultCheckPage />} />
             <Route
               path="/match-success"

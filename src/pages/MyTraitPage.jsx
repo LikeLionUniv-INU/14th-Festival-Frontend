@@ -14,6 +14,8 @@ const MyTraitPage = () => {
   const [selected, setSelected] = useState([]);
   const navigate = useNavigate();
 
+  const isButtonActive = selected.length === 3;
+
   //함수로직 (클릭할때, 안할때)
   const toggleTag = (tag) => {
     if (selected.includes(tag)) {
@@ -25,14 +27,14 @@ const MyTraitPage = () => {
 
   const Traits = [
     "# 스포츠",
-    "# 영화",
+    "# 뮤지컬/연극",
     "# 반려동물",
     "# 여행",
     "# 맛집탐방",
     "# 자기계발",
     "# 덕질",
     "# 음악감상",
-    "# 보드게임",
+    "# 게임",
   ];
 
   return (
@@ -50,14 +52,20 @@ const MyTraitPage = () => {
             label={text}
             isSelected={selected.includes(text)}
             onClick={() => toggleTag(text)}
-            width="100px"
-            height="100px"
           />
         ))}
       </TagGrid>
 
-      <ButtonContainer>
-        <Button onClick={() => navigate("/alcohol")}>다음</Button>
+      <ButtonContainer $active={isButtonActive}>
+        <Button
+          onClick={() => {
+            if (isButtonActive) {
+              navigate("/alcohol");
+            }
+          }}
+        >
+          다음
+        </Button>
       </ButtonContainer>
     </Container>
   );

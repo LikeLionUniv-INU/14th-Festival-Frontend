@@ -14,6 +14,8 @@ const AlcoholPage = () => {
   const [selected, setSelected] = useState([]);
   const navigate = useNavigate();
 
+  const isButtonActive = selected.length === 2;
+
   // 함수로직 (클릭할때, 안할때)
   const toggleTag = (tag) => {
     if (selected.includes(tag)) {
@@ -25,27 +27,16 @@ const AlcoholPage = () => {
 
   const AlcoholGrid = styled(TagGrid)`
     /* 3열을 2열로 변경 */
-    grid-template-columns: repeat(2, 1fr) !important;
-
-    width: 100% !important;
-    max-width: 340px !important;
-    column-gap: 20px !important; /* 가로 사이 간격 */
-    row-gap: 30px !important;
-
-    & button {
-      width: 100% !important;
-      height: 100px !important;
-      font-size: 16px !important;
-    }
+    grid-template-columns: repeat(2, 1fr);
   `;
 
   const alcohols = [
-    "# 소주",
-    "# 맥주",
-    "# 소맥",
-    "# 하이볼",
-    "# 위스키",
-    "# 음료수",
+    "# 로맨스",
+    "# 공포/스릴러",
+    "# 코미디",
+    "# 액션/느와르",
+    "# 애니메이션",
+    "# 판타지",
   ];
 
   return (
@@ -54,7 +45,7 @@ const AlcoholPage = () => {
 
       <MessageCard
         imageUrl={smallBasicLion}
-        text="오늘 내가 먹고 싶은 술은..."
+        text="내가 좋아하는 영화 장르는?"
       />
 
       <GuideText>2개를 선택해주세요!</GuideText>
@@ -72,8 +63,16 @@ const AlcoholPage = () => {
         ))}
       </AlcoholGrid>
 
-      <ButtonContainer>
-        <Button onClick={() => navigate("/your-animal")}>다음</Button>
+      <ButtonContainer $active={isButtonActive}>
+        <Button
+          onClick={() => {
+            if (isButtonActive) {
+              navigate("/your-animal");
+            }
+          }}
+        >
+          다음
+        </Button>
       </ButtonContainer>
     </Container>
   );

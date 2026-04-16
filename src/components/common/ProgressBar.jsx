@@ -18,7 +18,9 @@ const ProgressBar = ({ currentStep, totalSteps }) => {
 export default ProgressBar;
 
 const ProcessBarContainer = styled.div`
-  width: 360px;
+  margin-top: 1vh;
+  margin-bottom: 3vh;
+  width: 90%;
   height: 4px;
   background-color: #d9d9d9;
   overflow: hidden;

@@ -26,6 +26,12 @@ function Complete({
     isTypewriter ? "" : title,
   );
 
+  const lionImages = {
+    smile: smileLion,
+    heart: heartLion,
+    crying: cryingLion,
+  };
+
   useEffect(() => {
     if (!isTypewriter) {
       setDisplayedTitle(title);
@@ -60,29 +66,33 @@ function Complete({
 
   return (
     <S.Container>
-      <S.Box>
-        {isTypewriter ? ( // typewriter 효과 적용시
-          <S.TitleArea $fontSize={fontSize}>
-            <S.Title
-              $fontSize={fontSize}
-              $animation={isTypewriter ? "none" : "slideUp"}
-            >
-              {displayedTitle}
-            </S.Title>
-          </S.TitleArea>
-        ) : (
-          // slideUp 효과 적용 시
-          <S.Title $fontSize={fontSize} $animation="slideUp">
+      {isTypewriter ? ( // typewriter 효과 적용시
+        <S.TitleArea $fontSize={fontSize}>
+          <S.Title
+            $fontSize={fontSize}
+            $animation={isTypewriter ? "none" : "slideUp"}
+          >
             {displayedTitle}
           </S.Title>
-        )}
+        </S.TitleArea>
+      ) : (
+        // slideUp 효과 적용 시
+        <S.Title $fontSize={fontSize} $animation="slideUp">
+          {displayedTitle}
+        </S.Title>
+      )}
 
-        <S.Lion>
-          <img src={lionImages[lion]} />
-        </S.Lion>
-      </S.Box>
+      <S.Lion>
+        <img src={lionImages[lion]} />
+      </S.Lion>
+
       {!isFriday && <S.Info>{info}</S.Info>}
-      {button && <Button onClick={onButtonClick}>{button}</Button>}
+
+      {button && (
+        <Button style={{ marginBottom: "2vh" }} onClick={onButtonClick}>
+          {button}
+        </Button>
+      )}
     </S.Container>
   );
 }

@@ -52,8 +52,6 @@ const MyTraitPage = () => {
             label={text}
             isSelected={selected.includes(text)}
             onClick={() => toggleTag(text)}
-            width="100px"
-            height="100px"
           />
         ))}
       </TagGrid>
@@ -65,7 +63,9 @@ const MyTraitPage = () => {
               navigate("/alcohol");
             }
           }}
-        >다음</Button>
+        >
+          다음
+        </Button>
       </ButtonContainer>
     </Container>
   );

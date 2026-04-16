@@ -22,7 +22,6 @@ export const Title = styled.h2`
   line-height: 1.2;
   color: black;
   //text-shadow: 0.5px 0.5px 2px rgba(86, 86, 86, 0.3);
-  margin: 0;
   text-align: center;
   white-space: pre-wrap;
 
@@ -43,12 +42,12 @@ export const TitleArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  margin-top: 40px;
 `;
 
 export const Lion = styled.div`
   text-align: center;
-  margin-top: 5.03dvh; // 글자와 사진 사이 간격
-
+  margin: 60.41px 0 60.41px 0;
   img {
     width: 83.33%;
   }
@@ -63,22 +62,12 @@ export const Info = styled.p`
   color: darkgray;
 `;
 
-export const Box = styled.div`
-  //텍스트, 사진 그룹
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
 export const Container = styled.div`
   // 전체 텍스트, 사진, 버튼 그룹
-  height: 69.1dvh;
+  height: 100dvh;
   width: 100%;
-  box-sizing: border-box;
-  margin-top: 19.1dvh;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 `;

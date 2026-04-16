@@ -26,12 +26,6 @@ function Complete({
     isTypewriter ? "" : title,
   );
 
-  const lionImages = {
-    smile: smileLion,
-    heart: heartLion,
-    crying: cryingLion,
-  };
-
   useEffect(() => {
     if (!isTypewriter) {
       setDisplayedTitle(title);

@@ -4,7 +4,6 @@
 // 14. 매칭 실패 (지연)
 
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import Button from "../components/common/Button.jsx";
 import * as S from "./Complete.styles.js";
 import smileLion from "../assets/images/lion/smile-lion.png";
@@ -20,17 +19,12 @@ function Complete({
   info,
   onButtonClick,
 }) {
-  const isTypewriter = animation === "typewriter"; //타자기 효과
+  // 타자기 효과
+  const isTypewriter = animation === "typewriter";
 
   const [displayedTitle, setDisplayedTitle] = useState(
     isTypewriter ? "" : title,
   );
-
-  const lionImages = {
-    smile: smileLion,
-    heart: heartLion,
-    crying: cryingLion,
-  };
 
   useEffect(() => {
     if (!isTypewriter) {
@@ -52,6 +46,17 @@ function Complete({
 
     return () => clearInterval(interval);
   }, [title, isTypewriter]);
+
+  // 사진 바꿔끼기
+  const lionImages = {
+    smile: smileLion,
+    heart: heartLion,
+    crying: cryingLion,
+  };
+
+  // Info 금요일 비활성화
+  const today = new Date().getDay(); //일: 0, ..., 금: 5, 토: 6
+  const isFriday = today === 5;
 
   return (
     <S.Container>
@@ -76,7 +81,7 @@ function Complete({
           <img src={lionImages[lion]} />
         </S.Lion>
       </S.Box>
-      <S.Info>{info}</S.Info>
+      {!isFriday && <S.Info>{info}</S.Info>}
       {button && <Button onClick={onButtonClick}>{button}</Button>}
     </S.Container>
   );

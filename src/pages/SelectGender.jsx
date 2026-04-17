@@ -35,7 +35,11 @@ const SelectGender = () => {
       </S.BSection>
       <S.NButton $isDisabled={!selectedGender}>
         <Button
-          onClick={() => navigate("/my-animal")}
+          onClick={() =>
+            navigate("/my-animal", {
+              state: { gender: selectedGender },
+            })
+          }
           disabled={!selectedGender}
         >
           다음

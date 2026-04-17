@@ -34,23 +34,35 @@ export const Title = styled.h2`
     `}
 `;
 
-export const TitleArea = styled.div`
+//typewriter 효과 적용시
+export const typeTitleArea = styled.div`
   width: 100%;
-  height: calc(
-    (${(props) => props.$fontSize || "40px"}) * 2 * 1.2
-  ); // 글자 두 줄일 때 사진 안 밀리게
+  height: 76.8px;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  margin-top: 40px;
+  align-items: start;
+  margin-top: 4vh;
 `;
 
-export const Lion = styled.div`
-  text-align: center;
-  margin: 60.41px 0 60.41px 0;
-  img {
-    width: 83.33%;
-  }
+
+export const typeLion = styled.div`
+  margin: 81.6px 0 81.6px 0;
+`;
+
+
+//slideup 효과 적용시
+export const slideTitleArea = styled.div`
+  width: 100%;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  margin-top: 4vh;
+`;
+
+
+export const slideLion = styled.div`
+  margin: 96px 0 96px 0;
 `;
 
 export const Info = styled.p`
@@ -62,6 +74,10 @@ export const Info = styled.p`
   color: black;
   margin-bottom: 60px;
 `;
+
+export const ButtonContainer = styled.div`
+  margin-bottom: 2vh;
+`
 
 export const Container = styled.div`
   // 전체 텍스트, 사진, 버튼 그룹

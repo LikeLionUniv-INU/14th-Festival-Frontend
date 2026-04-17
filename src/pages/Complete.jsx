@@ -9,6 +9,7 @@ import * as S from "./Complete.styles.js";
 import smileLion from "../assets/images/lion/smile-lion.webp";
 import heartLion from "../assets/images/lion/big-heart-lion.webp";
 import cryingLion from "../assets/images/lion/crying-lion.webp";
+import { ButtonContainer } from "./MyAnimalPage.styles.js";
 
 function Complete({
   title,
@@ -60,33 +61,48 @@ function Complete({
 
   return (
     <S.Container>
-      {isTypewriter ? ( // typewriter 효과 적용시
-        <S.TitleArea $fontSize={fontSize}>
-          <S.Title
-            $fontSize={fontSize}
-            $animation={isTypewriter ? "none" : "slideUp"}
-          >
-            {displayedTitle}
-          </S.Title>
-        </S.TitleArea>
+      {isTypewriter ? (
+        // typewriter 효과 적용시
+        <>
+          <S.typeTitleArea $fontSize={fontSize}>
+            <S.Title
+              $fontSize={fontSize}
+              $animation={isTypewriter ? "none" : "slideUp"}
+            >
+              {displayedTitle}
+            </S.Title>
+          </S.typeTitleArea>
+          <S.typeLion>
+            <img src={lionImages[lion]} />
+          </S.typeLion>
+          <S.ButtonContainer>
+            {button && (
+              <Button onClick={onButtonClick} >
+                {button}
+              </Button>
+            )}
+          </S.ButtonContainer></>
       ) : (
         // slideUp 효과 적용 시
-        <S.Title $fontSize={fontSize} $animation="slideUp">
-          {displayedTitle}
-        </S.Title>
-      )}
+        <>
+          <S.slideTitleArea>
+            <S.Title $fontSize={fontSize} $animation="slideUp">
+              {displayedTitle}
+            </S.Title>
+          </S.slideTitleArea>
 
-      <S.Lion>
-        <img src={lionImages[lion]} />
-      </S.Lion>
+          <S.slideLion>
+            <img src={lionImages[lion]} />
+          </S.slideLion>
 
-      {!isFriday && <S.Info>{info}</S.Info>}
-
-      {button && (
-        <Button style={{ marginBottom: "2vh" }} onClick={onButtonClick}>
-          {button}
-        </Button>
-      )}
+          {!isFriday && <S.Info>{info}</S.Info>}
+          <S.ButtonContainer>
+            {button && (
+              <Button onClick={onButtonClick} >
+                {button}
+              </Button>
+            )}
+          </S.ButtonContainer></>)}
     </S.Container>
   );
 }

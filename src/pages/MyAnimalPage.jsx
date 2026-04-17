@@ -7,12 +7,32 @@ import Button from "../components/common/Button";
 import MessageCard from "../components/common/MessageCard";
 import ProgressBar from "../components/common/ProgressBar";
 import { Container, ButtonContainer } from "./MyAnimalPage.styles";
-import { useNavigate } from "react-router-dom";
-import smallBasicLion from "../assets/images/lion/small-basic-lion.png";
+import { useLocation, useNavigate } from "react-router-dom";
+import smallBasicLion from "../assets/images/lion/small-basic-lion.webp";
 
 const MyAnimalPage = () => {
   const [selected, setSelected] = useState([]);
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const gender = location.state?.gender;
+
+  const maleAnimals = ["강아지", "고양이", "햄스터", "곰", "원숭이", "공룡"];
+  const femaleAnimals = [
+    "강아지",
+    "고양이",
+    "햄스터",
+    "병아리",
+    "토끼",
+    "사슴",
+  ];
+
+  const MyAnimalGrid = styled(TagGrid)`
+    /* 3열을 2열로 변경 */
+    grid-template-columns: repeat(2, 1fr) !important;
+  `;
+
+  const MyAnimals = gender === "male" ? maleAnimals : femaleAnimals;
 
   const isButtonActive = selected.length === 1;
 
@@ -24,22 +44,6 @@ const MyAnimalPage = () => {
       setSelected([...selected, tag]);
     }
   };
-
-  const MyAnimalGrid = styled(TagGrid)`
-    /* 3열을 2열로 변경 */
-    grid-template-columns: repeat(2, 1fr) !important;
-  `;
-
-  const MyAnimals = [
-    "# 강아지",
-    "# 고양이",
-    "# 곰",
-    "# 원숭이",
-    "# 토끼",
-    "# 말",
-    "# 공룡",
-    "# 병아리",
-  ];
 
   return (
     <Container>
@@ -64,7 +68,9 @@ const MyAnimalPage = () => {
         <Button
           onClick={() => {
             if (isButtonActive) {
-              navigate("/my-trait");
+              navigate("/my-trait", {
+                state: { gender },
+              });
             }
           }}
         >

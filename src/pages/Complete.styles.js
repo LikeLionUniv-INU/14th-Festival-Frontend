@@ -59,7 +59,8 @@ export const Info = styled.p`
   align-items: center;
   font-size: 24px;
   font-weight: 500;
-  color: darkgray;
+  color: black;
+  margin-bottom: 60px;
 `;
 
 export const Container = styled.div`

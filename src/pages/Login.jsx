@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "../pages/Login.styles";
 import PrivacyModal from "../components/modal/PrivacyModal";
-import lion from "../assets/images/lion/small-basic-lion.png";
+import lion from "../assets/images/lion/small-basic-lion.webp";
 
 const Login = () => {
   const [instaId, setInstaId] = useState("");

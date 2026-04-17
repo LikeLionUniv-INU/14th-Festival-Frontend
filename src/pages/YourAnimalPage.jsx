@@ -13,6 +13,8 @@ import smallBasicLion from "../assets/images/lion/small-basic-lion.webp";
 const MyAnimalGrid = styled(TagGrid)`
   /* 3열을 2열로 변경 */
   grid-template-columns: repeat(2, 1fr) !important;
+  height: 300px;
+  margin-bottom: 15px;
 `;
 
 const YourAnimalPage = () => {
@@ -85,7 +87,7 @@ const YourAnimalPage = () => {
         <Button
           onClick={() => {
             if (isButtonActive) {
-              navigate("/profile");
+              navigate("/choice-done");
             }
           }}
         >

@@ -13,6 +13,7 @@ export const Container = styled.div`
 export const ButtonContainer = styled.button`
   button {
     background-color: ${(props) => (props.$active ? "" : "#D9D9D9 !important")};
+    color: ${(props) => (props.$active ? "#ffffff" : "#000000 !important")};
   }
 
   margin-bottom: 2dvh;
@@ -26,5 +27,5 @@ export const Anything = styled.span`
   text-decoration: underline;
   cursor: pointer;
   pointer-events: auto;
-  margin-bottom: 2dvh;
+  margin-bottom: 14.2px;
 `;

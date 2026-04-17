@@ -8,7 +8,7 @@ import MessageCard from "../components/common/MessageCard";
 import ProgressBar from "../components/common/ProgressBar";
 import { useNavigate } from "react-router-dom";
 import { Container, ButtonContainer } from "./MyTraitPage.styles";
-import smallBasicLion from "../assets/images/lion/small-basic-lion.png";
+import smallBasicLion from "../assets/images/lion/small-basic-lion.webp";
 
 const MyTraitPage = () => {
   const [selected, setSelected] = useState([]);

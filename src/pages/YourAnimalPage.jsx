@@ -1,4 +1,4 @@
-// 6. 질문1 - 본인 동물상 (남윤)
+// 6. 질문4 - 상대 동물상 (남윤)
 
 import React, { useState } from "react";
 import styled from "styled-components";
@@ -6,52 +6,64 @@ import TagBlock, { GuideText, TagGrid } from "../components/common/TagBlock";
 import Button from "../components/common/Button";
 import MessageCard from "../components/common/MessageCard";
 import ProgressBar from "../components/common/ProgressBar";
-import { Container, ButtonContainer } from "./MyAnimalPage.styles";
-import { useNavigate } from "react-router-dom";
+import { Container, ButtonContainer, Anything } from "./MyAnimalPage.styles";
+import { useNavigate, useLocation } from "react-router-dom";
 import smallBasicLion from "../assets/images/lion/small-basic-lion.png";
+
+const MyAnimalGrid = styled(TagGrid)`
+  /* 3열을 2열로 변경 */
+  grid-template-columns: repeat(2, 1fr) !important;
+`;
 
 const YourAnimalPage = () => {
   const [selected, setSelected] = useState([]);
   const navigate = useNavigate();
 
-  const isButtonActive = selected.length === 2;
+  const location = useLocation();
+  const gender = location.state?.gender;
+
+  const maleAnimals = ["강아지", "고양이", "햄스터", "곰", "원숭이", "공룡"];
+  const femaleAnimals = [
+    "강아지",
+    "고양이",
+    "햄스터",
+    "병아리",
+    "토끼",
+    "사슴",
+  ];
+
+  const MyAnimals = gender === "male" ? femaleAnimals : maleAnimals;
 
   // 함수로직 (클릭할때, 안할때)
   const toggleTag = (tag) => {
+    if (tag === "상관없음") {
+      setSelected(["상관없음"]);
+      return;
+    }
+
+    if (selected.includes("상관없음")) {
+      setSelected([tag]);
+      return;
+    }
+
     if (selected.includes(tag)) {
       setSelected(selected.filter((item) => item !== tag));
-    } else if (selected.length < 2) {
+    } else if (selected.length < 3) {
       setSelected([...selected, tag]);
     }
   };
 
-  const MyAnimalGrid = styled(TagGrid)`
-    /* 3열을 2열로 변경 */
-    grid-template-columns: repeat(2, 1fr) !important;
-  `;
-
-  const MyAnimals = [
-    "# 강아지",
-    "# 고양이",
-    "# 곰",
-    "# 원숭이",
-    "# 토끼",
-    "# 말",
-    "# 공룡",
-    "# 병아리",
-  ];
+  const isButtonActive = selected.length === 3 || selected.includes("상관없음");
 
   return (
     <Container>
       <ProgressBar currentStep={5} totalSteps={5} />
-
       <MessageCard
         imageUrl={smallBasicLion}
         text="내가 원하는 상대의 동물은?"
       />
 
-      <GuideText>2개를 선택해주세요!</GuideText>
-
+      <GuideText>3개를 선택해주세요!</GuideText>
       <MyAnimalGrid>
         {MyAnimals.map((text) => (
           <TagBlock
@@ -63,6 +75,12 @@ const YourAnimalPage = () => {
         ))}
       </MyAnimalGrid>
 
+      <Anything
+        $selected={selected.includes("상관없음")}
+        onClick={() => toggleTag("상관없음")}
+      >
+        상관없음
+      </Anything>
       <ButtonContainer $active={isButtonActive}>
         <Button
           onClick={() => {

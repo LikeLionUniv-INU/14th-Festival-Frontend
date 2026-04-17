@@ -6,13 +6,16 @@ import TagBlock, { GuideText, TagGrid } from "../components/common/TagBlock";
 import Button from "../components/common/Button";
 import MessageCard from "../components/common/MessageCard";
 import ProgressBar from "../components/common/ProgressBar";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Container, ButtonContainer } from "./MyTraitPage.styles";
 import smallBasicLion from "../assets/images/lion/small-basic-lion.png";
 
 const MyTraitPage = () => {
   const [selected, setSelected] = useState([]);
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const gender = location.state?.gender;
 
   const isButtonActive = selected.length === 3;
 
@@ -60,7 +63,9 @@ const MyTraitPage = () => {
         <Button
           onClick={() => {
             if (isButtonActive) {
-              navigate("/alcohol");
+              navigate("/alcohol", {
+                state: { gender },
+              });
             }
           }}
         >

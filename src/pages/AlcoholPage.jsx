@@ -7,12 +7,15 @@ import Button from "../components/common/Button";
 import MessageCard from "../components/common/MessageCard";
 import ProgressBar from "../components/common/ProgressBar";
 import { Container, ButtonContainer } from "./AlcoholPage.styles";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import smallBasicLion from "../assets/images/lion/small-basic-lion.png";
 
 const AlcoholPage = () => {
   const [selected, setSelected] = useState([]);
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const gender = location.state?.gender;
 
   const isButtonActive = selected.length === 2;
 
@@ -67,7 +70,9 @@ const AlcoholPage = () => {
         <Button
           onClick={() => {
             if (isButtonActive) {
-              navigate("/your-animal");
+              navigate("/your-animal", {
+                state: { gender },
+              });
             }
           }}
         >

@@ -8,7 +8,7 @@ import MessageCard from "../components/common/MessageCard";
 import ProgressBar from "../components/common/ProgressBar";
 import { Container, ButtonContainer, Anything } from "./MyAnimalPage.styles";
 import { useNavigate, useLocation } from "react-router-dom";
-import smallBasicLion from "../assets/images/lion/small-basic-lion.png";
+import smallBasicLion from "../assets/images/lion/small-basic-lion.webp";
 
 const MyAnimalGrid = styled(TagGrid)`
   /* 3열을 2열로 변경 */

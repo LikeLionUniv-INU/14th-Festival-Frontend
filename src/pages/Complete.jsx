@@ -6,9 +6,9 @@
 import React, { useEffect, useState } from "react";
 import Button from "../components/common/Button.jsx";
 import * as S from "./Complete.styles.js";
-import smileLion from "../assets/images/lion/smile-lion.png";
-import heartLion from "../assets/images/lion/big-heart-lion.png";
-import cryingLion from "../assets/images/lion/crying-lion.png";
+import smileLion from "../assets/images/lion/smile-lion.webp";
+import heartLion from "../assets/images/lion/big-heart-lion.webp";
+import cryingLion from "../assets/images/lion/crying-lion.webp";
 
 function Complete({
   title,

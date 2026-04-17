@@ -30,12 +30,6 @@ const MyAnimalPage = () => {
   const MyAnimalGrid = styled(TagGrid)`
     /* 3열을 2열로 변경 */
     grid-template-columns: repeat(2, 1fr) !important;
-
-    width: 100% !important;
-    max-width: 340px !important;
-    column-gap: 20px !important; /* 가로 사이 간격 */
-    //row-gap: 20px !important;
-    align-content: space-between;
   `;
 
   const MyAnimals = [
@@ -64,8 +58,6 @@ const MyAnimalPage = () => {
             label={text}
             isSelected={selected.includes(text)}
             onClick={() => toggleTag(text)}
-            width="160px"
-            height="60px"
           />
         ))}
       </MyAnimalGrid>
@@ -77,7 +69,9 @@ const MyAnimalPage = () => {
               navigate("/my-trait");
             }
           }}
-        >다음</Button>
+        >
+          다음
+        </Button>
       </ButtonContainer>
     </Container>
   );

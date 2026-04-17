@@ -49,7 +49,6 @@ export const LoginTitle = styled.div`
   line-height: 1.5;
   color: rgba(0, 0, 0, 1);
   margin-bottom: 30px;
-  font-family: "NEXON Lv1 Gothic ", sans-serif;
   text-align: center;
 `;
 
@@ -64,19 +63,17 @@ export const InputBox = styled.input`
   outline: none;
 
   //사용자가 입력할 글자 스타일
-  font-family: "NEXON Lv1 Gothic", sans-serif;
+  font-weight: 500;
   font-size: 14px;
   color: rgba(0, 0, 0, 1);
 
   &::placeholder {
-    font-family: "NEXON Lv1 Gothic", sans-serif;
     font-size: 14px;
     color: rgba(166, 166, 166, 1);
   }
 `;
 
 export const GuideText = styled.div`
-  font-family: "NEXON Lv1 Gothic", sans-serif;
   font-size: 10px;
   line-height: 1;
   font-weight: 300;
@@ -90,9 +87,9 @@ export const Button = styled.button`
   min-width: 150px;
   width: auto;
   height: 60px;
-  padding: 16px 44px;
   border: none;
   border-radius: 12px;
+  font-size: 20px;
   /// 활성화 전
   background-color: #d9d9d9;
   cursor: not-allowed;

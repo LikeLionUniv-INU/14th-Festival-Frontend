@@ -66,7 +66,7 @@ function App() {
               element={
                 <MatchResultPage
                   title="매칭 성공!"
-                  lion="bigheart"
+                  lion="heart"
                   button="결과 확인하기"
                   isSuccess={true}
                 />
@@ -78,6 +78,7 @@ function App() {
                 <MatchResultPage
                   title="매칭 실패!"
                   lion="crying"
+                  info="내일 다시 참여할 수 있어요!"
                   button="끝내기"
                 />
               }

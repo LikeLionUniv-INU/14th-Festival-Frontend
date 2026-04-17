@@ -1,4 +1,4 @@
-// 9. 질문 4 - 상대 동물상
+// 6. 질문1 - 본인 동물상 (남윤)
 
 import React, { useState } from "react";
 import styled from "styled-components";
@@ -28,12 +28,6 @@ const YourAnimalPage = () => {
   const MyAnimalGrid = styled(TagGrid)`
     /* 3열을 2열로 변경 */
     grid-template-columns: repeat(2, 1fr) !important;
-
-    width: 100% !important;
-    max-width: 340px !important;
-    column-gap: 20px !important; /* 가로 사이 간격 */
-    //row-gap: 20px !important;
-    align-content: space-between;
   `;
 
   const MyAnimals = [
@@ -65,8 +59,6 @@ const YourAnimalPage = () => {
             label={text}
             isSelected={selected.includes(text)}
             onClick={() => toggleTag(text)}
-            width="160px"
-            height="60px"
           />
         ))}
       </MyAnimalGrid>
@@ -75,7 +67,7 @@ const YourAnimalPage = () => {
         <Button
           onClick={() => {
             if (isButtonActive) {
-              navigate("/choice-done");
+              navigate("/profile");
             }
           }}
         >다음</Button>

@@ -6,11 +6,9 @@ const Block = styled.button`
   width: ${(props) => props.$width};
   height: ${(props) => props.$height};
   font-size: 14px;
-  -webkit-text-stroke: 0.5px; /* 글자 외곽선을 0.5px 그려서 강제로 굵게 만듦 */
+  font-weight: 700;
   //text-shadow: 0.1px 0.1px 0px;
   color: #a4612e;
-  font-weight: bold;
-  cursor: pointer;
   border: ${(props) =>
     props.$isSelected
       ? "1px solid #E69EA6" /* 선택되었을 때: 두꺼운 주황색 테두리 */
@@ -34,19 +32,14 @@ export const GuideText = styled.p`
   width: 123px;
   height: 16px;
   font-size: 14px;
-  font-weight: 100 !important;
+  font-weight: 300;
   text-align: center;
 `;
 
 // 해시태그 클릭했을 때
-const TagBlock = ({ label, isSelected, onClick, width, height }) => {
+const TagBlock = ({ label, isSelected, onClick }) => {
   return (
-    <Block
-      $isSelected={isSelected}
-      onClick={onClick}
-      $width={width}
-      $height={height}
-    >
+    <Block $isSelected={isSelected} onClick={onClick}>
       {label}
     </Block>
   );
@@ -56,12 +49,11 @@ const TagBlock = ({ label, isSelected, onClick, width, height }) => {
 export const TagGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  column-gap: 20px;
-  row-gap: 30px;
-  width: 340px;
-  height: 360px;
-  margin-top: 20px;
-  margin-bottom: 40px;
+  column-gap: 15px;
+  row-gap: 15px;
+  height: 320px;
+  width: 90%;
+  margin: 20px 0 30px 0;
 `;
 
 export default TagBlock;

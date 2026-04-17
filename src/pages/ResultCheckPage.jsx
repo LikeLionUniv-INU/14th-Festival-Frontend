@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./ResultCheckPage.styles";
-import smallBasicLion from "../assets/images/lion/small-basic-lion.png";
+import smallBasicLion from "../assets/images/lion/small-basic-lion.webp";
 
 const ResultCheckPage = () => {
   const [instaId, setInstaId] = useState("");

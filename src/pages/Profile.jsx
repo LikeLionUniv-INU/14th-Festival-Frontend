@@ -3,20 +3,20 @@ import { useNavigate } from "react-router-dom";
 import * as S from "./profile.styles";
 import GuideModal from "../components/modal/GuideModal";
 
-import bear from "../assets/images/profile/bear.png";
-import monkey from "../assets/images/profile/monkey.png";
-import cat from "../assets/images/profile/cat.png";
-import chick from "../assets/images/profile/chick.png";
-import dinosaur from "../assets/images/profile/dinosaur.png";
-import dog from "../assets/images/profile/dog.png";
-import horse from "../assets/images/profile/horse.png";
-import rabbit from "../assets/images/profile/rabbit.png";
+import bear from "../assets/images/profile/bear.webp";
+import monkey from "../assets/images/profile/monkey.webp";
+import cat from "../assets/images/profile/cat.webp";
+import chick from "../assets/images/profile/chick.webp";
+import dinosaur from "../assets/images/profile/dinosaur.webp";
+import dog from "../assets/images/profile/dog.webp";
+import horse from "../assets/images/profile/horse.webp";
+import rabbit from "../assets/images/profile/rabbit.webp";
 
 const Profile = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   ///테스트 용                       이거 단어 바꾸면 사진이랑 글 바꿀 수 있음
-  const [animalResult, setAnimalResult] = useState("rabbit");
+  const [animalResult, setAnimalResult] = useState("monkey");
   const [interestResult, setInterestResult] = useState("여행");
 
   {

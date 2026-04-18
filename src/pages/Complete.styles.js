@@ -46,9 +46,8 @@ export const TypeTitleArea = styled.div`
 
 
 export const TypeLion = styled.div`
-  margin: 81.6px 0 81.6px 0;
+  margin: 43.6px 0 43.6px 0;
 `;
-
 
 //slideup 효과 적용시
 export const SlideTitleArea = styled.div`
@@ -73,11 +72,24 @@ export const Info = styled.p`
   font-weight: 500;
   color: black;
   margin-bottom: 60px;
+  white-space: pre-wrap;
+`;
+
+export const TwoLineInfo = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #787878;
+  white-space: pre-wrap;
+  margin-top:20px;
 `;
 
 export const ButtonContainer = styled.div`
   margin-bottom: 2vh;
-`
+`;
 
 export const Container = styled.div`
   // 전체 텍스트, 사진, 버튼 그룹

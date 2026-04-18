@@ -47,6 +47,7 @@ function App() {
               element={
                 <QuestionPage
                   title={"질문에 대한 답변을\n 선택해 주세요!"}
+                  twolineinfo={"선택한 답변을 바탕으로\n 매칭이 진행돼요!"}
                   button="시작하기"
                 />
               }

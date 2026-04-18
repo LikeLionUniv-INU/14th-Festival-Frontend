@@ -4,7 +4,7 @@
 import Complete from "./Complete";
 import { useNavigate } from "react-router-dom";
 
-export default function QuestionPage({ title, button }) {
+export default function QuestionPage({ title, button, twolineinfo }) {
   const navigate = useNavigate();
 
   return (
@@ -13,6 +13,7 @@ export default function QuestionPage({ title, button }) {
       fontSize="2rem"
       button={button}
       animation="typewriter"
+      twolineinfo={twolineinfo}
       onButtonClick={() => navigate("/gender")}
     />
   );

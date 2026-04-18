@@ -21,6 +21,7 @@ function Complete({
   animation = "slideUp",
   info,
   onButtonClick,
+  twolineinfo
 }) {
   // 타자기 효과
   const isTypewriter = animation === "typewriter";
@@ -77,7 +78,11 @@ function Complete({
             </S.TypeTitleArea>
             <S.TypeLion>
               <img src={lionImages[lion]} />
+              <S.TwoLineInfo>
+                {twolineinfo}
+              </S.TwoLineInfo>
             </S.TypeLion>
+
             <S.ButtonContainer>
               {button && (
                 <Button onClick={onButtonClick} >

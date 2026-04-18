@@ -58,7 +58,14 @@ function App() {
             <Route path="/your-animal" element={<YourAnimalPage />} />
             <Route
               path="/choice-done"
-              element={<SelectPage title="작성 완료!" button="다음" />}
+              element={
+                <SelectPage
+                  title="작성 완료!"
+                  topinfo="&nbsp;"
+                  bottominfo="&nbsp;"
+                  button="다음"
+                />
+              }
             />
             <Route path="/profile" element={<Profile />} />
             <Route path="/result" element={<ResultCheckPage />} />
@@ -67,7 +74,9 @@ function App() {
               element={
                 <MatchResultPage
                   title="매칭 성공!"
+                  topinfo="&nbsp;"
                   lion="heart"
+                  bottominfo="나와 잘 맞는 상대를 찾았어요!"
                   button="결과 확인하기"
                   isSuccess={true}
                 />
@@ -78,8 +87,9 @@ function App() {
               element={
                 <MatchResultPage
                   title="매칭 실패!"
+                  topinfo="원하는 상대를 찾지 못했어요."
                   lion="crying"
-                  info="내일 다시 참여할 수 있어요!"
+                  bottominfo="내일 다시 참여할 수 있어요!"
                   button="끝내기"
                 />
               }

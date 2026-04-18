@@ -9,6 +9,7 @@ import ProgressBar from "../components/common/ProgressBar";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Container, ButtonContainer } from "./MyTraitPage.styles";
 import smallBasicLion from "../assets/images/lion/small-basic-lion.webp";
+import SlideTransition from "../components/common/SlideTransition.jsx";
 
 const MyTraitPage = () => {
   const [selected, setSelected] = useState([]);
@@ -41,38 +42,40 @@ const MyTraitPage = () => {
   ];
 
   return (
-    <Container>
-      <ProgressBar currentStep={3} totalSteps={5} />
+    <SlideTransition>
+      <Container>
+        <ProgressBar currentStep={3} totalSteps={5} />
 
-      <MessageCard imageUrl={smallBasicLion} text="내가 관심 있는 건..?" />
+        <MessageCard imageUrl={smallBasicLion} text="내가 관심 있는 건..?" />
 
-      <GuideText>3개를 선택해주세요!</GuideText>
+        <GuideText>3개를 선택해 주세요!</GuideText>
 
-      <TagGrid>
-        {Traits.map((text) => (
-          <TagBlock
-            key={text}
-            label={text}
-            isSelected={selected.includes(text)}
-            onClick={() => toggleTag(text)}
-          />
-        ))}
-      </TagGrid>
+        <TagGrid>
+          {Traits.map((text) => (
+            <TagBlock
+              key={text}
+              label={text}
+              isSelected={selected.includes(text)}
+              onClick={() => toggleTag(text)}
+            />
+          ))}
+        </TagGrid>
 
-      <ButtonContainer $active={isButtonActive}>
-        <Button
-          onClick={() => {
-            if (isButtonActive) {
-              navigate("/alcohol", {
-                state: { gender },
-              });
-            }
-          }}
-        >
-          다음
-        </Button>
-      </ButtonContainer>
-    </Container>
+        <ButtonContainer $active={isButtonActive}>
+          <Button
+            onClick={() => {
+              if (isButtonActive) {
+                navigate("/alcohol", {
+                  state: { gender },
+                });
+              }
+            }}
+          >
+            다음
+          </Button>
+        </ButtonContainer>
+      </Container>
+    </SlideTransition>
   );
 };
 

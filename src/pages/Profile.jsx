@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./profile.styles";
 import GuideModal from "../components/modal/GuideModal";
+import PopTransition from "../components/common/PopTransition.jsx";
 
 import bear from "../assets/images/profile/bear.webp";
 import monkey from "../assets/images/profile/monkey.webp";
@@ -86,19 +87,21 @@ const Profile = () => {
   };
 
   return (
-    <S.Container>
-      <S.Title> 나는 ...</S.Title> {/*안전장치*/}
-      <S.AnimalImg src={ANIMAL_MAP[animalResult] || ANIMAL_MAP.dog} />
-      <S.AnimalName>
-        {INTEREST_ADJECTIVE[interestResult]} {ANIMAL_NAME_KR[animalResult]}
-      </S.AnimalName>
-      <S.MainGuide>매칭 결과는 18시에 공개됩니다!</S.MainGuide>
-      <S.SubGuide>
-        원활한 진행을 위해 인스타 계정을 '공개'로 설정해 주세요
-      </S.SubGuide>
-      <S.Button onClick={() => setIsModalOpen(true)}>결과 확인 방법</S.Button>
-      <GuideModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-    </S.Container>
+    <PopTransition>
+      <S.Container>
+        <S.Title> 나는 ...</S.Title> {/*안전장치*/}
+        <S.AnimalImg src={ANIMAL_MAP[animalResult] || ANIMAL_MAP.dog} />
+        <S.AnimalName>
+          {INTEREST_ADJECTIVE[interestResult]} {ANIMAL_NAME_KR[animalResult]}
+        </S.AnimalName>
+        <S.MainGuide>매칭 결과는 18시에 공개됩니다!</S.MainGuide>
+        <S.SubGuide>
+          원활한 진행을 위해 인스타 계정을 '공개'로 설정해 주세요
+        </S.SubGuide>
+        <S.Button onClick={() => setIsModalOpen(true)}>결과 확인 방법</S.Button>
+        <GuideModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      </S.Container>
+    </PopTransition>
   );
 };
 

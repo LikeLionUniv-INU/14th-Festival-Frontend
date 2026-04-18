@@ -9,6 +9,7 @@ import ProgressBar from "../components/common/ProgressBar";
 import { Container, ButtonContainer } from "./AlcoholPage.styles";
 import { useNavigate, useLocation } from "react-router-dom";
 import smallBasicLion from "../assets/images/lion/small-basic-lion.webp";
+import SlideTransition from "../components/common/SlideTransition.jsx";
 
 const AlcoholPage = () => {
   const [selected, setSelected] = useState([]);
@@ -43,43 +44,45 @@ const AlcoholPage = () => {
   ];
 
   return (
-    <Container>
-      <ProgressBar currentStep={4} totalSteps={5} />
+    <SlideTransition>
+      <Container>
+        <ProgressBar currentStep={4} totalSteps={5} />
 
-      <MessageCard
-        imageUrl={smallBasicLion}
-        text="내가 좋아하는 영화 장르는?"
-      />
+        <MessageCard
+          imageUrl={smallBasicLion}
+          text="내가 좋아하는 영화 장르는?"
+        />
 
-      <GuideText>2개를 선택해주세요!</GuideText>
+        <GuideText>2개를 선택해 주세요!</GuideText>
 
-      <AlcoholGrid>
-        {alcohols.map((text) => (
-          <TagBlock
-            key={text}
-            label={text}
-            isSelected={selected.includes(text)}
-            onClick={() => toggleTag(text)}
-            width="160px"
-            height="100px"
-          />
-        ))}
-      </AlcoholGrid>
+        <AlcoholGrid>
+          {alcohols.map((text) => (
+            <TagBlock
+              key={text}
+              label={text}
+              isSelected={selected.includes(text)}
+              onClick={() => toggleTag(text)}
+              width="160px"
+              height="100px"
+            />
+          ))}
+        </AlcoholGrid>
 
-      <ButtonContainer $active={isButtonActive}>
-        <Button
-          onClick={() => {
-            if (isButtonActive) {
-              navigate("/your-animal", {
-                state: { gender },
-              });
-            }
-          }}
-        >
-          다음
-        </Button>
-      </ButtonContainer>
-    </Container>
+        <ButtonContainer $active={isButtonActive}>
+          <Button
+            onClick={() => {
+              if (isButtonActive) {
+                navigate("/your-animal", {
+                  state: { gender },
+                });
+              }
+            }}
+          >
+            다음
+          </Button>
+        </ButtonContainer>
+      </Container>
+    </SlideTransition>
   );
 };
 

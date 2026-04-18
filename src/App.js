@@ -46,7 +46,7 @@ function App() {
               path="/lets-choice"
               element={
                 <QuestionPage
-                  title={"질문에 대한 답변을\n 선택해주세요!"}
+                  title={"질문에 대한 답변을\n 선택해 주세요!"}
                   button="시작하기"
                 />
               }

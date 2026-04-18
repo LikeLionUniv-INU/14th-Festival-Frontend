@@ -29,7 +29,7 @@ const Block = styled.button`
 
 // 가이드 문장
 export const GuideText = styled.p`
-  width: 123px;
+  width: 128px;
   height: 16px;
   font-size: 14px;
   font-weight: 300;

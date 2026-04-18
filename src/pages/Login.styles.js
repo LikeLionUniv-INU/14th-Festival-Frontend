@@ -81,6 +81,8 @@ export const GuideText = styled.div`
   margin: 6px 0 22px 0;
   text-align: left;
   width: 207px;
+  color: ${(props) => (props.$isError ? "#bb0a0a" : "rgba(0, 0, 0, 1)")};
+  font-weight: ${(props) => (props.$isError ? "700" : "300")};
 `;
 
 export const Button = styled.button`

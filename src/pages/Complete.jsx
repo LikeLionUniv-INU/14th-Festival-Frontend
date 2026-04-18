@@ -10,6 +10,8 @@ import smileLion from "../assets/images/lion/smile-lion.webp";
 import heartLion from "../assets/images/lion/big-heart-lion.webp";
 import cryingLion from "../assets/images/lion/crying-lion.webp";
 import { ButtonContainer } from "./MyAnimalPage.styles.js";
+import PopTransition from "../components/common/PopTransition.jsx";
+import SlideTransition from "../components/common/SlideTransition.jsx";
 
 function Complete({
   title,
@@ -60,50 +62,55 @@ function Complete({
   const isFriday = today === 5;
 
   return (
-    <S.Container>
+    <>
       {isTypewriter ? (
         // typewriter 효과 적용시
-        <>
-          <S.typeTitleArea $fontSize={fontSize}>
-            <S.Title
-              $fontSize={fontSize}
-              $animation={isTypewriter ? "none" : "slideUp"}
-            >
-              {displayedTitle}
-            </S.Title>
-          </S.typeTitleArea>
-          <S.typeLion>
-            <img src={lionImages[lion]} />
-          </S.typeLion>
-          <S.ButtonContainer>
-            {button && (
-              <Button onClick={onButtonClick} >
-                {button}
-              </Button>
-            )}
-          </S.ButtonContainer></>
+        <PopTransition>
+          <S.Container>
+            <S.TypeTitleArea $fontSize={fontSize}>
+              <S.Title
+                $fontSize={fontSize}
+                $animation={isTypewriter ? "none" : "slideUp"}
+              >
+                {displayedTitle}
+              </S.Title>
+            </S.TypeTitleArea>
+            <S.TypeLion>
+              <img src={lionImages[lion]} />
+            </S.TypeLion>
+            <S.ButtonContainer>
+              {button && (
+                <Button onClick={onButtonClick} >
+                  {button}
+                </Button>
+              )}
+            </S.ButtonContainer></S.Container>
+        </PopTransition>
       ) : (
         // slideUp 효과 적용 시
-        <>
-          <S.slideTitleArea>
-            <S.Title $fontSize={fontSize} $animation="slideUp">
-              {displayedTitle}
-            </S.Title>
-          </S.slideTitleArea>
+        <PopTransition>
+          <S.Container>
+            <S.SlideTitleArea>
+              <S.Title $fontSize={fontSize} $animation="slideUp">
+                {displayedTitle}
+              </S.Title>
+            </S.SlideTitleArea>
 
-          <S.slideLion>
-            <img src={lionImages[lion]} />
-          </S.slideLion>
+            <S.SlideLion>
+              <img src={lionImages[lion]} />
+            </S.SlideLion>
 
-          {!isFriday && <S.Info>{info}</S.Info>}
-          <S.ButtonContainer>
-            {button && (
-              <Button onClick={onButtonClick} >
-                {button}
-              </Button>
-            )}
-          </S.ButtonContainer></>)}
-    </S.Container>
+            {!isFriday && <S.Info>{info}</S.Info>}
+            <S.ButtonContainer>
+              {button && (
+                <Button onClick={onButtonClick} >
+                  {button}
+                </Button>
+              )}
+            </S.ButtonContainer></S.Container>
+        </PopTransition>
+      )}
+    </>
   );
 }
 

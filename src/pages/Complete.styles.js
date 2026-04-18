@@ -35,7 +35,7 @@ export const Title = styled.h2`
 `;
 
 //typewriter 효과 적용시
-export const typeTitleArea = styled.div`
+export const TypeTitleArea = styled.div`
   width: 100%;
   height: 76.8px;
   display: flex;
@@ -45,13 +45,13 @@ export const typeTitleArea = styled.div`
 `;
 
 
-export const typeLion = styled.div`
+export const TypeLion = styled.div`
   margin: 81.6px 0 81.6px 0;
 `;
 
 
 //slideup 효과 적용시
-export const slideTitleArea = styled.div`
+export const SlideTitleArea = styled.div`
   width: 100%;
   height: 48px;
   display: flex;
@@ -61,8 +61,8 @@ export const slideTitleArea = styled.div`
 `;
 
 
-export const slideLion = styled.div`
-  margin: 96px 0 96px 0;
+export const SlideLion = styled.div`
+  margin: 96px 0 36px 0;
 `;
 
 export const Info = styled.p`

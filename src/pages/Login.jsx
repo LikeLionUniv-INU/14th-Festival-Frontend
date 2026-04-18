@@ -21,17 +21,22 @@ const Login = () => {
     const value = e.target.value;
     let filtered = value.toLowerCase().replace(/[^a-z0-9._@]|\s/g, "");
     if (filtered.includes("..")) return;
-    if (filtered.endsWith(".") && filtered.length > instaId.length) {
-      if (filtered.startsWith("@")) {
-        filtered = "@" + filtered.slice(1).replace(/@/g, "");
-      } else {
-        filtered = "@" + filtered.replace(/@/g, "");
-      }
+    if (filtered.startsWith("@")) {
+      filtered = "@" + filtered.slice(1).replace(/@/g, "");
+    } else {
+      filtered = "@" + filtered.replace(/@/g, "");
     }
+
     if (filtered.length <= 30) {
       setInstaId(filtered);
     }
-    const blackId = ["@likelion_inu", "@insta", "@instagram"];
+    const blackId = [
+      "@likelion_inu",
+      "@insta",
+      "@instagram",
+      "@likelion",
+      "@likelion.inu",
+    ];
 
     if (blackId.includes(filtered)) {
       setErrorMsg("사용할 수 없는 아이디입니다.");
@@ -63,13 +68,20 @@ const Login = () => {
             if (!instaId) setInstaId("@");
           }}
         />
-        <S.GuideText>원활한 진행을 위해 본인 계정을 입력해주세요 </S.GuideText>
+        {errorMsg ? (
+          <S.GuideText $isError={true}>{errorMsg}</S.GuideText>
+        ) : (
+          <S.GuideText>
+            원활한 진행을 위해 본인 계정을 입력해주세요{" "}
+          </S.GuideText>
+        )}
         <S.InputBox
           type="text"
           placeholder="ex) 1234"
           value={userNum}
           onChange={handleUserNumChange}
         />
+
         <S.GuideText> 숫자 4자리 </S.GuideText>
         <S.Button onClick={() => setIsModalOpen(true)} disabled={!isFormValid}>
           입력완료

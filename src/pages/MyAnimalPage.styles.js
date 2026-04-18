@@ -20,7 +20,7 @@ export const ButtonContainer = styled.button`
 `;
 
 export const Anything = styled.span`
-  color: ${(props) => (props.$selected ? "blue" : "#b5b5b5")};
+  color: ${(props) => (props.$selected ? "#f24859" : "#b5b5b5")};
   align-items: center;
   justify-content: center;
   font-size: 18px;

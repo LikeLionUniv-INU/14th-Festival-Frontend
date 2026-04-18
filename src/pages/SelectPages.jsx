@@ -4,13 +4,15 @@
 import Complete from "./Complete";
 import { useNavigate } from "react-router-dom";
 
-export default function SelectPage({ title, button }) {
+export default function SelectPage({ title, button, topinfo, bottominfo }) {
   const navigate = useNavigate();
 
   return (
     <Complete
       title={title}
       button={button}
+      topinfo={topinfo}
+      bottominfo={bottominfo}
       onButtonClick={() => navigate("/profile")}
     />
   );

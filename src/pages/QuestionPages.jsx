@@ -12,7 +12,6 @@ export default function QuestionPage({ title, button, twolineinfo }) {
       title={title}
       fontSize="2rem"
       button={button}
-      animation="typewriter"
       twolineinfo={twolineinfo}
       onButtonClick={() => navigate("/gender")}
     />

@@ -58,6 +58,8 @@ const YourAnimalPage = () => {
 
   const isButtonActive = selected.length === 3 || selected.includes("상관없음");
 
+  const isAnythingSelected = selected.includes("상관없음");
+
   return (
     <SlideTransition>
       <Container>
@@ -74,6 +76,7 @@ const YourAnimalPage = () => {
               key={text}
               label={text}
               isSelected={selected.includes(text)}
+              isAnythingSelected={isAnythingSelected}
               onClick={() => toggleTag(text)}
             />
           ))}
@@ -85,7 +88,10 @@ const YourAnimalPage = () => {
         >
           상관없음
         </Anything>
-        <ButtonContainer $active={isButtonActive}>
+        <ButtonContainer
+          $active={isButtonActive}
+          $selected={isAnythingSelected}
+        >
           <Button
             onClick={() => {
               if (isButtonActive) {

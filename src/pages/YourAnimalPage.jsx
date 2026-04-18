@@ -9,6 +9,7 @@ import ProgressBar from "../components/common/ProgressBar";
 import { Container, ButtonContainer, Anything } from "./MyAnimalPage.styles";
 import { useNavigate, useLocation } from "react-router-dom";
 import smallBasicLion from "../assets/images/lion/small-basic-lion.webp";
+import SlideTransition from "../components/common/SlideTransition.jsx";
 
 const MyAnimalGrid = styled(TagGrid)`
   /* 3열을 2열로 변경 */
@@ -58,43 +59,45 @@ const YourAnimalPage = () => {
   const isButtonActive = selected.length === 3 || selected.includes("상관없음");
 
   return (
-    <Container>
-      <ProgressBar currentStep={5} totalSteps={5} />
-      <MessageCard
-        imageUrl={smallBasicLion}
-        text="내가 원하는 상대의 동물은?"
-      />
+    <SlideTransition>
+      <Container>
+        <ProgressBar currentStep={5} totalSteps={5} />
+        <MessageCard
+          imageUrl={smallBasicLion}
+          text="내가 원하는 상대의 동물상은?"
+        />
 
-      <GuideText>3개를 선택해주세요!</GuideText>
-      <MyAnimalGrid>
-        {MyAnimals.map((text) => (
-          <TagBlock
-            key={text}
-            label={text}
-            isSelected={selected.includes(text)}
-            onClick={() => toggleTag(text)}
-          />
-        ))}
-      </MyAnimalGrid>
+        <GuideText>3개를 선택해 주세요!</GuideText>
+        <MyAnimalGrid>
+          {MyAnimals.map((text) => (
+            <TagBlock
+              key={text}
+              label={text}
+              isSelected={selected.includes(text)}
+              onClick={() => toggleTag(text)}
+            />
+          ))}
+        </MyAnimalGrid>
 
-      <Anything
-        $selected={selected.includes("상관없음")}
-        onClick={() => toggleTag("상관없음")}
-      >
-        상관없음
-      </Anything>
-      <ButtonContainer $active={isButtonActive}>
-        <Button
-          onClick={() => {
-            if (isButtonActive) {
-              navigate("/choice-done");
-            }
-          }}
+        <Anything
+          $selected={selected.includes("상관없음")}
+          onClick={() => toggleTag("상관없음")}
         >
-          다음
-        </Button>
-      </ButtonContainer>
-    </Container>
+          상관없음
+        </Anything>
+        <ButtonContainer $active={isButtonActive}>
+          <Button
+            onClick={() => {
+              if (isButtonActive) {
+                navigate("/choice-done");
+              }
+            }}
+          >
+            다음
+          </Button>
+        </ButtonContainer>
+      </Container>
+    </SlideTransition>
   );
 };
 

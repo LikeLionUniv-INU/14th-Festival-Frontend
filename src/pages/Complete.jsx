@@ -9,47 +9,18 @@ import * as S from "./Complete.styles.js";
 import smileLion from "../assets/images/lion/smile-lion.webp";
 import heartLion from "../assets/images/lion/big-heart-lion.webp";
 import cryingLion from "../assets/images/lion/crying-lion.webp";
-import { ButtonContainer } from "./MyAnimalPage.styles.js";
 import PopTransition from "../components/common/PopTransition.jsx";
-import SlideTransition from "../components/common/SlideTransition.jsx";
 
 function Complete({
   title,
   fontSize,
   lion = "smile",
   button,
-  animation = "slideUp",
-  info,
+  topinfo,
+  bottominfo,
   onButtonClick,
+  twolineinfo,
 }) {
-  // 타자기 효과
-  const isTypewriter = animation === "typewriter";
-
-  const [displayedTitle, setDisplayedTitle] = useState(
-    isTypewriter ? "" : title,
-  );
-
-  useEffect(() => {
-    if (!isTypewriter) {
-      setDisplayedTitle(title);
-      return;
-    }
-
-    let index = 0;
-    setDisplayedTitle("");
-
-    const interval = setInterval(() => {
-      index += 1;
-      setDisplayedTitle(title.slice(0, index));
-
-      if (index >= title.length) {
-        clearInterval(interval);
-      }
-    }, 80);
-
-    return () => clearInterval(interval);
-  }, [title, isTypewriter]);
-
   // 사진 바꿔끼기
   const lionImages = {
     smile: smileLion,
@@ -63,51 +34,54 @@ function Complete({
 
   return (
     <>
-      {isTypewriter ? (
-        // typewriter 효과 적용시
+      {fontSize === "2rem" ? ( //lets-choice page
         <PopTransition>
           <S.Container>
             <S.TypeTitleArea $fontSize={fontSize}>
-              <S.Title
-                $fontSize={fontSize}
-                $animation={isTypewriter ? "none" : "slideUp"}
-              >
-                {displayedTitle}
-              </S.Title>
+              <S.Title $fontSize={fontSize}>{title}</S.Title>
             </S.TypeTitleArea>
             <S.TypeLion>
               <img src={lionImages[lion]} />
+              <S.TwoLineInfo>{twolineinfo}</S.TwoLineInfo>
             </S.TypeLion>
-            <S.ButtonContainer>
-              {button && (
-                <Button onClick={onButtonClick} >
-                  {button}
-                </Button>
-              )}
-            </S.ButtonContainer></S.Container>
+            <S.TypeButton>
+              {button && <Button onClick={onButtonClick}>{button}</Button>}
+            </S.TypeButton>
+          </S.Container>
         </PopTransition>
-      ) : (
-        // slideUp 효과 적용 시
+      ) : lion === "crying" ? ( //match-fail page
         <PopTransition>
           <S.Container>
             <S.SlideTitleArea>
-              <S.Title $fontSize={fontSize} $animation="slideUp">
-                {displayedTitle}
-              </S.Title>
+              <S.Title $fontSize={fontSize}>{title}</S.Title>
             </S.SlideTitleArea>
-
+            <S.Info>{topinfo}</S.Info>
             <S.SlideLion>
               <img src={lionImages[lion]} />
             </S.SlideLion>
+            {!isFriday && <S.Info>{bottominfo}</S.Info>}
+            <S.SlideButton>
+              {button && <Button onClick={onButtonClick}>{button}</Button>}
+            </S.SlideButton>
+          </S.Container>
+        </PopTransition>
+      ) : (
+        <PopTransition>
+          <S.Container>
+            <S.SlideTitleArea>
+              <S.Title $fontSize={fontSize}>{title}</S.Title>
+            </S.SlideTitleArea>
 
-            {!isFriday && <S.Info>{info}</S.Info>}
-            <S.ButtonContainer>
-              {button && (
-                <Button onClick={onButtonClick} >
-                  {button}
-                </Button>
-              )}
-            </S.ButtonContainer></S.Container>
+            <S.SlideLion>
+              <S.Info>{topinfo}</S.Info>
+              <img src={lionImages[lion]} />
+              <S.Info>{bottominfo}</S.Info>
+            </S.SlideLion>
+
+            <S.SlideButton>
+              {button && <Button onClick={onButtonClick}>{button}</Button>}
+            </S.SlideButton>
+          </S.Container>
         </PopTransition>
       )}
     </>

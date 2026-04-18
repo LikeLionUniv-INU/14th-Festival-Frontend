@@ -105,7 +105,8 @@ export const GuideText = styled.div`
   font-size: 10px;
   line-height: 1;
   font-weight: 300;
-  color: white;
+  color: ${(props) => (props.$isError ? "#bb0a0a" : "rgb(255, 255, 255)")};
+  font-weight: ${(props) => (props.$isError ? "700" : "300")};
   margin: 6px 0 22px 0;
   text-align: left;
   width: 207px;

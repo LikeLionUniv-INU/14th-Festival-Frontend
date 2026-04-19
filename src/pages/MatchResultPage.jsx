@@ -12,7 +12,8 @@ import { useNavigate } from "react-router-dom";
 export default function MatchResultPage({
   title,
   lion,
-  info,
+  topinfo,
+  bottominfo,
   button,
   isSuccess,
 }) {
@@ -36,7 +37,8 @@ export default function MatchResultPage({
         title={title}
         lion={lion}
         fontSize="40px"
-        info={info}
+        topinfo={topinfo}
+        bottominfo={bottominfo}
         button={button}
         onButtonClick={isSuccess ? handleButtonClick : () => navigate("/")}
       />

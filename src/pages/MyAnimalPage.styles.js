@@ -12,10 +12,10 @@ export const Container = styled.div`
 
 export const ButtonContainer = styled.div`
   margin-bottom: 2dvh;
+  margin-top: 10px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 79%;
+  gap: 20px;
 `;
 
 export const Anything = styled.span`

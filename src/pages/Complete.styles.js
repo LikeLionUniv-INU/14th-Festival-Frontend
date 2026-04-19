@@ -51,6 +51,7 @@ export const TwoLineInfo = styled.p`
 `;
 
 export const TypeButton = styled.div`
+  margin-top: 10px;
   margin-bottom: 2vh;
 `;
 

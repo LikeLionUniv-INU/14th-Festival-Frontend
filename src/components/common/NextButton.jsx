@@ -11,7 +11,7 @@ const StyledBtn = styled.button`
 
   background-color: ${({ $active }) =>
     $active === false ? "#d9d9d9" : "#f08c97"};
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 
   font-size: 24px;
   color: ${({ $active }) => ($active === false ? "#000000" : "#ffffff")};
@@ -23,7 +23,7 @@ const StyledBtn = styled.button`
   &:active {
     background-color: ${({ $active }) =>
       $active === false ? "#d9d9d9" : "#cb7881"};
-    box-shadow: inset 2px 5px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.3);
   }
 `;
 

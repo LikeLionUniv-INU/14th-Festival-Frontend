@@ -10,17 +10,17 @@ const StyledBtn = styled.button`
   border-radius: 12px;
 
   background-color: rgb(255, 255, 255);
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 
   font-size: 24px;
   color: rgb(240, 140, 151);
-
+  outline: 1px solid #f08c97;
   transition:
     transform 0.1s ease,
     box-shadow 0.1s ease;
 
   &:active {
-    box-shadow: inset 2px 5px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.3);
   }
 `;
 

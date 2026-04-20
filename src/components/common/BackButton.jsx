@@ -2,10 +2,12 @@
 import styled from "styled-components";
 
 const StyledBtn = styled.button`
-  min-width: 160px;
-  width: auto;
+  min-width: ${(props) =>
+    props.$width ? "none" : "160px"}; // width가 들어오면 min-width 해제
+  width: ${(props) => (props.$width ? props.$width : "auto")};
   height: 60px;
-  padding: 16px 44px;
+  padding: ${(props) =>
+    props.$width ? "16px 0" : "16px 44px"}; // 가로폭 고정 시 패딩 조정
   border: none;
   border-radius: 12px;
 
@@ -24,8 +26,12 @@ const StyledBtn = styled.button`
   }
 `;
 
-const BackButton = ({ onClick }) => {
-  return <StyledBtn onClick={onClick}>이전</StyledBtn>;
+const BackButton = ({ onClick, width }) => {
+  return (
+    <StyledBtn onClick={onClick} $width={width}>
+      이전
+    </StyledBtn>
+  );
 };
 
 export default BackButton;

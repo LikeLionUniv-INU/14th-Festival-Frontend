@@ -2,10 +2,10 @@
 import styled from "styled-components";
 
 const StyledBtn = styled.button`
-  min-width: 160px;
-  width: auto;
+  min-width: ${(props) => (props.$width ? "none" : "160px")};
+  width: ${(props) => (props.$width ? props.$width : "auto")};
   height: 60px;
-  padding: 16px 44px;
+  padding: ${(props) => (props.$width ? "16px 0" : "16px 44px")};
   border: none;
   border-radius: 12px;
 

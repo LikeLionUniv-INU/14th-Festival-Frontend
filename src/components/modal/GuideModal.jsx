@@ -14,9 +14,19 @@ const Modal = ({ isOpen, onClose }) => {
       <ModalBox onClick={(e) => e.stopPropagation()}>
         <Title>{"결과는 어떻게 확인하나요?"}</Title>
         <Content>
-          {"1. 18시 이후"} <a href="https://www.instagram.com/likelion_inu/" target="_blank" style={{ color: '#007bff', textDecoration: 'underline' }}>멋사 인스타 스토리</a>
-          {" 확인\n 2. 링크 접속\n 3. 매칭 성공 화면에서 상대방 ID 확인\n 4. ID 복사 후 인스타에서 DM 보내기"}
-
+          {"1. 오후 6시 이후"}{" "}
+          <a
+            href="https://www.instagram.com/likelion_inu/"
+            target="_blank"
+            style={{ color: "#007bff", textDecoration: "underline" }}
+          >
+            멋사 인스타 스토리
+          </a>
+          {
+            " 확인\n 2. 결과 확인 페이지 접속\n 3. 매칭 성공 화면에서 상대방 ID 확인\n 4. 나와 잘 맞는 동물친구와 자유롭게\n"
+          }
+          {"\u00a0\u00a0\u00a0"}
+          {"연락 시작하기"}
           <Info>{"오후 6시, 설레는 소식을 기대해 주세요!"}</Info>
         </Content>
         <ButtonWrapper>
@@ -79,7 +89,7 @@ const Title = styled.h3`
   font-weight: 700;
   color: #000000;
   text-align: center;
-  white-space: pre-line;
+  white-space: pre-wrap;
 `;
 
 const Content = styled.p`

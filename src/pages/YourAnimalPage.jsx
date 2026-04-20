@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import TagBlock, { GuideText, TagGrid } from "../components/common/TagBlock";
-import Button from "../components/common/Button";
+import NextButton from "../components/common/NextButton.jsx";
+import BackButton from "../components/common/BackButton.jsx";
 import MessageCard from "../components/common/MessageCard";
 import ProgressBar from "../components/common/ProgressBar";
 import { Container, ButtonContainer, Anything } from "./MyAnimalPage.styles";
@@ -92,7 +93,15 @@ const YourAnimalPage = () => {
           $active={isButtonActive}
           $selected={isAnythingSelected}
         >
-          <Button
+          <BackButton
+            onClick={() => {
+              navigate("/alcohol");
+            }}
+          >
+            이전
+          </BackButton>
+          <NextButton
+            $active={isButtonActive}
             onClick={() => {
               if (isButtonActive) {
                 navigate("/choice-done");
@@ -100,7 +109,7 @@ const YourAnimalPage = () => {
             }}
           >
             다음
-          </Button>
+          </NextButton>
         </ButtonContainer>
       </Container>
     </SlideTransition>

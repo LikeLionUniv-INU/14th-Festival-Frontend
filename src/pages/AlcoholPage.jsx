@@ -71,6 +71,7 @@ const AlcoholPage = () => {
 
         <ButtonContainer>
           <BackButton
+            width="90%"
             onClick={() => {
               navigate("/my-trait");
             }}
@@ -78,6 +79,7 @@ const AlcoholPage = () => {
             이전
           </BackButton>
           <NextButton
+            $width="90%"
             $active={isButtonActive}
             onClick={() => {
               if (isButtonActive) {

@@ -94,6 +94,7 @@ const YourAnimalPage = () => {
           $selected={isAnythingSelected}
         >
           <BackButton
+            width="90%"
             onClick={() => {
               navigate("/alcohol");
             }}
@@ -101,6 +102,7 @@ const YourAnimalPage = () => {
             이전
           </BackButton>
           <NextButton
+            $width="90%"
             $active={isButtonActive}
             onClick={() => {
               if (isButtonActive) {

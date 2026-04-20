@@ -69,6 +69,7 @@ const MyAnimalPage = () => {
 
         <ButtonContainer>
           <BackButton
+            width="90%"
             onClick={() => {
               navigate("/gender");
             }}
@@ -76,6 +77,7 @@ const MyAnimalPage = () => {
             이전
           </BackButton>
           <NextButton
+            $width="90%"
             $active={isButtonActive}
             onClick={() => {
               if (isButtonActive) {

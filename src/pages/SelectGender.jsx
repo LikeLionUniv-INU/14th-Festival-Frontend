@@ -6,7 +6,7 @@ import * as S from "./SelectGender.styles";
 import smallBasicLion from "../assets/images/lion/small-basic-lion.webp";
 import ProgressBar from "../components/common/ProgressBar";
 // 공통 버튼 불러오기
-import Button from "../components/common/Button";
+import Button from "../components/common/NextButton";
 import MessageCard from "../components/common/MessageCard";
 import SlideTransition from "../components/common/SlideTransition.jsx";
 

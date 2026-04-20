@@ -76,14 +76,14 @@ const Profile = () => {
 
   const INTEREST_ADJECTIVE = {
     스포츠: "스포츠광",
-    영화: "할리우드",
+    "뮤지컬/연극": "뮤덕",
     반려동물: "집사",
     여행: "탐험하는",
     맛집탐방: "맛잘알",
-    자기계발: "똑똑이",
+    자기계발: "갓생러",
     덕질: "마니아",
     음악감상: "음잘알",
-    보드게임: "게이머",
+    게임: "게이머",
   };
 
   return (
@@ -99,7 +99,10 @@ const Profile = () => {
           원활한 진행을 위해 인스타 계정을 '공개'로 설정해 주세요
         </S.SubGuide>
         <S.Button onClick={() => setIsModalOpen(true)}>결과 확인 방법</S.Button>
-        <GuideModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        <GuideModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
       </S.Container>
     </PopTransition>
   );

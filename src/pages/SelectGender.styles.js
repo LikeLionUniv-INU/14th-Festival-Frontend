@@ -49,6 +49,7 @@ export const BSection = styled.div`
 `;
 
 export const GenderButton = styled.button`
+  margin-top: 10px;
   width: 166px;
   height: 210px;
   border-radius: 26px;

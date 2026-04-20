@@ -4,7 +4,7 @@
 // 14. 매칭 실패 (지연)
 
 import React, { useEffect, useState } from "react";
-import Button from "../components/common/Button.jsx";
+import Button from "../components/common/NextButton.jsx";
 import * as S from "./Complete.styles.js";
 import smileLion from "../assets/images/lion/smile-lion.webp";
 import heartLion from "../assets/images/lion/big-heart-lion.webp";

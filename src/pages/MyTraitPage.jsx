@@ -64,6 +64,7 @@ const MyTraitPage = () => {
 
         <ButtonContainer $active={isButtonActive}>
           <BackButton
+            width="90%"
             onClick={() => {
               navigate("/my-animal");
             }}
@@ -71,6 +72,7 @@ const MyTraitPage = () => {
             이전
           </BackButton>
           <NextButton
+            $width="90%"
             $active={isButtonActive}
             onClick={() => {
               if (isButtonActive) {

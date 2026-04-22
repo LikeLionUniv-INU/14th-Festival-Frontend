@@ -81,7 +81,7 @@ const MyAnimalPage = () => {
             $active={isButtonActive}
             onClick={() => {
               if (isButtonActive) {
-                navigate("/my-trait", {
+                navigate("/interests", {
                   state: { gender },
                 });
               }

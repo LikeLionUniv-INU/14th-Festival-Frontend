@@ -28,6 +28,7 @@ export const Info = styled.p`
 `;
 
 export const Logo = styled.img`
+  width: 90%;
   margin-bottom: 17vh;
   margin-left: 1vh;
 `;

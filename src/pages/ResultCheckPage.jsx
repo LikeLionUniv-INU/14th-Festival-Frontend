@@ -4,12 +4,39 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./ResultCheckPage.styles";
 import smallBasicLion from "../assets/images/lion/small-basic-lion.webp";
+import axios from "axios";
 
 const ResultCheckPage = () => {
   const [instaId, setInstaId] = useState("");
   const [userNum, setUserNum] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const navigate = useNavigate();
+
+  /** 매칭 결과 확인 API */
+  const handleResult = async () => {
+    try {
+      const response = await axios.post('/api/match/result', {
+        "instagramId": instaId,
+        "verificationPin": userNum
+      });
+
+      if (response.data.isSuccess) {
+        navigate("/match-success");
+      }
+    }
+    catch (error) {
+      const errorCode = error.response?.data?.code;
+      const errorMessage = error.response?.data?.message;
+
+      if (errorCode === "USER_4001")
+        alert(errorMessage);
+      else if (errorCode === "MATCH_4031")
+        alert(errorMessage);
+      else if (errorCode === "MATCH_4041")
+        alert(errorMessage);
+    }
+  }
 
   const handleInstaIdChange = (e) => {
     const value = e.target.value;
@@ -81,7 +108,7 @@ const ResultCheckPage = () => {
         />
 
         <S.GuideText> 캡처 화면을 들고 멋사 부스로 와주세요! </S.GuideText>
-        <S.Button onClick={() => setIsModalOpen(true)} disabled={!isFormValid}>
+        <S.Button onClick={handleResult} disabled={!isFormValid}>
           결과 확인하기
         </S.Button>
       </S.Content>

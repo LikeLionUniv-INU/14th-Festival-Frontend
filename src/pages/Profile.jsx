@@ -17,7 +17,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   ///테스트 용                       이거 단어 바꾸면 사진이랑 글 바꿀 수 있음
-  const [animalResult, setAnimalResult] = useState("monkey");
+  const [animalResult, setAnimalResult] = useState("dog");
   const [interestResult, setInterestResult] = useState("여행");
 
   {

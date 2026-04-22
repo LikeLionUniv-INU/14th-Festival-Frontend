@@ -96,7 +96,7 @@ const YourAnimalPage = () => {
           <BackButton
             width="90%"
             onClick={() => {
-              navigate("/alcohol");
+              navigate("/moviegenre");
             }}
           >
             이전

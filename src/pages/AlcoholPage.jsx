@@ -12,7 +12,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import smallBasicLion from "../assets/images/lion/small-basic-lion.webp";
 import SlideTransition from "../components/common/SlideTransition.jsx";
 
-const AlcoholPage = () => {
+const MovieGenrePage = () => {
   const [selected, setSelected] = useState([]);
   const navigate = useNavigate();
 
@@ -73,7 +73,7 @@ const AlcoholPage = () => {
           <BackButton
             width="90%"
             onClick={() => {
-              navigate("/my-trait");
+              navigate("/interests");
             }}
           >
             이전
@@ -97,4 +97,4 @@ const AlcoholPage = () => {
   );
 };
 
-export default AlcoholPage;
+export default MovieGenrePage;

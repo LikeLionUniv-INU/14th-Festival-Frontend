@@ -4,12 +4,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyle";
 import Layout from "./components/common/Layout";
 
-import AlcoholPage from "./pages/AlcoholPage";
+import MovieGenre from "./pages/AlcoholPage";
 import IntroPage from "./pages/Intro";
 import Login from "./pages/Login";
 import MatchResultPage from "./pages/MatchResultPage";
 import MyAnimalPage from "./pages/MyAnimalPage";
-import MyTraitPage from "./pages/MyTraitPage";
+import InterestsPage from "./pages/MyTraitPage";
 import QuestionPage from "./pages/QuestionPages";
 import ResultCheckPage from "./pages/ResultCheckPage";
 import SelectGender from "./pages/SelectGender";
@@ -53,8 +53,8 @@ function App() {
               }
             />
             <Route path="/my-animal" element={<MyAnimalPage />} />
-            <Route path="/my-trait" element={<MyTraitPage />} />
-            <Route path="/alcohol" element={<AlcoholPage />} />
+            <Route path="/interests" element={<InterestsPage />} />
+            <Route path="/moviegenre" element={<MovieGenre />} />
             <Route path="/your-animal" element={<YourAnimalPage />} />
             <Route
               path="/choice-done"

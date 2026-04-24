@@ -11,9 +11,11 @@ export const Container = styled.div`
 `;
 
 export const ButtonContainer = styled.div`
+  width: 90%;
   margin-top: 10px;
   margin-bottom: 2dvh;
   display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: center;
+  gap: 15px;
 `;

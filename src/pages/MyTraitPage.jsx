@@ -12,7 +12,7 @@ import { Container, ButtonContainer } from "./MyTraitPage.styles";
 import smallBasicLion from "../assets/images/lion/small-basic-lion.webp";
 import SlideTransition from "../components/common/SlideTransition.jsx";
 
-const MyTraitPage = () => {
+const InterestsPage = () => {
   const [selected, setSelected] = useState([]);
   const navigate = useNavigate();
 
@@ -64,6 +64,7 @@ const MyTraitPage = () => {
 
         <ButtonContainer $active={isButtonActive}>
           <BackButton
+            width="90%"
             onClick={() => {
               navigate("/my-animal");
             }}
@@ -71,10 +72,11 @@ const MyTraitPage = () => {
             이전
           </BackButton>
           <NextButton
+            $width="90%"
             $active={isButtonActive}
             onClick={() => {
               if (isButtonActive) {
-                navigate("/alcohol", {
+                navigate("/moviegenre", {
                   state: { gender },
                 });
               }
@@ -88,4 +90,4 @@ const MyTraitPage = () => {
   );
 };
 
-export default MyTraitPage;
+export default InterestsPage;

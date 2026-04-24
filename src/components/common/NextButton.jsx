@@ -2,10 +2,10 @@
 import styled from "styled-components";
 
 const StyledBtn = styled.button`
-  min-width: 160px;
-  width: auto;
+  min-width: ${(props) => (props.$width ? "none" : "160px")};
+  width: ${(props) => (props.$width ? props.$width : "auto")};
   height: 60px;
-  padding: 16px 44px;
+  padding: ${(props) => (props.$width ? "16px 0" : "16px 44px")};
   border: none;
   border-radius: 12px;
 
@@ -22,7 +22,7 @@ const StyledBtn = styled.button`
 
   &:active {
     background-color: ${({ $active }) =>
-      $active === false ? "#d9d9d9" : "#cb7881"};
+    $active === false ? "#d9d9d9" : "#cb7881"};
     box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.3);
   }
 `;

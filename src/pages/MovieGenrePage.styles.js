@@ -1,5 +1,4 @@
-// 8. 질문 3 - 주종 (남윤)
-
+// 8. 질문 3 - 영화 장르 (남윤)
 import styled from "styled-components";
 
 export const Container = styled.div`

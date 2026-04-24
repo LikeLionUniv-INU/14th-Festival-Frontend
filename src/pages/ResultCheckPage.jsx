@@ -11,6 +11,19 @@ const ResultCheckPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post("/api/match/result", {
+        instagramId: instaId,
+        verificationPin: userNum,
+      });
+
+      if (response.data.inSuccess) {
+        set;
+      }
+    } catch {}
+  };
+
   const handleInstaIdChange = (e) => {
     const value = e.target.value;
     let filtered = value.toLowerCase().replace(/[^a-z0-9._@]|\s/g, "");

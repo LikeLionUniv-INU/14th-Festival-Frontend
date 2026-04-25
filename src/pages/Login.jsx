@@ -1,6 +1,7 @@
 // 2-1. 정보 입력 → 개인정보 수집 동의 (아현)
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as S from "../pages/Login.styles";
 import PrivacyModal from "../components/modal/PrivacyModal";
 import NotTimeModal from "../components/modal/NotTimeModal";
@@ -10,6 +11,7 @@ import axios from "axios";
 const Login = () => {
   const [instaId, setInstaId] = useState("");
   const [userNum, setUserNum] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false); // 나중에 백 서버 열리면 지우셈
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isNotTimeOpen, setIsNotTimeOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");

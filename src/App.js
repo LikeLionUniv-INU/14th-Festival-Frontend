@@ -1,15 +1,15 @@
-// 건들지마시오
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyle";
 import Layout from "./components/common/Layout";
+import { SurveyProvider } from "./contexts/SurveyContext";
 
-import MovieGenre from "./pages/AlcoholPage";
+import MovieGenrePage from "./pages/MovieGenrePage";
 import IntroPage from "./pages/Intro";
 import Login from "./pages/Login";
 import MatchResultPage from "./pages/MatchResultPage";
 import MyAnimalPage from "./pages/MyAnimalPage";
-import InterestsPage from "./pages/MyTraitPage";
+import InterestsPage from "./pages/InterestsPage";
 import QuestionPage from "./pages/QuestionPages";
 import ResultCheckPage from "./pages/ResultCheckPage";
 import SelectGender from "./pages/SelectGender";
@@ -34,7 +34,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <SurveyProvider>
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
@@ -54,7 +54,7 @@ function App() {
             />
             <Route path="/my-animal" element={<MyAnimalPage />} />
             <Route path="/interests" element={<InterestsPage />} />
-            <Route path="/moviegenre" element={<MovieGenre />} />
+            <Route path="/movie-genre" element={<MovieGenrePage />} />
             <Route path="/your-animal" element={<YourAnimalPage />} />
             <Route
               path="/choice-done"
@@ -97,7 +97,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </SurveyProvider>
   );
 }
 

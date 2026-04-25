@@ -13,7 +13,7 @@ export default function IntroPage() {
     <>
       <PopTransition>
         <I.Container>
-          <img src={zooting} />
+          <img width="90%" src={zooting} />
           <I.Info>{"#동물로 찾는 내 짝꿍 \n #키워드 소개팅"}</I.Info>
           <I.Logo src={logo} />
           <I.Intro_Button onClick={() => navigate("login")}>

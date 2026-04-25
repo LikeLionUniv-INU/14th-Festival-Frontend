@@ -3,13 +3,54 @@
 import React, { useState } from "react";
 import * as S from "../pages/Login.styles";
 import PrivacyModal from "../components/modal/PrivacyModal";
+import NotTimeModal from "../components/modal/NotTimeModal";
 import lion from "../assets/images/lion/small-basic-lion.webp";
+import axios from "axios";
 
 const Login = () => {
   const [instaId, setInstaId] = useState("");
   const [userNum, setUserNum] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+  const [isNotTimeOpen, setIsNotTimeOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const navigate = useNavigate();
+
+  /** 인스타 ID 및 본인확인 숫자 검증 API */
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post("/api/onboarding/instagram", {
+        instagramId: instaId,
+        verificationPin: userNum,
+      });
+
+      if (response.date.isSuccess) {
+        const isSuccess = response.data.result.isSuccess;
+        const now = new Date();
+        const hour = now.getHours();
+
+        // 오전 11시 ~ 오후 5시
+        if (hour >= 11 && hour < 17) {
+          if (isSuccess === false) navigate("/lets-choice");
+          else navigate("/profile");
+        }
+        // 오후 5시 ~ 오후 6시   모달로 바꿔야됨
+        else if (hour >= 17 && hour < 18) {
+          if (isSuccess === true) setIsModalOpen(true);
+          else setIsNotTimeOpen(true);
+        }
+        // 오후 6시 ~ 오전 10시
+        else if (hour >= 18 && hour < 10) {
+          if (isSuccess === true) navigate("/match");
+          else setIsNotTimeOpen(true);
+        }
+      }
+    } catch (error) {
+      const errorCode = error.response?.data?.code;
+
+      if (errorCode === "USER_4011")
+        setErrorMsg("비밀번호가 일치하지 않습니다.");
+    }
+  };
 
   const handleUserNumChange = (e) => {
     const value = e.target.value;
@@ -84,6 +125,7 @@ const Login = () => {
 
         <S.GuideText> 숫자 4자리 </S.GuideText>
         <S.Button onClick={() => setIsModalOpen(true)} disabled={!isFormValid}>
+          {/* <S.Button onClick={handleLogin} disabled={!isFormValid}> */}
           입력완료
         </S.Button>
       </S.Content>
@@ -94,4 +136,5 @@ const Login = () => {
     </S.Container>
   );
 };
+
 export default Login;

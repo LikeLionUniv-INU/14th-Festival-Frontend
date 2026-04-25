@@ -15,7 +15,7 @@
 
 import React from "react";
 import styled from "styled-components";
-import lion from "../../assets/images/lion/small-crying-lion.png";
+import lion from "../../assets/images/lion/small-crying-lion.webp";
 
 // isOpen: 모달이 열려있는지 여부
 // onClose: 모달을 닫는 함수
@@ -28,17 +28,11 @@ const NotTimeModal = ({ isOpen, onClose }) => {
   return (
     <Overlay onClick={onClose}>
       <ModalBox onClick={(e) => e.stopPropagation()}>
-        {
-          <Title>
-            {"지금은\n 매칭시간이\n 아니예요!"}
-          </Title>
-        }
+        {<Title>{"지금은\n 매칭시간이\n 아니예요!"}</Title>}
 
         <img src={lion} width="100" />
 
-        <Content>
-          {"내일 다시 만나요"}
-        </Content>
+        <Content>{"내일 다시 만나요"}</Content>
 
         <ButtonWrapper>
           <CloseButton onClick={onClose}>확인</CloseButton>

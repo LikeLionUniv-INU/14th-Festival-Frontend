@@ -1,18 +1,24 @@
 // 5. 남녀 선택 화면 (아현)
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./SelectGender.styles";
 import smallBasicLion from "../assets/images/lion/small-basic-lion.webp";
 import ProgressBar from "../components/common/ProgressBar";
-// 공통 버튼 불러오기
 import Button from "../components/common/NextButton";
 import MessageCard from "../components/common/MessageCard";
 import SlideTransition from "../components/common/SlideTransition.jsx";
+import { useSurvey } from "../contexts/SurveyContext.jsx";
 
 const SelectGender = () => {
-  const [selectedGender, setSelectedGender] = useState(null);
   const navigate = useNavigate();
+  const { answers, updateAnswer } = useSurvey();
+  const [selectedGender, setSelectedGender] = useState(answers.gender ?? null);
+
+  const handleNext = () => {
+    if (!selectedGender) return;
+    updateAnswer("gender", selectedGender);
+    navigate("/my-animal");
+  };
 
   return (
     <SlideTransition>
@@ -36,14 +42,7 @@ const SelectGender = () => {
           </S.GenderButton>
         </S.BSection>
         <S.NButton $isDisabled={!selectedGender}>
-          <Button
-            onClick={() =>
-              navigate("/my-animal", {
-                state: { gender: selectedGender },
-              })
-            }
-            disabled={!selectedGender}
-          >
+          <Button onClick={handleNext} disabled={!selectedGender}>
             다음
           </Button>
         </S.NButton>

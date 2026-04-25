@@ -42,7 +42,7 @@ export const BSection = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  column-gap: 5vw;
+  gap: 15px;
   height: 336px;
   width: 90%;
   margin: 20px 0 30px 0;
@@ -50,7 +50,7 @@ export const BSection = styled.div`
 
 export const GenderButton = styled.button`
   margin-top: 10px;
-  width: 166px;
+  flex: 1;
   height: 210px;
   border-radius: 26px;
   font-size: 28px;

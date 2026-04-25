@@ -1,16 +1,16 @@
 // 6. 질문4 - 상대 동물상 (남윤)
-
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import TagBlock, { GuideText, TagGrid } from "../components/common/TagBlock";
 import NextButton from "../components/common/NextButton.jsx";
 import BackButton from "../components/common/BackButton.jsx";
 import MessageCard from "../components/common/MessageCard";
 import ProgressBar from "../components/common/ProgressBar";
-import { Container, ButtonContainer, Anything } from "./MyAnimalPage.styles";
-import { useNavigate, useLocation } from "react-router-dom";
-import smallBasicLion from "../assets/images/lion/small-basic-lion.webp";
 import SlideTransition from "../components/common/SlideTransition.jsx";
+import { Container, ButtonContainer, Anything } from "./MyAnimalPage.styles";
+import smallBasicLion from "../assets/images/lion/small-basic-lion.webp";
+import { useSurvey } from "../contexts/SurveyContext.jsx";
 
 const MyAnimalGrid = styled(TagGrid)`
   /* 3열을 2열로 변경 */
@@ -19,24 +19,16 @@ const MyAnimalGrid = styled(TagGrid)`
   margin-bottom: 15px;
 `;
 
+const MALE_ANIMALS = ["강아지", "고양이", "햄스터", "곰", "원숭이", "공룡"];
+const FEMALE_ANIMALS = ["강아지", "고양이", "햄스터", "병아리", "토끼", "사슴"];
+
 const YourAnimalPage = () => {
-  const [selected, setSelected] = useState([]);
   const navigate = useNavigate();
+  const { answers, updateAnswer } = useSurvey();
+  const [selected, setSelected] = useState(answers.preferredAnimals ?? []);
 
-  const location = useLocation();
-  const gender = location.state?.gender;
-
-  const maleAnimals = ["강아지", "고양이", "햄스터", "곰", "원숭이", "공룡"];
-  const femaleAnimals = [
-    "강아지",
-    "고양이",
-    "햄스터",
-    "병아리",
-    "토끼",
-    "사슴",
-  ];
-
-  const MyAnimals = gender === "male" ? femaleAnimals : maleAnimals;
+  const gender = answers.gender;
+  const animalOptions = gender === "male" ? FEMALE_ANIMALS : MALE_ANIMALS;
 
   // 함수로직 (클릭할때, 안할때)
   const toggleTag = (tag) => {
@@ -57,9 +49,19 @@ const YourAnimalPage = () => {
     }
   };
 
-  const isButtonActive = selected.length === 3 || selected.includes("상관없음");
-
   const isAnythingSelected = selected.includes("상관없음");
+  const isButtonActive = selected.length === 3 || isAnythingSelected;
+
+  const handleBack = () => {
+    updateAnswer("preferredAnimals", selected);
+    navigate("/movie-genre");
+  };
+
+  const handleNext = () => {
+    if (!isButtonActive) return;
+    updateAnswer("preferredAnimals", selected);
+    navigate("/choice-done");
+  };
 
   return (
     <SlideTransition>
@@ -72,7 +74,7 @@ const YourAnimalPage = () => {
 
         <GuideText>3개를 선택해 주세요!</GuideText>
         <MyAnimalGrid>
-          {MyAnimals.map((text) => (
+          {animalOptions.map((text) => (
             <TagBlock
               key={text}
               label={text}
@@ -89,26 +91,18 @@ const YourAnimalPage = () => {
         >
           상관없음
         </Anything>
+
         <ButtonContainer
           $active={isButtonActive}
           $selected={isAnythingSelected}
         >
-          <BackButton
-            width="90%"
-            onClick={() => {
-              navigate("/moviegenre");
-            }}
-          >
+          <BackButton width="90%" onClick={handleBack}>
             이전
           </BackButton>
           <NextButton
             $width="90%"
             $active={isButtonActive}
-            onClick={() => {
-              if (isButtonActive) {
-                navigate("/choice-done");
-              }
-            }}
+            onClick={handleNext}
           >
             다음
           </NextButton>

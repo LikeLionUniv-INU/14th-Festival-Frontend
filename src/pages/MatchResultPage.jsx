@@ -7,7 +7,7 @@ import React, { useState } from "react";
 
 import Complete from "./Complete";
 import Modal from "../components/modal/ResultModal";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function MatchResultPage({
   title,
@@ -26,10 +26,11 @@ export default function MatchResultPage({
   };
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   /* 모달창 안 인스타그램 아이디
   나머지 과정은 모달 컴포넌트 안에 구현 */
-  const instagramId = "인스타 ID"; //백엔드 값으로 교체
+  const instagramId = location.state?.instagramId || "ID 정보 없음"; //백엔드 값으로 교체
 
   return (
     <>

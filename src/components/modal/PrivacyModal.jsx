@@ -8,14 +8,15 @@ import { useNavigate } from "react-router-dom";
 // onClose: 모달을 닫는 함수
 // title: 모달 상단 제목
 // children: 모달 창 안에 들어갈 내용물
-const PrivacyModal = ({ isOpen, onClose }) => {
-  const navigate = useNavigate();
 
+const PrivacyModal = ({ isOpen, onClose, onConfirm }) => {
+  const navigate = useNavigate();
   if (!isOpen) return null;
 
   const handleAgree = () => {
-    onClose();
-    navigate("/lets-choice");
+    if (onConfirm) {
+      onConfirm();
+    }
   };
 
   return (

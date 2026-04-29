@@ -22,7 +22,16 @@ const ResultCheckPage = () => {
       });
 
       if (response.data.isSuccess) {
-        navigate("/match-success");
+        const isMatched = response.data.result?.isMatched;
+
+        if (isMatched) {
+          const { partnerInstagramId } = response.data.result.partnerInstagramId;
+
+          navigate("/match-success", { state: { instagramId: partnerInstagramId } });
+        }
+        else {
+          navigate("/match-fail");
+        }
       }
     }
     catch (error) {

@@ -13,7 +13,8 @@
 
 import React from "react";
 import styled from "styled-components";
-import lion from "../../assets/images/lion/small-crying-lion.png";
+import lion from "../../assets/images/lion/small-crying-lion.webp";
+import cryingLion from "../../assets/images/lion/small-crying-lion.webp";
 
 // isOpen: 모달이 열려있는지 여부
 // onClose: 모달을 닫는 함수
@@ -26,21 +27,13 @@ const DuplicateModal = ({ isOpen, onClose }) => {
   return (
     <Overlay onClick={onClose}>
       <ModalBox onClick={(e) => e.stopPropagation()}>
-        {
-          <Title>
-            {"이미 참여했어요"}
-          </Title>
-        }
+        {<Title>{"이미 참여했어요"}</Title>}
 
         <img src={lion} width="110" />
 
-        <Content>
-          {"18시 이후에\n 결과를 확인할 수 있어요!"}
-        </Content>
+        <Content>{"18시 이후에\n 결과를 확인할 수 있어요!"}</Content>
 
-        <Info>
-          {"내일 또 참여할 수 있어요"}
-        </Info>
+        <Info>{"내일 또 참여할 수 있어요"}</Info>
 
         <ButtonWrapper>
           <CloseButton onClick={onClose}>확인</CloseButton>
@@ -110,8 +103,8 @@ const Content = styled.p`
   text-align: center;
   line-height: 1.5;
   white-space: pre-line;
-  width:260px;
-  margin-top:12px;
+  width: 260px;
+  margin-top: 12px;
   line-height: 23px;
 `;
 

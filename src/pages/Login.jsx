@@ -7,43 +7,60 @@ import PrivacyModal from "../components/modal/PrivacyModal";
 import NotTimeModal from "../components/modal/NotTimeModal";
 import lion from "../assets/images/lion/small-basic-lion.webp";
 import axios from "axios";
+import DuplicateModal from "../components/modal/DuplicateModal";
 
 const Login = () => {
   const [instaId, setInstaId] = useState("");
   const [userNum, setUserNum] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false); // 나중에 백 서버 열리면 지우셈
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isNotTimeOpen, setIsNotTimeOpen] = useState(false);
+  const [isDuplicateOpen, setIsDuplicateOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
 
   /** 인스타 ID 및 본인확인 숫자 검증 API */
-  const handleLogin = async () => {
+  const handleLoginClick = async () => {
+    if (!isFormValid) return;
+
     try {
       const response = await axios.post("/api/onboarding/instagram", {
         instagramId: instaId,
         verificationPin: userNum,
       });
 
-      if (response.date.isSuccess) {
-        const isSuccess = response.data.result.isSuccess;
+      if (response.data.isSuccess) {
+        const { isComplete, isSuccess, privacyConsent, accessToken } =
+          response.data.result;
+        localStorage.setItem("accessToken", accessToken);
+
         const now = new Date();
         const hour = now.getHours();
 
-        // 오전 11시 ~ 오후 5시
+        // 오전 11시 ~ 오후 5시 ff는 개인정보 모달 tf는 답변 tt는 프로필
         if (hour >= 11 && hour < 17) {
-          if (isSuccess === false) navigate("/lets-choice");
-          else navigate("/profile");
+          if (privacyConsent === false && isComplete === false) {
+            setIsPrivacyOpen(true);
+          } else if (privacyConsent === true && isComplete === false) {
+            navigate("/lets-choice");
+          } else {
+            navigate("/profile");
+          }
         }
-        // 오후 5시 ~ 오후 6시   모달로 바꿔야됨
+        // 오후 5시 ~ 오후 6시
         else if (hour >= 17 && hour < 18) {
-          if (isSuccess === true) setIsModalOpen(true);
-          else setIsNotTimeOpen(true);
+          if (privacyConsent === true && isComplete === true) {
+            setIsDuplicateOpen(true);
+          } else {
+            setIsNotTimeOpen(true);
+          }
         }
-        // 오후 6시 ~ 오전 10시
-        else if (hour >= 18 && hour < 10) {
-          if (isSuccess === true) navigate("/match");
-          else setIsNotTimeOpen(true);
+        // 오후 6시 ~ 오전 10시 (교집합 X => or 연산)
+        else if (hour >= 18 || hour < 10) {
+          if (privacyConsent === true && isComplete === true) {
+            await getMatchResult();
+          } else setIsNotTimeOpen(true);
+        } else {
+          setIsNotTimeOpen(true);
         }
       }
     } catch (error) {
@@ -51,6 +68,48 @@ const Login = () => {
 
       if (errorCode === "USER_4011")
         setErrorMsg("비밀번호가 일치하지 않습니다.");
+    }
+  };
+
+  /** 18-10시 매칭 결과 확인 API */
+  const getMatchResult = async () => {
+    try {
+      const response = await axios.post("/api/match/result", {
+        instagramId: instaId,
+        verificationPin: userNum,
+      });
+
+      if (response.data.isSuccess) {
+        const { isMatched, partnerInstagramId } = response.data.result;
+
+        if (isMatched) {
+          const { partnerInstagramId } =
+            response.data.result.partnerInstagramId;
+
+          navigate("/match-success", {
+            state: { instagramId: partnerInstagramId },
+          });
+        } else {
+          navigate("/match-fail");
+        }
+      }
+    } catch (error) {
+      console.error("매칭 결과 조회 에러: ", error);
+    }
+  };
+
+  const submitLogin = async () => {
+    try {
+      const response = await axios.post("/api/onboarding/privacy", {
+        instagramId: instaId,
+        privacyConsent: true,
+      });
+
+      if (response.data.isSuccess) {
+        navigate("/lets-choice"); // 동의 완료되면 설문 페이지로!
+      }
+    } catch (error) {
+      console.error("동의 전송 에러:", error);
     }
   };
 
@@ -126,14 +185,29 @@ const Login = () => {
         />
 
         <S.GuideText> 숫자 4자리 </S.GuideText>
-        <S.Button onClick={() => setIsModalOpen(true)} disabled={!isFormValid}>
+        <S.Button onClick={handleLoginClick} disabled={!isFormValid}>
           {/* <S.Button onClick={handleLogin} disabled={!isFormValid}> */}
           입력완료
         </S.Button>
       </S.Content>
+
       <PrivacyModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isPrivacyOpen}
+        onClose={() => setIsPrivacyOpen(false)}
+        onConfirm={() => {
+          setIsPrivacyOpen(false);
+          submitLogin();
+        }}
+      />
+
+      <NotTimeModal
+        isOpen={isNotTimeOpen}
+        onClose={() => setIsNotTimeOpen(false)}
+      />
+
+      <DuplicateModal
+        isOpen={isDuplicateOpen}
+        onClose={() => setIsDuplicateOpen(false)}
       />
     </S.Container>
   );

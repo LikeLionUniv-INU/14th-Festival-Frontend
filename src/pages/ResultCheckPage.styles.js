@@ -80,7 +80,6 @@ export const Button = styled.button`
   border: none;
   border-radius: 12px;
   font-size: 20px;
-  margin-top: 28px;
   /// 활성화 전
   background-color: #d9d9d9;
   cursor: not-allowed;

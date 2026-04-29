@@ -12,7 +12,6 @@ import DuplicateModal from "../components/modal/DuplicateModal";
 const Login = () => {
   const [instaId, setInstaId] = useState("");
   const [userNum, setUserNum] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false); // 나중에 백 서버 열리면 지우셈
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isNotTimeOpen, setIsNotTimeOpen] = useState(false);
   const [isDuplicateOpen, setIsDuplicateOpen] = useState(false);
@@ -55,11 +54,11 @@ const Login = () => {
             setIsNotTimeOpen(true);
           }
         }
-        // 오후 6시 ~ 오전 10시
-        else if (hour >= 18 && hour < 10) {
-          if (privacyConsent === true && isComplete === true)
-            navigate("/match");
-          else setIsNotTimeOpen(true);
+        // 오후 6시 ~ 오전 10시 (교집합 X => or 연산)
+        else if (hour >= 18 || hour < 10) {
+          if (privacyConsent === true && isComplete === true) {
+            await getMatchResult();
+          } else setIsNotTimeOpen(true);
         } else {
           setIsNotTimeOpen(true);
         }
@@ -69,6 +68,33 @@ const Login = () => {
 
       if (errorCode === "USER_4011")
         setErrorMsg("비밀번호가 일치하지 않습니다.");
+    }
+  };
+
+  /** 18-10시 매칭 결과 확인 API */
+  const getMatchResult = async () => {
+    try {
+      const response = await axios.post("/api/match/result", {
+        instagramId: instaId,
+        verificationPin: userNum,
+      });
+
+      if (response.data.isSuccess) {
+        const { isMatched, partnerInstagramId } = response.data.result;
+
+        if (isMatched) {
+          const { partnerInstagramId } =
+            response.data.result.partnerInstagramId;
+
+          navigate("/match-success", {
+            state: { instagramId: partnerInstagramId },
+          });
+        } else {
+          navigate("/match-fail");
+        }
+      }
+    } catch (error) {
+      console.error("매칭 결과 조회 에러: ", error);
     }
   };
 
@@ -164,13 +190,24 @@ const Login = () => {
           입력완료
         </S.Button>
       </S.Content>
+
       <PrivacyModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isPrivacyOpen}
+        onClose={() => setIsPrivacyOpen(false)}
         onConfirm={() => {
-          setIsModalOpen(false);
+          setIsPrivacyOpen(false);
           submitLogin();
         }}
+      />
+
+      <NotTimeModal
+        isOpen={isNotTimeOpen}
+        onClose={() => setIsNotTimeOpen(false)}
+      />
+
+      <DuplicateModal
+        isOpen={isDuplicateOpen}
+        onClose={() => setIsDuplicateOpen(false)}
       />
     </S.Container>
   );

@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyle";
 import Layout from "./components/common/Layout";
 import { SurveyProvider } from "./contexts/SurveyContext";
@@ -16,6 +16,33 @@ import SelectGender from "./pages/SelectGender";
 import SelectPage from "./pages/SelectPages";
 import YourAnimalPage from "./pages/YourAnimalPage";
 import Profile from "./pages/Profile";
+
+// 뒤로가기 방지
+function BackBlocker() {
+  const location = useLocation();
+  const currentPathRef = useRef("");
+
+  useEffect(() => {
+    currentPathRef.current =
+      location.pathname + location.search + location.hash;
+
+    window.history.pushState(null, "", currentPathRef.current);
+  }, [location]);
+
+  useEffect(() => {
+    const blockBack = () => {
+      window.history.pushState(null, "", currentPathRef.current);
+    };
+
+    window.addEventListener("popstate", blockBack);
+
+    return () => {
+      window.removeEventListener("popstate", blockBack);
+    };
+  }, []);
+
+  return null;
+}
 
 function App() {
   // 모바일 브라우저 높이 계산
@@ -37,6 +64,7 @@ function App() {
     <SurveyProvider>
       <GlobalStyle />
       <BrowserRouter>
+        <BackBlocker />
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<IntroPage />} />

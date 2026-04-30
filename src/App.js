@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyle";
 import Layout from "./components/common/Layout";
 import { SurveyProvider } from "./contexts/SurveyContext";
+import { Analytics } from "@vercel/analytics/react";
 
 import MovieGenrePage from "./pages/MovieGenrePage";
 import IntroPage from "./pages/Intro";
@@ -61,71 +62,74 @@ function App() {
   }, []);
 
   return (
-    <SurveyProvider>
-      <GlobalStyle />
-      <BrowserRouter>
-        <BackBlocker />
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<IntroPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/gender" element={<SelectGender />} />
-            <Route
-              path="/lets-choice"
-              element={
-                <QuestionPage
-                  title={"질문에 대한 답변을\n 선택해 주세요!"}
-                  twolineinfo={"선택한 답변을 바탕으로\n 매칭이 진행돼요!"}
-                  button="시작하기"
-                />
-              }
-            />
-            <Route path="/my-animal" element={<MyAnimalPage />} />
-            <Route path="/interests" element={<InterestsPage />} />
-            <Route path="/movie-genre" element={<MovieGenrePage />} />
-            <Route path="/your-animal" element={<YourAnimalPage />} />
-            <Route
-              path="/choice-done"
-              element={
-                <SelectPage
-                  title="작성 완료!"
-                  topinfo="&nbsp;"
-                  bottominfo="&nbsp;"
-                  button="다음"
-                />
-              }
-            />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/result" element={<ResultCheckPage />} />
-            <Route
-              path="/match-success"
-              element={
-                <MatchResultPage
-                  title="매칭 성공!"
-                  topinfo="&nbsp;"
-                  lion="heart"
-                  bottominfo="나와 잘 맞는 상대를 찾았어요!"
-                  button="결과 확인하기"
-                  isSuccess={true}
-                />
-              }
-            />
-            <Route
-              path="/match-fail"
-              element={
-                <MatchResultPage
-                  title="매칭 실패!"
-                  topinfo="원하는 상대를 찾지 못했어요."
-                  lion="crying"
-                  bottominfo="내일 다시 참여할 수 있어요!"
-                  button="끝내기"
-                />
-              }
-            />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </SurveyProvider>
+    <>
+      <SurveyProvider>
+        <GlobalStyle />
+        <BrowserRouter>
+          <BackBlocker />
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<IntroPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/gender" element={<SelectGender />} />
+              <Route
+                path="/lets-choice"
+                element={
+                  <QuestionPage
+                    title={"질문에 대한 답변을\n 선택해 주세요!"}
+                    twolineinfo={"선택한 답변을 바탕으로\n 매칭이 진행돼요!"}
+                    button="시작하기"
+                  />
+                }
+              />
+              <Route path="/my-animal" element={<MyAnimalPage />} />
+              <Route path="/interests" element={<InterestsPage />} />
+              <Route path="/movie-genre" element={<MovieGenrePage />} />
+              <Route path="/your-animal" element={<YourAnimalPage />} />
+              <Route
+                path="/choice-done"
+                element={
+                  <SelectPage
+                    title="작성 완료!"
+                    topinfo="&nbsp;"
+                    bottominfo="&nbsp;"
+                    button="다음"
+                  />
+                }
+              />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/result" element={<ResultCheckPage />} />
+              <Route
+                path="/match-success"
+                element={
+                  <MatchResultPage
+                    title="매칭 성공!"
+                    topinfo="&nbsp;"
+                    lion="heart"
+                    bottominfo="나와 잘 맞는 상대를 찾았어요!"
+                    button="결과 확인하기"
+                    isSuccess={true}
+                  />
+                }
+              />
+              <Route
+                path="/match-fail"
+                element={
+                  <MatchResultPage
+                    title="매칭 실패!"
+                    topinfo="원하는 상대를 찾지 못했어요."
+                    lion="crying"
+                    bottominfo="내일 다시 참여할 수 있어요!"
+                    button="끝내기"
+                  />
+                }
+              />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </SurveyProvider>
+      <Analytics />
+    </>
   );
 }
 

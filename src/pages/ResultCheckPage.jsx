@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import * as S from "./ResultCheckPage.styles";
 import smallBasicLion from "../assets/images/lion/small-basic-lion.webp";
 import axios from "axios";
+import api from "../api/axios";
 
 const ResultCheckPage = () => {
   const [instaId, setInstaId] = useState("");
@@ -16,36 +17,34 @@ const ResultCheckPage = () => {
   /** 매칭 결과 확인 API */
   const handleResult = async () => {
     try {
-      const response = await axios.post('/api/match/result', {
-        "instagramId": instaId,
-        "verificationPin": userNum
+      const response = await api.post("/api/match/result", {
+        instagramId: instaId,
+        verificationPin: userNum,
       });
 
       if (response.data.isSuccess) {
         const isMatched = response.data.result?.isMatched;
 
         if (isMatched) {
-          const { partnerInstagramId } = response.data.result.partnerInstagramId;
+          const { partnerInstagramId } =
+            response.data.result.partnerInstagramId;
 
-          navigate("/match-success", { state: { instagramId: partnerInstagramId } });
-        }
-        else {
+          navigate("/match-success", {
+            state: { instagramId: partnerInstagramId },
+          });
+        } else {
           navigate("/match-fail");
         }
       }
-    }
-    catch (error) {
+    } catch (error) {
       const errorCode = error.response?.data?.code;
       const errorMessage = error.response?.data?.message;
 
-      if (errorCode === "USER_4001")
-        alert(errorMessage);
-      else if (errorCode === "MATCH_4031")
-        alert(errorMessage);
-      else if (errorCode === "MATCH_4041")
-        alert(errorMessage);
+      if (errorCode === "USER_4001") alert(errorMessage);
+      else if (errorCode === "MATCH_4031") alert(errorMessage);
+      else if (errorCode === "MATCH_4041") alert(errorMessage);
     }
-  }
+  };
 
   const handleInstaIdChange = (e) => {
     const value = e.target.value;

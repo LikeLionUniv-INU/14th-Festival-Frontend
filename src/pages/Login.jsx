@@ -8,6 +8,7 @@ import NotTimeModal from "../components/modal/NotTimeModal";
 import lion from "../assets/images/lion/small-basic-lion.webp";
 import axios from "axios";
 import DuplicateModal from "../components/modal/DuplicateModal";
+import api from "../api/axios";
 
 const Login = () => {
   const [instaId, setInstaId] = useState("");
@@ -23,7 +24,7 @@ const Login = () => {
     if (!isFormValid) return;
 
     try {
-      const response = await axios.post("/api/onboarding/instagram", {
+      const response = await api.post("/api/onboarding/instagram", {
         instagramId: instaId,
         verificationPin: userNum,
       });
@@ -74,7 +75,7 @@ const Login = () => {
   /** 18-10시 매칭 결과 확인 API */
   const getMatchResult = async () => {
     try {
-      const response = await axios.post("/api/match/result", {
+      const response = await api.post("/api/match/result", {
         instagramId: instaId,
         verificationPin: userNum,
       });
@@ -100,7 +101,7 @@ const Login = () => {
 
   const submitLogin = async () => {
     try {
-      const response = await axios.post("/api/onboarding/privacy", {
+      const response = await api.post("zooting.site/api/onboarding/privacy", {
         instagramId: instaId,
         privacyConsent: true,
       });

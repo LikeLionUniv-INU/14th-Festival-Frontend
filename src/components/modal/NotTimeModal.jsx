@@ -22,7 +22,7 @@ import lion from "../../assets/images/lion/small-crying-lion.webp";
 // title: 모달 상단 제목
 // children: 모달 창 안에 들어갈 내용물
 
-const NotTimeModal = ({ isOpen, onClose }) => {
+const NotTimeModal = ({ isOpen, onClose, children = "내일 다시 만나요!" }) => {
   if (!isOpen) return null;
 
   return (
@@ -32,7 +32,7 @@ const NotTimeModal = ({ isOpen, onClose }) => {
 
         <img src={lion} width="100" />
 
-        <Content>{"내일 다시 만나요"}</Content>
+        <Content>{children}</Content>
 
         <ButtonWrapper>
           <CloseButton onClick={onClose}>확인</CloseButton>
@@ -51,6 +51,7 @@ const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
 
   display: flex;
   justify-content: center;

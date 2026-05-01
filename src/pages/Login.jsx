@@ -15,7 +15,7 @@ const Login = () => {
   const [userNum, setUserNum] = useState("");
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isNotTimeOpen, setIsNotTimeOpen] = useState(false);
-  const [isDuplicateOpen, setIsDuplicateOpen] = useState(false);
+  const [modalContent, setModalContent] = useState(undefined);
   const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ const Login = () => {
         const now = new Date();
         const hour = now.getHours();
 
-        // 오전 11시 ~ 오후 5시 ff는 개인정보 모달 tf는 답변 tt는 프로필
+        // 11시 ~ 17시 ff는 개인정보 모달 tf는 답변 tt는 프로필
         if (hour >= 11 && hour < 17) {
           if (privacyConsent === false && isComplete === false) {
             setIsPrivacyOpen(true);
@@ -47,20 +47,29 @@ const Login = () => {
             navigate("/profile");
           }
         }
-        // 오후 5시 ~ 오후 6시
+        // 17시 ~ 18시
         else if (hour >= 17 && hour < 18) {
           if (privacyConsent === true && isComplete === true) {
-            setIsDuplicateOpen(true);
+            setModalContent("매칭 결과를 집계 중이에요!");
+            setIsNotTimeOpen(true);
           } else {
             setIsNotTimeOpen(true);
           }
         }
-        // 오후 6시 ~ 오전 10시 (교집합 X => or 연산)
+        // 18시 ~ 10시
         else if (hour >= 18 || hour < 10) {
           if (privacyConsent === true && isComplete === true) {
             await getMatchResult();
-          } else setIsNotTimeOpen(true);
-        } else {
+          } else {
+            const msg =
+              hour < 10 ? "오전 11시에 오픈됩니다!" : "내일 다시 만나요!";
+            setModalContent(msg);
+            setIsNotTimeOpen(true);
+          }
+        }
+        // 10시 ~ 11시
+        else {
+          setModalContent("서비스 오픈 준비 중!");
           setIsNotTimeOpen(true);
         }
       }
@@ -204,12 +213,9 @@ const Login = () => {
       <NotTimeModal
         isOpen={isNotTimeOpen}
         onClose={() => setIsNotTimeOpen(false)}
-      />
-
-      <DuplicateModal
-        isOpen={isDuplicateOpen}
-        onClose={() => setIsDuplicateOpen(false)}
-      />
+      >
+        {modalContent}
+      </NotTimeModal>
     </S.Container>
   );
 };

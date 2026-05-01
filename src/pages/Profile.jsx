@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import * as S from "./profile.styles";
 import GuideModal from "../components/modal/GuideModal";
 import PopTransition from "../components/common/PopTransition.jsx";
+import api from "../api/axios.js";
 
 import bear from "../assets/images/profile/bear.webp";
 import monkey from "../assets/images/profile/monkey.webp";
@@ -25,7 +26,7 @@ const Profile = () => {
   /** 생성된 프로필 조회 API */
   const handleProfile = async () => {
     try {
-      const response = await axios.get("/api/profile");
+      const response = await api.get("/api/profile");
 
       if (response.data.isSuccess) {
         setAnimalResult(response.data.result.animalType);

@@ -109,7 +109,7 @@ const Login = () => {
 
   const submitLogin = async () => {
     try {
-      const response = await api.post("zooting.site/api/onboarding/privacy", {
+      const response = await api.post("/api/onboarding/privacy", {
         instagramId: instaId,
         privacyConsent: true,
       });

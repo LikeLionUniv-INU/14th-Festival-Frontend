@@ -7,7 +7,6 @@ import PrivacyModal from "../components/modal/PrivacyModal";
 import NotTimeModal from "../components/modal/NotTimeModal";
 import lion from "../assets/images/lion/small-basic-lion.webp";
 import axios from "axios";
-import DuplicateModal from "../components/modal/DuplicateModal";
 import api from "../api/axios";
 
 const Login = () => {

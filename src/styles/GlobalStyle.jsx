@@ -45,6 +45,14 @@ const GlobalStyle = createGlobalStyle`
   button, p, h3, span, input, textarea {
     font-family: var(--font-main);
     color: #000000;
+    font-size: 16px !important;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+    touch-action: manipulation;
   }
 
   input,

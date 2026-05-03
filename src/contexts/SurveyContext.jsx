@@ -8,7 +8,7 @@ const initialState = {
   gender: null,
   animalType: [],
   interests: [],
-  moviGenres: [],
+  movieGenres: [],
   preferredAnimals: [],
 };
 

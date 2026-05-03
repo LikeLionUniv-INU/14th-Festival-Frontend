@@ -26,8 +26,7 @@ const ResultCheckPage = () => {
         const isMatched = response.data.result?.isMatched;
 
         if (isMatched) {
-          const { partnerInstagramId } =
-            response.data.result.partnerInstagramId;
+          const partnerInstagramId = response.data.result.partnerInstagramId;
 
           navigate("/match-success", {
             state: { instagramId: partnerInstagramId },

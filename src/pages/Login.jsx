@@ -1,5 +1,4 @@
 // 2-1. 정보 입력 → 개인정보 수집 동의 (아현)
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "../pages/Login.styles";
@@ -8,19 +7,25 @@ import NotTimeModal from "../components/modal/NotTimeModal";
 import lion from "../assets/images/lion/small-basic-lion.webp";
 import axios from "axios";
 import api from "../api/axios";
+import { useSurvey } from "../contexts/SurveyContext";
 
 const Login = () => {
+  const { resetAnswers } = useSurvey();
   const [instaId, setInstaId] = useState("");
   const [userNum, setUserNum] = useState("");
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isNotTimeOpen, setIsNotTimeOpen] = useState(false);
   const [modalContent, setModalContent] = useState(undefined);
   const [errorMsg, setErrorMsg] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   /** 인스타 ID 및 본인확인 숫자 검증 API */
   const handleLoginClick = async () => {
-    if (!isFormValid) return;
+    if (!isFormValid || isLoading) return;
+
+    setIsLoading(true);
+    setErrorMsg("");
 
     try {
       const response = await api.post("/api/onboarding/instagram", {
@@ -31,7 +36,26 @@ const Login = () => {
       if (response.data.isSuccess) {
         const { isComplete, isSuccess, privacyConsent, accessToken } =
           response.data.result;
-        localStorage.setItem("accessToken", accessToken);
+
+        // localStorage 저장 - 에러 처리
+        try {
+          // 이전 토큰 있을 시 검사 후 삭제
+          const lastLoggedInId = localStorage.getItem("lastLoggedInId");
+          if (lastLoggedInId !== instaId) {
+            resetAnswers();
+            localStorage.removeItem("isCompleted");
+            localStorage.setItem("lastLoggedInId", instaId);
+          }
+
+          localStorage.setItem("accessToken", accessToken); // 새 토큰 저장
+        } catch (storageError) {
+          console.error("localStorage 저장 실패:", storageError);
+          setErrorMsg(
+            "데이터 저장에 실패했습니다. 브라우저 설정을 확인해주세요.",
+          );
+          setIsLoading(false);
+          return;
+        }
 
         const now = new Date();
         const hour = now.getHours();
@@ -73,10 +97,27 @@ const Login = () => {
         }
       }
     } catch (error) {
-      const errorCode = error.response?.data?.code;
+      // API 응답 에러
+      if (error.response?.data) {
+        const errorCode = error.response.data.code;
+        const errorMessage = error.response.data.message;
 
-      if (errorCode === "USER_4011")
-        setErrorMsg("비밀번호가 일치하지 않습니다.");
+        if (errorCode === "USER_4011") {
+          setErrorMsg("비밀번호가 일치하지 않습니다.");
+        } else if (errorCode === "USER_4001") {
+          setErrorMsg("가입되지 않은 계정입니다.");
+        } else {
+          setErrorMsg(errorMessage || "로그인 실패. 다시 시도해주세요.");
+        }
+      }
+      // 네트워크 에러 (axios 인터셉터에서 처리된 메시지)
+      else {
+        setErrorMsg(
+          error.message || "네트워크 오류가 발생했습니다. 다시 시도해주세요.",
+        );
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -92,9 +133,6 @@ const Login = () => {
         const { isMatched, partnerInstagramId } = response.data.result;
 
         if (isMatched) {
-          const { partnerInstagramId } =
-            response.data.result.partnerInstagramId;
-
           navigate("/match-success", {
             state: { instagramId: partnerInstagramId },
           });
@@ -103,11 +141,21 @@ const Login = () => {
         }
       }
     } catch (error) {
-      console.error("매칭 결과 조회 에러: ", error);
+      if (error.response?.data) {
+        const errorMessage =
+          error.response.data.message || "매칭 결과를 불러올 수 없습니다.";
+        setModalContent(errorMessage);
+      } else {
+        setModalContent(
+          error.message || "네트워크 오류가 발생했습니다. 다시 시도해주세요.",
+        );
+      }
+      setIsNotTimeOpen(true);
     }
   };
 
   const submitLogin = async () => {
+    setIsLoading(true);
     try {
       const response = await api.post("/api/onboarding/privacy", {
         instagramId: instaId,
@@ -118,7 +166,13 @@ const Login = () => {
         navigate("/lets-choice"); // 동의 완료되면 설문 페이지로!
       }
     } catch (error) {
-      console.error("동의 전송 에러:", error);
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        "동의 처리 중 오류가 발생했습니다. 다시 시도해주세요.";
+      setErrorMsg(errorMessage);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -126,6 +180,13 @@ const Login = () => {
     const value = e.target.value;
     const onlyNumber = value.replace(/[^0-9]/g, "").slice(0, 4);
     setUserNum(onlyNumber);
+    // 입력 시 이전 API 에러 메시지 제거
+    if (
+      (errorMsg && errorMsg.includes("비밀번호")) ||
+      errorMsg.includes("가입")
+    ) {
+      setErrorMsg("");
+    }
   };
 
   const handleInstaIdChange = (e) => {
@@ -157,10 +218,7 @@ const Login = () => {
   };
 
   const isFormValid =
-    instaId.length >= 3 &&
-    instaId.length <= 30 &&
-    errorMsg === "" &&
-    userNum.length === 4;
+    instaId.length >= 3 && instaId.length <= 30 && userNum.length === 4;
 
   return (
     <S.Container>
@@ -194,9 +252,12 @@ const Login = () => {
         />
 
         <S.GuideText> 숫자 4자리 </S.GuideText>
-        <S.Button onClick={handleLoginClick} disabled={!isFormValid}>
+        <S.Button
+          onClick={handleLoginClick}
+          disabled={!isFormValid || isLoading}
+        >
           {/* <S.Button onClick={handleLogin} disabled={!isFormValid}> */}
-          입력완료
+          {isLoading ? "진행 중..." : "입력완료"}
         </S.Button>
       </S.Content>
 

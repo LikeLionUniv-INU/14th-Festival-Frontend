@@ -14,11 +14,11 @@ const ProtectedRoute = ({ requireCompleted = false }) => {
     return <Navigate to="/" replace />;
   }
 
-  // // 설문 안 끝냈는데 결과 페이지 가려는 사람 막기
-  // if (requireCompleted && !isCompleted) {
-  //   alert("설문을 먼저 완료해야 결과를 볼 수 있습니다! 🦁");
-  //   return <Navigate to="/login" replace />;
-  // }
+  // 설문 안 끝냈는데 결과 페이지 가려는 사람 막기
+  if (requireCompleted && !isCompleted) {
+    alert("설문을 먼저 완료해야 결과를 볼 수 있습니다! 🦁");
+    return <Navigate to="/lets-choice" replace />;
+  }
 
   // 이미 설문 다 했는데 또 설문 페이지 가려는 사람 막기
   if (!requireCompleted && isCompleted) {

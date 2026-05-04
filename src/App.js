@@ -72,8 +72,9 @@ function App() {
             <Route element={<Layout />}>
               <Route path="/" element={<IntroPage />} />
               <Route path="/login" element={<Login />} />
-              // 토큰 없으면 로그인 페이지로, 토큰 있으면 원래 가려던 페이지로
-              <Route element={<ProtectedRoute />}>
+
+              {/* 토큰 없으면 로그인 페이지로, 토큰 있으면 원래 가려던 페이지로 */}
+              <Route element={<ProtectedRoute requireCompleted={false} />}>
                 <Route path="/gender" element={<SelectGender />} />
                 <Route
                   path="/lets-choice"
@@ -101,6 +102,10 @@ function App() {
                   }
                 />
                 <Route path="/profile" element={<Profile />} />
+              </Route>
+
+              {/* 설문 끝까지 완료한 사람만 볼 수 있는 결과 페이지들 */}
+              <Route element={<ProtectedRoute requireCompleted={true} />}>
                 <Route path="/result" element={<ResultCheckPage />} />
                 <Route
                   path="/match-success"

@@ -8,6 +8,15 @@ import lion from "../assets/images/lion/small-basic-lion.webp";
 import axios from "axios";
 import api from "../api/axios";
 import { useSurvey } from "../contexts/SurveyContext";
+import { getPhase } from "../constants/serviceTime";
+
+const BLACK_IDS = [
+  "@likelion_inu",
+  "@insta",
+  "@instagram",
+  "@likelion",
+  "@likelion.inu",
+];
 
 const Login = () => {
   const { resetAnswers } = useSurvey();
@@ -15,15 +24,48 @@ const Login = () => {
   const [userNum, setUserNum] = useState("");
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isNotTimeOpen, setIsNotTimeOpen] = useState(false);
-  const [modalContent, setModalContent] = useState(undefined);
+  const [modalContent, setModalContent] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  const isFormValid =
+    instaId.length >= 3 && instaId.length <= 30 && userNum.length === 4;
+
+  /** 로그인 후 phase + 진행상태에 따라 분기 */
+  const routeAfterLogin = async ({ isComplete, privacyConsent }) => {
+    const phase = getPhase();
+
+    if (phase === "PREPARING") {
+      setModalContent("오전 11시에 오픈돼요! 🦁");
+      setIsNotTimeOpen(true);
+      return;
+    }
+
+    if (phase === "AGGREGATING") {
+      setModalContent("매칭 결과를 집계 중이에요! 🦁");
+      setIsNotTimeOpen(true);
+      return;
+    }
+
+    if (phase === "RESULT") {
+      if (isComplete) await getMatchResult();
+      else {
+        setModalContent("오늘은 참여하지 않으셨어요. 내일 다시 만나요! 🦁");
+        setIsNotTimeOpen(true);
+      }
+      return;
+    }
+
+    // SURVEY 단계
+    if (!privacyConsent) setIsPrivacyOpen(true);
+    else if (!isComplete) navigate("/lets-choice");
+    else navigate("/profile");
+  };
+
   /** 인스타 ID 및 본인확인 숫자 검증 API */
   const handleLoginClick = async () => {
     if (!isFormValid || isLoading) return;
-
     setIsLoading(true);
     setErrorMsg("");
 
@@ -33,89 +75,25 @@ const Login = () => {
         verificationPin: userNum,
       });
 
-      if (response.data.isSuccess) {
-        const { isComplete, isSuccess, privacyConsent, accessToken } =
-          response.data.result;
+      if (!response.data.isSuccess) return;
+      const { isComplete, privacyConsent, accessToken } = response.data.result;
 
-        // localStorage 저장 - 에러 처리
-        try {
-          // 이전 토큰 있을 시 검사 후 삭제
-          const lastLoggedInId = localStorage.getItem("lastLoggedInId");
-          if (lastLoggedInId !== instaId) {
-            resetAnswers();
-            localStorage.removeItem("isCompleted");
-            localStorage.setItem("lastLoggedInId", instaId);
-          }
-
-          localStorage.setItem("accessToken", accessToken); // 새 토큰 저장
-        } catch (storageError) {
-          console.error("localStorage 저장 실패:", storageError);
-          setErrorMsg(
-            "데이터 저장에 실패했습니다. 브라우저 설정을 확인해주세요.",
-          );
-          setIsLoading(false);
-          return;
-        }
-
-        const now = new Date();
-        const hour = now.getHours();
-
-        // 11시 ~ 17시 ff는 개인정보 모달 tf는 답변 tt는 프로필
-        if (hour >= 11 && hour < 17) {
-          if (privacyConsent === false && isComplete === false) {
-            setIsPrivacyOpen(true);
-          } else if (privacyConsent === true && isComplete === false) {
-            navigate("/lets-choice");
-          } else {
-            navigate("/profile");
-          }
-        }
-        // 17시 ~ 18시
-        else if (hour >= 17 && hour < 18) {
-          if (privacyConsent === true && isComplete === true) {
-            setModalContent("매칭 결과를 집계 중이에요!");
-            setIsNotTimeOpen(true);
-          } else {
-            setIsNotTimeOpen(true);
-          }
-        }
-        // 18시 ~ 10시
-        else if (hour >= 18 || hour < 10) {
-          if (privacyConsent === true && isComplete === true) {
-            await getMatchResult();
-          } else {
-            const msg =
-              hour < 10 ? "오전 11시에 오픈됩니다!" : "내일 다시 만나요!";
-            setModalContent(msg);
-            setIsNotTimeOpen(true);
-          }
-        }
-        // 10시 ~ 11시
-        else {
-          setModalContent("서비스 오픈 준비 중!");
-          setIsNotTimeOpen(true);
-        }
+      // 다른 사용자로 로그인 시 이전 데이터 초기화
+      const lastLoggedInId = localStorage.getItem("lastLoggedInId");
+      if (lastLoggedInId !== instaId) {
+        resetAnswers();
+        localStorage.setItem("lastLoggedInId", instaId);
       }
+      localStorage.setItem("accessToken", accessToken);
+
+      await routeAfterLogin({ isComplete, privacyConsent });
     } catch (error) {
-      // API 응답 에러
-      if (error.response?.data) {
-        const errorCode = error.response.data.code;
-        const errorMessage = error.response.data.message;
-
-        if (errorCode === "USER_4011") {
-          setErrorMsg("비밀번호가 일치하지 않습니다.");
-        } else if (errorCode === "USER_4001") {
-          setErrorMsg("가입되지 않은 계정입니다.");
-        } else {
-          setErrorMsg(errorMessage || "로그인 실패. 다시 시도해주세요.");
-        }
-      }
-      // 네트워크 에러 (axios 인터셉터에서 처리된 메시지)
-      else {
-        setErrorMsg(
-          error.message || "네트워크 오류가 발생했습니다. 다시 시도해주세요.",
-        );
-      }
+      const code = error.response?.data?.code;
+      const msg = error.response?.data?.message;
+      if (code === "USER_4011") setErrorMsg("비밀번호가 일치하지 않습니다.");
+      else if (code === "USER_4001") setErrorMsg("가입되지 않은 계정입니다.");
+      else
+        setErrorMsg(msg || error.message || "로그인 실패. 다시 시도해주세요.");
     } finally {
       setIsLoading(false);
     }
@@ -128,28 +106,18 @@ const Login = () => {
         instagramId: instaId,
         verificationPin: userNum,
       });
-
       if (response.data.isSuccess) {
         const { isMatched, partnerInstagramId } = response.data.result;
-
-        if (isMatched) {
-          navigate("/match-success", {
-            state: { instagramId: partnerInstagramId },
-          });
-        } else {
-          navigate("/match-fail");
-        }
+        navigate(isMatched ? "/match-success" : "/match-fail", {
+          state: { instagramId: partnerInstagramId },
+        });
       }
     } catch (error) {
-      if (error.response?.data) {
-        const errorMessage =
-          error.response.data.message || "매칭 결과를 불러올 수 없습니다.";
-        setModalContent(errorMessage);
-      } else {
-        setModalContent(
-          error.message || "네트워크 오류가 발생했습니다. 다시 시도해주세요.",
-        );
-      }
+      const msg =
+        error.response?.data?.message ||
+        error.message ||
+        "매칭 결과를 불러올 수 없습니다.";
+      setModalContent(msg);
       setIsNotTimeOpen(true);
     }
   };
@@ -177,48 +145,26 @@ const Login = () => {
   };
 
   const handleUserNumChange = (e) => {
-    const value = e.target.value;
-    const onlyNumber = value.replace(/[^0-9]/g, "").slice(0, 4);
+    const onlyNumber = e.target.value.replace(/[^0-9]/g, "").slice(0, 4);
     setUserNum(onlyNumber);
-    // 입력 시 이전 API 에러 메시지 제거
-    if (
-      (errorMsg && errorMsg.includes("비밀번호")) ||
-      errorMsg.includes("가입")
-    ) {
+    if (errorMsg.includes("비밀번호") || errorMsg.includes("가입"))
       setErrorMsg("");
-    }
   };
 
   const handleInstaIdChange = (e) => {
-    const value = e.target.value;
-    let filtered = value.toLowerCase().replace(/[^a-z0-9._@]|\s/g, "");
+    let filtered = e.target.value.toLowerCase().replace(/[^a-z0-9._@]|\s/g, "");
     if (filtered.includes("..")) return;
-    if (filtered.startsWith("@")) {
-      filtered = "@" + filtered.slice(1).replace(/@/g, "");
-    } else {
-      filtered = "@" + filtered.replace(/@/g, "");
-    }
-
-    if (filtered.length <= 30) {
-      setInstaId(filtered);
-    }
-    const blackId = [
-      "@likelion_inu",
-      "@insta",
-      "@instagram",
-      "@likelion",
-      "@likelion.inu",
-    ];
-
-    if (blackId.includes(filtered)) {
-      setErrorMsg("사용할 수 없는 아이디입니다.");
-    } else {
-      setErrorMsg("");
-    }
+    filtered =
+      "@" +
+      (filtered.startsWith("@") ? filtered.slice(1) : filtered).replace(
+        /@/g,
+        "",
+      );
+    if (filtered.length <= 30) setInstaId(filtered);
+    setErrorMsg(
+      BLACK_IDS.includes(filtered) ? "사용할 수 없는 아이디입니다." : "",
+    );
   };
-
-  const isFormValid =
-    instaId.length >= 3 && instaId.length <= 30 && userNum.length === 4;
 
   return (
     <S.Container>
@@ -238,11 +184,9 @@ const Login = () => {
           }}
         />
         {errorMsg ? (
-          <S.GuideText $isError={true}>{errorMsg}</S.GuideText>
+          <S.GuideText $isError>{errorMsg}</S.GuideText>
         ) : (
-          <S.GuideText>
-            원활한 진행을 위해 본인 계정을 입력해주세요{" "}
-          </S.GuideText>
+          <S.GuideText>원활한 진행을 위해 본인 계정을 입력해주세요</S.GuideText>
         )}
         <S.InputBox
           type="text"
@@ -250,13 +194,11 @@ const Login = () => {
           value={userNum}
           onChange={handleUserNumChange}
         />
-
-        <S.GuideText> 숫자 4자리 </S.GuideText>
+        <S.GuideText>숫자 4자리</S.GuideText>
         <S.Button
           onClick={handleLoginClick}
           disabled={!isFormValid || isLoading}
         >
-          {/* <S.Button onClick={handleLogin} disabled={!isFormValid}> */}
           {isLoading ? "진행 중..." : "입력완료"}
         </S.Button>
       </S.Content>
@@ -269,7 +211,6 @@ const Login = () => {
           submitLogin();
         }}
       />
-
       <NotTimeModal
         isOpen={isNotTimeOpen}
         onClose={() => setIsNotTimeOpen(false)}

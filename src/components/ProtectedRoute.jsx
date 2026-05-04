@@ -1,28 +1,25 @@
+// 로그인 여부, 설문 참여 여부, 서비스 시간에 따른 접근 제어 컴포넌트
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import { getPhase } from "../constants/serviceTime";
 
-const ProtectedRoute = ({ requireCompleted = false }) => {
-  // 토큰으로 로그인 여부 검사
+const ProtectedRoute = ({ allow = [] }) => {
   const token = localStorage.getItem("accessToken");
-
-  // 유저 설문 상태 꺼내기
-  const isCompleted = localStorage.getItem("isCompleted") === "true";
-
-  // 로그인 안 한 사람 막기
   if (!token) {
-    alert("로그인이 필요한 서비스입니다! 🦁");
+    alert("로그인이 필요합니다! 🦁");
     return <Navigate to="/" replace />;
   }
 
-  // 설문 안 끝냈는데 결과 페이지 가려는 사람 막기
-  if (requireCompleted && !isCompleted) {
-    alert("설문을 먼저 완료해야 결과를 볼 수 있습니다! 🦁");
-    return <Navigate to="/lets-choice" replace />;
-  }
-
-  // 이미 설문 다 했는데 또 설문 페이지 가려는 사람 막기
-  if (!requireCompleted && isCompleted) {
-    return <Navigate to="/login" replace />;
+  const phase = getPhase();
+  if (!allow.includes(phase)) {
+    const messages = {
+      PREPARING: "10-11시는 오픈 준비 중입니다! 🦁",
+      SURVEY: "지금은 설문 시간입니다! 🦁",
+      AGGREGATING: "17-18시는 결과 집계 중입니다! 🦁",
+      RESULT: "지금은 결과 확인 시간입니다! 🦁",
+    };
+    alert(messages[phase]);
+    return <Navigate to="/" replace />;
   }
 
   return <Outlet />;

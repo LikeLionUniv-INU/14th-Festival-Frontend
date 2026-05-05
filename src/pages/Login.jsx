@@ -78,7 +78,7 @@ const Login = () => {
       if (isComplete)
         await getMatchResult(); // 이미 완료 상태면 어제 결과 띄우기
       else {
-        setModalContent("오전 11시 오픈입니다!");
+        setModalContent("11시에 오픈됩니다!");
         setIsNotTimeOpen(true);
       }
       return;
@@ -143,7 +143,7 @@ const Login = () => {
       // 서버 에러 메시지 표시
       const code = error.response?.data?.code;
       const msg = error.response?.data?.message;
-      
+
       if (code === "USER_4011") setErrorMsg("비밀번호가 일치하지 않습니다.");
       else if (code === "USER_4001") setErrorMsg("가입되지 않은 계정입니다.");
       else
@@ -171,10 +171,7 @@ const Login = () => {
         });
       }
     } catch (error) {
-      const msg =
-        error.response?.data?.message ||
-        error.message ||
-        "매칭 결과를 불러올 수 없습니다.";
+      const msg = "매칭 결과를 불러올 수 없습니다.";
       setModalContent(msg);
       setIsNotTimeOpen(true);
     }

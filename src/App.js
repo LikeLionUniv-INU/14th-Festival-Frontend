@@ -108,8 +108,10 @@ function App() {
 
               <Route path="/result" element={<ResultCheckPage />} />
 
-              {/* 결과 시간(18-익일 9:59)에만 접근 가능 */}
-              <Route element={<ProtectedRoute allow={["RESULT"]} />}>
+              {/* 결과 시간(18-익일 10:59)에만 접근 가능 */}
+              <Route
+                element={<ProtectedRoute allow={["RESULT", "PREPARING"]} />}
+              >
                 <Route
                   path="/match-success"
                   element={

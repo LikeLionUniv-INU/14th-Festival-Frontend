@@ -6,14 +6,15 @@ import GuideModal from "../components/modal/GuideModal";
 import PopTransition from "../components/common/PopTransition.jsx";
 import api from "../api/axios.js";
 
+import dog from "../assets/images/profile/dog.webp";
+import cat from "../assets/images/profile/cat.webp";
+import hamster from "../assets/images/profile/hamster.webp";
 import bear from "../assets/images/profile/bear.webp";
 import monkey from "../assets/images/profile/monkey.webp";
-import cat from "../assets/images/profile/cat.webp";
-import chick from "../assets/images/profile/chick.webp";
 import dinosaur from "../assets/images/profile/dinosaur.webp";
-import dog from "../assets/images/profile/dog.webp";
-import horse from "../assets/images/profile/horse.webp";
 import rabbit from "../assets/images/profile/rabbit.webp";
+import deer from "../assets/images/profile/deer.webp";
+import chick from "../assets/images/profile/chick.webp";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -49,14 +50,15 @@ const Profile = () => {
   }, []);
 
   const ANIMAL_MAP = {
-    monkey: monkey,
-    rabbit: rabbit,
-    horse: horse,
-    dinosaur: dinosaur,
-    chick: chick,
-    bear: bear,
-    cat: cat,
     dog: dog,
+    cat: cat,
+    hamster: hamster,
+    bear: bear,
+    monkey: monkey,
+    dinosaur: dinosaur,
+    rabbit: rabbit,
+    deer: deer,
+    chick: chick,
   };
 
   return (

@@ -28,7 +28,7 @@ const NotTimeModal = ({ isOpen, onClose, children = "내일 다시 만나요!" }
   return (
     <Overlay onClick={onClose}>
       <ModalBox onClick={(e) => e.stopPropagation()}>
-        {<Title>{"지금은\n 매칭시간이\n 아니예요!"}</Title>}
+        {<Title>{"지금은\n 매칭시간이\n 아니에요!"}</Title>}
 
         <img src={lion} width="100" />
 

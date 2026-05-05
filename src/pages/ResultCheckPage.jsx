@@ -16,6 +16,7 @@ import {
   validateAndFormatInstaId,
   isValidInstaId,
   isValidVerificationPin,
+  isBlackListedId,
 } from "../utils/validation";
 
 const ResultCheckPage = () => {
@@ -81,7 +82,12 @@ const ResultCheckPage = () => {
   const handleInstaIdChange = (e) => {
     const formatted = validateAndFormatInstaId(e.target.value);
     setInstaId(formatted);
-    setErrorMsg("");
+
+    if (isBlackListedId(formatted)) {
+      setErrorMsg("사용할 수 없는 아이디입니다.");
+    } else {
+      setErrorMsg("");
+    }
   };
 
   const handleUserNumChange = (e) => {

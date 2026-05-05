@@ -24,6 +24,7 @@ import {
   validateAndFormatInstaId,
   isValidInstaId,
   isValidVerificationPin,
+  isBlackListedId,
 } from "../utils/validation";
 
 const Login = () => {
@@ -126,6 +127,7 @@ const Login = () => {
 
       // 다른 사용자로 로그인 시 이전 데이터 초기화
       const lastLoggedInId = localStorage.getItem("lastLoggedInId");
+
       if (lastLoggedInId !== instaId) {
         resetAnswers(); // 설문 데이터 초기화
         localStorage.removeItem("isCompleted"); // 완료 여부 초기화
@@ -141,6 +143,7 @@ const Login = () => {
       // 서버 에러 메시지 표시
       const code = error.response?.data?.code;
       const msg = error.response?.data?.message;
+      
       if (code === "USER_4011") setErrorMsg("비밀번호가 일치하지 않습니다.");
       else if (code === "USER_4001") setErrorMsg("가입되지 않은 계정입니다.");
       else
@@ -201,6 +204,24 @@ const Login = () => {
   };
 
   /**
+   * 인스타 ID 입력 처리
+   * - @로 시작해야 함
+   * - 영소문자, 숫자, 언더스코어, 점만 입력 가능
+   * - 검증 함수에서 처리
+   * - 30자 초과 입력 방지
+   */
+  const handleInstaIdChange = (e) => {
+    const formatted = validateAndFormatInstaId(e.target.value);
+    setInstaId(formatted);
+
+    if (isBlackListedId(formatted)) {
+      setErrorMsg("사용할 수 없는 아이디입니다.");
+    } else {
+      setErrorMsg("");
+    }
+  };
+
+  /**
    * 본인확인 숫자 입력 처리
    * 숫자만 4자리까지 입력 가능
    */
@@ -210,18 +231,6 @@ const Login = () => {
     // 새로운 입력이 들어오면 에러 메시지 초기화 (버튼 활성화되게)
     if (errorMsg.includes("비밀번호") || errorMsg.includes("가입"))
       setErrorMsg("");
-  };
-
-  /**
-   * 인스타 ID 입력 처리
-   * - @로 시작해야 함
-   * - 영소문자, 숫자, 언더스코어, 점만 입력 가능
-   * - 검증 함수에서 처리
-   */
-  const handleInstaIdChange = (e) => {
-    const formatted = validateAndFormatInstaId(e.target.value);
-    setInstaId(formatted);
-    setErrorMsg("");
   };
 
   return (

@@ -69,3 +69,19 @@ export const Button = styled.button`
     box-shadow: inset 2px 5px 5px rgba(0, 0, 0, 0.3);
   }
 `;
+
+export const ErrorMsg = styled.div`
+  font-size: 16px;
+  color: #d32f2f;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 500;
+`;
+
+export const LoadingMsg = styled.div`
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 500;
+`;

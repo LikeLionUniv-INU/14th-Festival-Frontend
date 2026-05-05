@@ -66,7 +66,7 @@ const ModalBox = styled.div`
   height: 412px;
   min-height: 412px;
   border-radius: 12px;
-  padding: 32px 64px;
+  padding: 32px 32px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
   display: flex;
@@ -105,6 +105,7 @@ const Content = styled.p`
   color: #555;
   text-align: center;
   line-height: 1.5;
+  white-space: pre-line;
 `;
 
 const ButtonWrapper = styled.div`

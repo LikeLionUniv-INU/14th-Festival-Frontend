@@ -101,12 +101,15 @@ function App() {
                     />
                   }
                 />
+              </Route>
+              <Route element={<ProtectedRoute allow={["SURVEY", "RESULT"]} />}>
                 <Route path="/profile" element={<Profile />} />
               </Route>
 
+              <Route path="/result" element={<ResultCheckPage />} />
+
               {/* 결과 시간(18-익일 9:59)에만 접근 가능 */}
               <Route element={<ProtectedRoute allow={["RESULT"]} />}>
-                <Route path="/result" element={<ResultCheckPage />} />
                 <Route
                   path="/match-success"
                   element={

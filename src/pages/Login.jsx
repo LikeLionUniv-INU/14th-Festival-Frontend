@@ -37,13 +37,16 @@ const Login = () => {
     const phase = getPhase();
 
     if (phase === "PREPARING") {
-      setModalContent("오전 11시에 오픈돼요! 🦁");
-      setIsNotTimeOpen(true);
+      if (isComplete) await getMatchResult();
+      else {
+        setModalContent("오전 11시 오픈입니다!");
+        setIsNotTimeOpen(true);
+      }
       return;
     }
 
     if (phase === "AGGREGATING") {
-      setModalContent("매칭 결과를 집계 중이에요! 🦁");
+      setModalContent("매칭 결과 집계 중이에요!");
       setIsNotTimeOpen(true);
       return;
     }
@@ -51,7 +54,7 @@ const Login = () => {
     if (phase === "RESULT") {
       if (isComplete) await getMatchResult();
       else {
-        setModalContent("오늘은 참여하지 않으셨어요. 내일 다시 만나요! 🦁");
+        setModalContent(`오늘 참여한 기록이 없어요!\n내일 다시 만나요~`);
         setIsNotTimeOpen(true);
       }
       return;

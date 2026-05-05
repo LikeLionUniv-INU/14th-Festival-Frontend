@@ -25,7 +25,6 @@ export default function SelectPage({ title, button, topinfo, bottominfo }) {
     setLoading(true);
     try {
       const payload = buildPayload(answers);
-      console.log("전송 데이터:", payload); // 테스트 (나중에 지울거임)
 
       const res = await api.post("/api/onboarding/submit", payload);
 

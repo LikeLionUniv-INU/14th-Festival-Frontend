@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./ResultCheckPage.styles";
 import smallBasicLion from "../assets/images/lion/small-basic-lion.webp";
+import NotTimeModal from "../components/modal/NotTimeModal";
 import api from "../api/axios";
 import {
   validateAndFormatInstaId,
@@ -25,6 +26,9 @@ const ResultCheckPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // 결과 모달
   const [errorMsg, setErrorMsg] = useState(""); // 입력 에러
   const [isLoading, setIsLoading] = useState(false); // API 호출 중
+  const [isNotTimeOpen, setIsNotTimeOpen] = useState(false); //모달 추가
+  const [modalContent, setModalContent] = useState("");
+
   const navigate = useNavigate();
 
   // 입력값이 모두 유효한지 확인
@@ -42,38 +46,53 @@ const ResultCheckPage = () => {
    *    - 실패: /match-fail
    */
   const handleResult = async () => {
-    if (isLoading) return; // 이미 조회 중이면 무시
+    if (isLoading) return;
     setIsLoading(true);
+
     try {
-      const response = await api.post("/api/match/result", {
+      // 1. 로그인 API로 설문 참여 여부(isComplete) 먼저 확인
+      const loginRes = await api.post("/api/onboarding/instagram", {
         instagramId: instaId,
         verificationPin: userNum,
       });
 
-      if (response.data.isSuccess) {
-        const isMatched = response.data.result?.isMatched;
+      if (loginRes.data.isSuccess) {
+        const { isComplete, accessToken } = loginRes.data.result;
+        localStorage.setItem("accessToken", accessToken);
 
-        // 매칭 결과에 따라 다른 페이지로 이동
-        if (isMatched) {
-          // 매칭 성공: 상대방 ID를 state로 전달
-          const partnerInstagramId = response.data.result.partnerInstagramId;
-          navigate("/match-success", {
-            state: { instagramId: partnerInstagramId },
-          });
-        } else {
-          // 매칭 실패
-          navigate("/match-fail");
+        // 2. [미참여자] 모달 띄우기
+        if (!isComplete) {
+          setModalContent(`오늘 참여한 기록이 없어요!\n내일 다시 만나요~`);
+          setIsNotTimeOpen(true);
+          setIsLoading(false);
+          return;
+        }
+
+        // 3. [참여자] 매칭 결과 조회
+        const matchRes = await api.post("/api/match/result", {
+          instagramId: instaId,
+          verificationPin: userNum,
+        });
+
+        if (matchRes.data.isSuccess) {
+          const { isMatched, partnerInstagramId } = matchRes.data.result;
+          if (isMatched) {
+            navigate("/match-success", {
+              state: { instagramId: partnerInstagramId },
+            });
+          } else {
+            navigate("/match-fail");
+          }
         }
       }
     } catch (error) {
-      // 에러 코드별 처리
       const errorCode = error.response?.data?.code;
       const errorMessage = error.response?.data?.message;
-
-      if (errorCode === "USER_4001") alert(errorMessage);
-      else if (errorCode === "MATCH_4031") alert(errorMessage);
-      else if (errorCode === "MATCH_4041") alert(errorMessage);
-      else alert(errorMessage || "결과 조회에 실패했습니다.");
+      if (errorCode === "USER_4001" || errorCode === "USER_4011") {
+        alert(errorMessage || "정보가 일치하지 않습니다.");
+      } else {
+        alert("결과 조회 중 오류가 발생했습니다.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -130,6 +149,12 @@ const ResultCheckPage = () => {
           {isLoading ? "로딩 중..." : "결과 확인하기"}
         </S.Button>
       </S.Content>
+      <NotTimeModal
+        isOpen={isNotTimeOpen}
+        onClose={() => setIsNotTimeOpen(false)}
+      >
+        {modalContent}
+      </NotTimeModal>
     </S.Container>
   );
 };

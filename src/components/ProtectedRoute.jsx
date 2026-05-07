@@ -1,6 +1,6 @@
 /**
  * 임의 URL 접근 제어 컴포넌트
- * 
+ *
  * 역할:
  * 1. 로그인 여부 확인 (토큰)
  * 2. 현재 시간에 따른 접근 권한 확인
@@ -22,7 +22,7 @@ const ProtectedRoute = ({ allow = [] }) => {
   if (!allow.includes(phase)) {
     // 현재 시간대가 허용 목록에 없으면 시간대별 메시지 표시 후 홈으로 이동
     const messages = {
-      PREPARING: "10-11시는 오픈 준비 중입니다! 🦁",
+      PREPARING: "11시에 오픈됩니다! 🦁",
       SURVEY: "지금은 설문 시간입니다! 🦁",
       AGGREGATING: "17-18시는 결과 집계 중입니다! 🦁",
       RESULT: "지금은 결과 확인 시간입니다! 🦁",

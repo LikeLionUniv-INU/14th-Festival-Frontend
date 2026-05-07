@@ -9,8 +9,7 @@ import dog from "../assets/images/profile/dog.webp";
 import cat from "../assets/images/profile/cat.webp";
 import hamster from "../assets/images/profile/hamster.webp";
 import bear from "../assets/images/profile/bear.webp";
-import monkey from "../assets/images/profile/monkey.webp";
-//import fox from "../assets/images/profile/fox.webp";
+import fox from "../assets/images/profile/fox.webp";
 import dinosaur from "../assets/images/profile/dinosaur.webp";
 import rabbit from "../assets/images/profile/rabbit.webp";
 import deer from "../assets/images/profile/deer.webp";
@@ -61,8 +60,7 @@ const Profile = () => {
     cat: cat,
     hamster: hamster,
     bear: bear,
-    monkey: monkey,
-    //fox: fox,
+    fox: fox,
     dinosaur: dinosaur,
     rabbit: rabbit,
     deer: deer,

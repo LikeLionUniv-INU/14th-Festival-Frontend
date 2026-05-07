@@ -19,8 +19,7 @@ const MyAnimalGrid = styled(TagGrid)`
   margin-bottom: 15px;
 `;
 
-const MALE_ANIMALS = ["강아지", "고양이", "햄스터", "곰", "원숭이", "공룡"];
-//const MALE_ANIMALS = ["강아지", "고양이", "햄스터", "곰", "여우", "공룡"];
+const MALE_ANIMALS = ["강아지", "고양이", "햄스터", "곰", "여우", "공룡"];
 const FEMALE_ANIMALS = ["강아지", "고양이", "햄스터", "병아리", "토끼", "사슴"];
 
 const YourAnimalPage = () => {
